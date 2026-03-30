@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import { useState, useEffect } from 'react';
@@ -20,37 +20,48 @@ export function VeraSidebar() {
   const pathname = usePathname();
   const router = useRouter();
   const [user, setUser] = useState<any>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (u) => setUser(u));
     return () => unsubscribe();
   }, []);
 
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
   const handleLogout = async () => {
-    // Neural Shutdown: Sign out from Firebase
     try {
       await signOut(auth);
-      // Return to the Marketing Home
       router.push('/');
     } catch (error) {
       console.error("Logout failed:", error);
     }
   };
 
-  return (
-    <aside className="w-72 h-screen fixed left-0 top-0 bg-surface-container-low/40 backdrop-blur-3xl border-r border-outline-variant/20 flex flex-col z-50">
+  const SidebarContent = () => (
+    <aside className="w-72 h-full bg-surface-container-low/95 backdrop-blur-3xl border-r border-outline-variant/20 flex flex-col">
       {/* Sidebar Header */}
-      <div className="p-8 flex items-center gap-4">
-        <Link href="/" className="flex items-center gap-4">
+      <div className="p-6 flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-4" onClick={() => setMobileOpen(false)}>
           <div className="w-10 h-10 border-t-2 border-r-2 border-primary-container rounded-tr-xl rounded-bl-xl flex items-center justify-center relative shadow-[0_0_15px_rgba(0,229,255,0.4)]">
             <div className="w-2 h-2 bg-primary blur-[1px] rounded-full animate-pulse" />
           </div>
           <span className="text-xl font-manrope font-bold tracking-widest uppercase text-white">Vera</span>
         </Link>
+        {/* Close button (mobile only) */}
+        <button
+          className="md:hidden w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"
+          onClick={() => setMobileOpen(false)}
+        >
+          <i className="pi pi-times text-sm" />
+        </button>
       </div>
 
       {/* Navigation Groups */}
-      <nav className="flex-1 px-4 py-4 flex flex-col gap-2">
+      <nav className="flex-1 px-4 py-4 flex flex-col gap-2 overflow-y-auto">
         <p className="px-4 text-[10px] font-mono tracking-[0.2em] text-outline-variant uppercase mb-4 opacity-50">Neural Navigation</p>
 
         {menuItems.map((item) => {
@@ -59,10 +70,11 @@ export function VeraSidebar() {
             <Link key={item.path} href={item.path}>
               <motion.div
                 whileHover={{ x: 5, backgroundColor: 'rgba(0, 229, 255, 0.05)' }}
-                className={`flex items-center gap-4 px-4 py-4 rounded-xl transition-all cursor-pointer relative group ${isActive ? 'bg-primary/10 border-l-4 border-primary' : 'hover:bg-surface-container-highest/20'
-                  }`}
+                className={`flex items-center gap-4 px-4 py-4 rounded-xl transition-all cursor-pointer relative group ${
+                  isActive ? 'bg-primary/10 border-l-4 border-primary' : 'hover:bg-surface-container-highest/20'
+                }`}
               >
-                <i className={`pi ${item.icon} text-lg ${isActive ? 'text-primary' : 'text-on-surface-variant group-hover:text-primary'}`}></i>
+                <i className={`pi ${item.icon} text-lg ${isActive ? 'text-primary' : 'text-on-surface-variant group-hover:text-primary'}`} />
                 <span className={`text-sm font-inter font-medium tracking-wide ${isActive ? 'text-white' : 'text-on-surface-variant group-hover:text-white'}`}>
                   {item.name}
                 </span>
@@ -102,34 +114,76 @@ export function VeraSidebar() {
               <p className="text-sm font-manrope font-extrabold text-white tracking-tight truncate">
                 {user?.displayName || 'Neural Operator'}
               </p>
-              {/* COMPACT LOGOUT BUTTON */}
               <motion.button
                 whileHover={{ scale: 1.1, backgroundColor: 'rgba(255, 51, 102, 0.2)' }}
                 onClick={handleLogout}
                 className="w-6 h-6 rounded-lg bg-error/5 border border-error/20 flex items-center justify-center text-error transition-all group/logout shadow-lg flex-shrink-0"
                 title="Disconnect"
               >
-                <i className="pi pi-power-off text-[8px] group-hover/logout:rotate-90 transition-transform"></i>
+                <i className="pi pi-power-off text-[8px] group-hover/logout:rotate-90 transition-transform" />
               </motion.button>
             </div>
-            {/* NEURAL ENERGY PARAMETER */}
             <div className="flex flex-col gap-1 mt-1.5">
-               <div className="flex justify-between items-center px-0.5">
-                  <span className="text-[6px] font-mono text-primary/60 uppercase tracking-widest">Neural_Stable</span>
-                  <span className="text-[6px] font-mono text-primary/80 uppercase">98%</span>
-               </div>
-               <div className="w-full h-[2px] bg-white/5 rounded-full overflow-hidden border border-white/5">
-                  <motion.div 
-                    initial={{ width: 0 }}
-                    animate={{ width: '98%' }}
-                    transition={{ duration: 1.5, ease: "easeOut" }}
-                    className="h-full bg-gradient-to-r from-primary/40 to-primary shadow-[0_0_8px_#00e5ff]"
-                  />
-               </div>
+              <div className="flex justify-between items-center px-0.5">
+                <span className="text-[6px] font-mono text-primary/60 uppercase tracking-widest">Neural_Stable</span>
+                <span className="text-[6px] font-mono text-primary/80 uppercase">98%</span>
+              </div>
+              <div className="w-full h-[2px] bg-white/5 rounded-full overflow-hidden border border-white/5">
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={{ width: '98%' }}
+                  transition={{ duration: 1.5, ease: "easeOut" }}
+                  className="h-full bg-gradient-to-r from-primary/40 to-primary shadow-[0_0_8px_#00e5ff]"
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
     </aside>
+  );
+
+  return (
+    <>
+      {/* ── DESKTOP: Fixed sidebar ── */}
+      <div className="hidden md:block w-72 h-screen fixed left-0 top-0 z-50">
+        <SidebarContent />
+      </div>
+
+      {/* ── MOBILE: Hamburger button ── */}
+      <button
+        className="md:hidden fixed top-4 left-4 z-[200] w-10 h-10 bg-surface-container-high/80 backdrop-blur-xl border border-outline-variant/30 rounded-xl flex items-center justify-center text-primary shadow-lg"
+        onClick={() => setMobileOpen(true)}
+        aria-label="Open menu"
+      >
+        <i className="pi pi-bars text-sm" />
+      </button>
+
+      {/* ── MOBILE: Slide-in Drawer ── */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <>
+            {/* Overlay backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="md:hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[150]"
+              onClick={() => setMobileOpen(false)}
+            />
+            {/* Drawer */}
+            <motion.div
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ type: 'tween', duration: 0.3 }}
+              className="md:hidden fixed left-0 top-0 h-screen z-[160]"
+            >
+              <SidebarContent />
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

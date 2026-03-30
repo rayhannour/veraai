@@ -23,7 +23,7 @@ export default function DashboardLayout({
 
   return (
     <div className="flex bg-background min-h-screen relative overflow-hidden font-inter">
-      {/* Background AI Presence (More visible in dashboard) */}
+      {/* Background AI Presence */}
       <div className="fixed inset-0 pointer-events-none z-[1] select-none">
         <img
           src="/agent.png"
@@ -33,35 +33,35 @@ export default function DashboardLayout({
         <div className="absolute inset-0 bg-gradient-to-br from-background/80 via-transparent to-background/20" />
       </div>
 
-      {/* Sidebar - Fixed Left */}
+      {/* Sidebar */}
       <VeraSidebar />
 
-      {/* Main Content Area */}
-      <main className="flex-1 ml-72 p-12 relative z-10 flex flex-col min-h-screen">
+      {/* Main Content Area — responsive margin */}
+      <main className="flex-1 md:ml-72 p-4 sm:p-6 md:p-10 lg:p-12 relative z-10 flex flex-col min-h-screen pt-16 md:pt-10">
         {/* Dashboard Header Bar */}
-        <header className="flex justify-between items-center mb-12 border-b border-outline-variant/10 pb-8">
+        <header className="flex flex-wrap justify-between items-center mb-6 md:mb-12 border-b border-outline-variant/10 pb-4 md:pb-8 gap-4">
           <div className="flex flex-col gap-1">
             <span className="text-[10px] font-mono tracking-widest text-primary-fixed-dim uppercase">Secure Domain: 192.168.1.1</span>
-            <h1 className="text-3xl font-manrope font-bold text-white tracking-tight uppercase">
+            <h1 className="text-xl md:text-3xl font-manrope font-bold text-white tracking-tight uppercase">
               {pathname.split('/').pop()?.replace('-', ' ')}
             </h1>
           </div>
 
-          <div className="flex items-center gap-6">
-            <div className="flex flex-col text-right">
+          <div className="flex items-center gap-3 md:gap-6">
+            <div className="hidden sm:flex flex-col text-right">
               <span className="text-[10px] font-mono text-outline-variant tracking-widest uppercase mb-1">Compute Load</span>
-              <div className="w-32 h-1 bg-surface-container-highest rounded-full overflow-hidden">
+              <div className="w-24 md:w-32 h-1 bg-surface-container-highest rounded-full overflow-hidden">
                 <div className="h-full bg-primary-container w-[65%]" />
               </div>
             </div>
-            <div className="w-12 h-12 bg-surface-container-high rounded-full border border-outline-variant/30 flex items-center justify-center text-primary cursor-pointer hover:border-primary transition-all shadow-[0_0_20px_rgba(0,0,0,0.4)] relative">
-              <i className="pi pi-bell text-xl animate-pulse"></i>
-              <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-error rounded-full border-2 border-surface" />
+            <div className="w-10 h-10 md:w-12 md:h-12 bg-surface-container-high rounded-full border border-outline-variant/30 flex items-center justify-center text-primary cursor-pointer hover:border-primary transition-all shadow-[0_0_20px_rgba(0,0,0,0.4)] relative">
+              <i className="pi pi-bell text-base md:text-xl animate-pulse" />
+              <span className="absolute top-1 right-1 w-2 h-2 md:w-2.5 md:h-2.5 bg-error rounded-full border-2 border-surface" />
             </div>
           </div>
         </header>
 
-        {/* Page Content with Entry Animation */}
+        {/* Page Content */}
         <AnimatePresence mode="wait">
           <motion.div
             key={pathname}
