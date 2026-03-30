@@ -370,137 +370,82 @@ export default function HomePage() {
       </section>
 
       {/* 1.6 B2B & B2C ENERGY OFFERS (ORBITAL INTERACTIVE UI) */}
-      <section className="py-48 px-8 lg:px-24 bg-background relative overflow-hidden flex flex-col items-center">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-primary/5 blur-[180px] rounded-full pointer-events-none" />
+      <section className="py-16 md:py-32 px-5 sm:px-8 lg:px-24 bg-background relative overflow-hidden flex flex-col items-center">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[1000px] h-[600px] md:h-[1000px] bg-primary/5 blur-[180px] rounded-full pointer-events-none" />
 
         <motion.div
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-80px" }}
           variants={staggerContainer}
           className="max-w-7xl mx-auto relative z-10 w-full flex flex-col items-center"
         >
-          <motion.div variants={fadeUpScroll} className="text-center mb-40">
-            <h2 className="text-4xl md:text-6xl font-manrope font-black text-white mb-6 uppercase tracking-tight">Nos Offres Énergie</h2>
-            <p className="text-xl text-on-surface-variant font-inter max-w-3xl mx-auto font-light leading-relaxed">
+          <motion.div variants={fadeUpScroll} className="text-center mb-10 md:mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-6xl font-manrope font-black text-white mb-4 md:mb-6 uppercase tracking-tight">Nos Offres Énergie</h2>
+            <p className="text-base md:text-xl text-on-surface-variant font-inter max-w-3xl mx-auto font-light leading-relaxed">
               Interagissez avec Vera pour explorer les solutions énergétiques de demain.
             </p>
           </motion.div>
 
-          {/* INTERACTIVE ORBITAL CENTER */}
-          <div className="relative w-full h-[600px] flex items-center justify-center group/orbit">
+          {/* OFFER CARDS - Stacked on mobile, side by side on desktop */}
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
 
-            {/* 1. THE CENTRAL VERA CIRCLE */}
+            {/* B2B OFFER CARD */}
             <motion.div
-              whileHover={{ scale: 1.15 }}
-              className="relative w-56 h-56 rounded-full border-2 border-primary/30 z-30 bg-surface-container-high shadow-[0_0_80px_rgba(0,229,255,0.3)] flex items-center justify-center overflow-hidden cursor-pointer"
+              variants={fadeUpScroll}
+              whileHover={{ scale: 1.02 }}
+              className="w-full bg-surface-container-low/90 backdrop-blur-3xl p-7 md:p-10 rounded-2xl md:rounded-[2.5rem] border border-primary/30 shadow-[0_20px_60px_rgba(0,0,0,0.4)] transition-all"
             >
-              <Image src="/agent.png" alt="Vera AI Core" fill className="object-cover scale-150 opacity-80 group-hover/orbit:opacity-100 transition-all duration-700" />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent" />
-              <div className="absolute inset-x-0 bottom-6 text-center z-10">
-                <p className="text-[10px] font-mono text-primary font-black uppercase tracking-widest animate-pulse">VERA CORE</p>
-              </div>
-              {/* Pulsing Neural Rings */}
-              <div className="absolute inset-x-0 inset-y-0 border-2 border-primary/40 rounded-full animate-ping opacity-20" />
-            </motion.div>
-
-            {/* 2. THE FLOATING OFFER CARDS (ORBITAL OFFSET) */}
-
-            {/* B2B OFFER CARD - ANIMATED POSITION ON CURSOR HOVER OR LOAD */}
-            <motion.div
-              initial={{ x: 0, opacity: 0, scale: 0.8 }}
-              whileInView={{ x: -380, opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.05, zIndex: 40 }}
-              className="absolute z-20 w-[450px] bg-surface-container-low/90 backdrop-blur-3xl p-12 rounded-[3.5rem] border border-primary/30 shadow-[0_40px_100px_rgba(0,0,0,0.6)] transition-all duration-700 pointer-events-auto"
-            >
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-4 md:gap-6">
                 <div className="flex justify-between items-start">
-                  <span className="bg-primary/20 text-primary border border-primary/30 text-[10px] font-mono px-4 py-1.5 rounded-full uppercase tracking-widest font-black">B2B : GS ÉLECTRICITÉ PRO</span>
-                  <i className="pi pi-building text-2xl text-primary/40"></i>
+                  <span className="bg-primary/20 text-primary border border-primary/30 text-[10px] font-mono px-3 py-1.5 rounded-full uppercase tracking-widest font-black">B2B · GS ÉLECTRICITÉ PRO</span>
+                  <i className="pi pi-building text-xl md:text-2xl text-primary/40"></i>
                 </div>
-                <h3 className="text-4xl font-manrope font-black text-white italic tracking-tight">Expansion Industrielle</h3>
-                <p className="text-base text-on-surface-variant font-inter leading-relaxed font-light">
+                <h3 className="text-2xl md:text-4xl font-manrope font-black text-white italic tracking-tight">Expansion Industrielle</h3>
+                <p className="text-sm md:text-base text-on-surface-variant font-inter leading-relaxed font-light">
                   Optimisation multi-sites massive avec une réduction garantie de <span className="text-primary font-bold">25%</span> de vos dépenses énergétiques via l'IA.
                 </p>
-                <div className="border-t border-outline-variant/10 pt-8 mt-4">
-                  <button className="w-full py-5 bg-gradient-to-r from-primary to-primary-container text-surface font-manrope font-black text-sm uppercase tracking-widest rounded-2xl shadow-[0_20px_40px_rgba(0,229,255,0.2)] hover:shadow-[0_40px_80px_rgba(0,229,255,0.4)] transition-all">Consulter Devis Pro</button>
-                </div>
+                <button className="w-full py-4 md:py-5 bg-gradient-to-r from-primary to-primary-container text-surface font-manrope font-black text-sm uppercase tracking-widest rounded-xl md:rounded-2xl hover:shadow-[0_20px_40px_rgba(0,229,255,0.3)] transition-all">Consulter Devis Pro</button>
               </div>
             </motion.div>
 
             {/* B2C OFFER CARD */}
             <motion.div
-              initial={{ x: 0, opacity: 0, scale: 0.8 }}
-              whileInView={{ x: 380, opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.05, zIndex: 40 }}
-              className="absolute z-20 w-[450px] bg-surface-container-low/90 backdrop-blur-3xl p-12 rounded-[3.5rem] border border-secondary/30 shadow-[0_40px_100px_rgba(0,0,0,0.6)] transition-all duration-700 pointer-events-auto"
+              variants={fadeUpScroll}
+              whileHover={{ scale: 1.02 }}
+              className="w-full bg-surface-container-low/90 backdrop-blur-3xl p-7 md:p-10 rounded-2xl md:rounded-[2.5rem] border border-secondary/30 shadow-[0_20px_60px_rgba(0,0,0,0.4)] transition-all"
             >
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-4 md:gap-6">
                 <div className="flex justify-between items-start">
-                  <span className="bg-secondary/20 text-secondary border border-secondary/30 text-[10px] font-mono px-4 py-1.5 rounded-full uppercase tracking-widest font-black">B2C : OHM ÉNERGIE SMART</span>
-                  <i className="pi pi-home text-2xl text-secondary/40"></i>
+                  <span className="bg-secondary/20 text-secondary border border-secondary/30 text-[10px] font-mono px-3 py-1.5 rounded-full uppercase tracking-widest font-black">B2C · OHM ÉNERGIE SMART</span>
+                  <i className="pi pi-home text-xl md:text-2xl text-secondary/40"></i>
                 </div>
-                <h3 className="text-4xl font-manrope font-black text-white italic tracking-tight">Maison Connectée</h3>
-                <p className="text-base text-on-surface-variant font-inter leading-relaxed font-light">
+                <h3 className="text-2xl md:text-4xl font-manrope font-black text-white italic tracking-tight">Maison Connectée</h3>
+                <p className="text-sm md:text-base text-on-surface-variant font-inter leading-relaxed font-light">
                   Énergie <span className="text-secondary font-bold">100% Verte</span> pour votre foyer. Suivi live via Vera et facturation transparente instantanée.
                 </p>
-                <div className="border-t border-outline-variant/10 pt-8 mt-4">
-                  <button className="w-full py-5 bg-gradient-to-r from-secondary to-[#00f28e] text-surface font-manrope font-black text-sm uppercase tracking-widest rounded-2xl shadow-[0_20px_40px_rgba(43,255,160,0.2)] hover:shadow-[0_40px_80px_rgba(43,255,160,0.4)] transition-all">Souscription Immédiate</button>
-                </div>
+                <button className="w-full py-4 md:py-5 bg-gradient-to-r from-secondary to-[#00f28e] text-surface font-manrope font-black text-sm uppercase tracking-widest rounded-xl md:rounded-2xl hover:shadow-[0_20px_40px_rgba(43,255,160,0.3)] transition-all">Souscription Immédiate</button>
               </div>
             </motion.div>
-
-            {/* Neural Connector Lines (SVG Animated) */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-visible" viewBox="0 0 1000 600">
-              <motion.path
-                initial={{ pathLength: 0, opacity: 0 }}
-                whileInView={{ pathLength: 1, opacity: 1 }}
-                transition={{ duration: 1.5, ease: "easeInOut" }}
-                d="M 500,300 L 120,300"
-                stroke="url(#veraPrimaryGrad)"
-                strokeWidth="2"
-                strokeDasharray="10,10"
-              />
-              <motion.path
-                initial={{ pathLength: 0, opacity: 0 }}
-                whileInView={{ pathLength: 1, opacity: 1 }}
-                transition={{ duration: 1.5, ease: "easeInOut", delay: 0.2 }}
-                d="M 500,300 L 880,300"
-                stroke="url(#veraSecondaryGrad)"
-                strokeWidth="2"
-                strokeDasharray="10,10"
-              />
-              <defs>
-                <linearGradient id="veraPrimaryGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="var(--color-primary)" />
-                  <stop offset="100%" stopColor="transparent" />
-                </linearGradient>
-                <linearGradient id="veraSecondaryGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="transparent" />
-                  <stop offset="100%" stopColor="var(--color-secondary)" />
-                </linearGradient>
-              </defs>
-            </svg>
-
           </div>
         </motion.div>
       </section>
 
       {/* 1.7 VERA CONTRACT CYCLE (AI ONBOARDING FLOW) - FULL WIDTH */}
-      <section className="py-32 bg-surface-container-lowest relative overflow-hidden">
+      <section className="py-12 md:py-24 bg-surface-container-lowest relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
 
         <motion.div
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-80px" }}
           variants={staggerContainer}
           className="relative z-10 w-full"
         >
-          <motion.div variants={fadeUpScroll} className="text-center mb-24 max-w-7xl mx-auto px-8">
-            <span className="text-primary font-mono text-xs uppercase tracking-[0.5em] mb-4 inline-block font-bold">Zéro Lenteur . Zéro Papier</span>
-            <h2 className="text-5xl md:text-7xl font-manrope font-black text-white mb-8 uppercase tracking-tighter">Cycle Contractuel <span className="text-primary italic">Vera</span></h2>
-            <p className="text-xl text-on-surface-variant font-inter max-w-3xl mx-auto font-light leading-relaxed">
+          <motion.div variants={fadeUpScroll} className="text-center mb-8 md:mb-16 max-w-7xl mx-auto px-5 sm:px-8">
+            <span className="text-primary font-mono text-xs uppercase tracking-[0.3em] md:tracking-[0.5em] mb-3 md:mb-4 inline-block font-bold">Zéro Lenteur · Zéro Papier</span>
+            <h2 className="text-3xl md:text-5xl lg:text-7xl font-manrope font-black text-white mb-4 md:mb-8 uppercase tracking-tighter">Cycle Contractuel <span className="text-primary italic">Vera</span></h2>
+            <p className="text-sm md:text-xl text-on-surface-variant font-inter max-w-3xl mx-auto font-light leading-relaxed">
               Dites adieu aux formulaires classiques. Vera automatise votre transition énergétique en temps réel, du premier mot à la signature finale.
             </p>
           </motion.div>
@@ -593,7 +538,7 @@ export default function HomePage() {
       </section>
 
       {/* 2. DATA STATISTIC TABLEAU & GRAPHICS (SCROLL ANIMATED) */}
-      <section className="py-32 px-8 lg:px-24 bg-surface-container-lowest border-y border-outline-variant/10 relative overflow-hidden">
+      <section className="py-12 md:py-24 px-5 sm:px-8 lg:px-24 bg-surface-container-lowest border-y border-outline-variant/10 relative overflow-hidden">
         {/* Abstract Background Vectors */}
         <svg className="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none" viewBox="0 0 1000 500" preserveAspectRatio="none">
           <path d="M0,250 C200,400 300,100 500,250 C700,400 800,100 1000,250 L1000,500 L0,500 Z" fill="url(#grad1)" />
@@ -612,19 +557,19 @@ export default function HomePage() {
           variants={staggerContainer}
           className="max-w-7xl mx-auto flex flex-col gap-16 relative z-10"
         >
-          <motion.div variants={fadeUpScroll} className="flex flex-col md:flex-row justify-between items-end gap-6 mb-12 border-b border-primary/20 pb-8">
+          <motion.div variants={fadeUpScroll} className="flex flex-col md:flex-row justify-between items-end gap-4 md:gap-6 mb-8 md:mb-12 border-b border-primary/20 pb-6 md:pb-8">
             <div>
-              <h2 className="text-5xl lg:text-7xl font-manrope font-extrabold text-on-surface mb-4">Live Telemetry</h2>
-              <p className="text-on-surface-variant font-inter md:text-2xl max-w-3xl font-light">
+              <h2 className="text-3xl md:text-5xl lg:text-7xl font-manrope font-extrabold text-on-surface mb-3 md:mb-4">Live Telemetry</h2>
+              <p className="text-sm md:text-base lg:text-2xl text-on-surface-variant font-inter max-w-3xl font-light">
                 Real-time graphics engine monitoring global energy and telecom throughput.
               </p>
             </div>
-            <div className="flex gap-6">
-              <span className="bg-primary/10 border border-primary/20 text-primary px-6 py-3 rounded-xl text-sm font-mono tracking-widest flex items-center gap-3">
-                <i className="pi pi-bolt text-xl"></i> ENERGY
+            <div className="flex gap-3 md:gap-6">
+              <span className="bg-primary/10 border border-primary/20 text-primary px-3 md:px-6 py-2 md:py-3 rounded-xl text-xs md:text-sm font-mono tracking-widest flex items-center gap-2 md:gap-3">
+                <i className="pi pi-bolt" /> ENERGY
               </span>
-              <span className="bg-secondary/10 border border-secondary/20 text-secondary px-6 py-3 rounded-xl text-sm font-mono tracking-widest flex items-center gap-3">
-                <i className="pi pi-wifi text-xl"></i> TELECOM
+              <span className="bg-secondary/10 border border-secondary/20 text-secondary px-3 md:px-6 py-2 md:py-3 rounded-xl text-xs md:text-sm font-mono tracking-widest flex items-center gap-2 md:gap-3">
+                <i className="pi pi-wifi" /> TELECOM
               </span>
             </div>
           </motion.div>
@@ -632,10 +577,10 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
 
             {/* Left Col: Main Interactive Graphic / Map */}
-            <motion.div variants={fadeUpScroll} className="lg:col-span-8 bg-surface-container hover:bg-surface-container-high transition-colors p-10 rounded-[2rem] border border-outline-variant/20 shadow-2xl relative overflow-hidden group min-h-[500px] flex flex-col">
-              <div className="flex justify-between items-center mb-8 border-b border-outline-variant/20 pb-6">
-                <h3 className="text-3xl font-manrope font-bold text-white">Global Neural Topology</h3>
-                <span className="text-sm font-mono text-outline-variant tracking-widest uppercase">Nodes Online: 4,092</span>
+            <motion.div variants={fadeUpScroll} className="lg:col-span-8 bg-surface-container p-5 md:p-10 rounded-xl md:rounded-[2rem] border border-outline-variant/20 shadow-2xl relative overflow-hidden group min-h-[280px] md:min-h-[500px] flex flex-col">
+              <div className="flex flex-wrap justify-between items-center mb-5 md:mb-8 border-b border-outline-variant/20 pb-4 md:pb-6 gap-2">
+                <h3 className="text-lg md:text-3xl font-manrope font-bold text-white">Global Neural Topology</h3>
+                <span className="text-xs md:text-sm font-mono text-outline-variant tracking-widest uppercase">Nodes: 4,092</span>
               </div>
 
               {/* Graphic Representation (SVG Network) */}
@@ -669,28 +614,27 @@ export default function HomePage() {
             </motion.div>
 
             {/* Right Col: Stat Blocks */}
-            <div className="lg:col-span-4 flex flex-col gap-8">
-              <motion.div variants={fadeUpScroll} className="bg-gradient-to-br from-primary/10 to-surface-container p-10 rounded-[2rem] border border-primary/30 shadow-[0_0_40px_rgba(0,229,255,0.1)] flex-1 flex flex-col justify-center relative overflow-hidden min-h-[250px]">
-                <div className="absolute top-0 right-0 w-48 h-48 bg-primary/20 blur-[60px] rounded-full"></div>
-                <i className="pi pi-chart-line text-4xl text-primary mb-6 drop-shadow-[0_0_10px_var(--color-primary)]"></i>
-                <h4 className="text-sm md:text-base font-inter text-on-surface-variant mb-2">AI Predictability Score</h4>
-                <p className="text-5xl lg:text-6xl font-manrope font-black text-white">99.8%</p>
-                <div className="w-full h-1.5 bg-surface-container-highest mt-6 rounded-full overflow-hidden">
-                  <div className="h-full bg-primary w-[99.8%] shadow-[0_0_15px_var(--color-primary)]"></div>
+            <div className="lg:col-span-4 grid grid-cols-2 lg:grid-cols-1 gap-4 md:gap-8">
+              <motion.div variants={fadeUpScroll} className="bg-gradient-to-br from-primary/10 to-surface-container p-5 md:p-10 rounded-xl md:rounded-[2rem] border border-primary/30 shadow-[0_0_40px_rgba(0,229,255,0.1)] flex flex-col justify-center relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-24 h-24 md:w-48 md:h-48 bg-primary/20 blur-[60px] rounded-full" />
+                <i className="pi pi-chart-line text-2xl md:text-4xl text-primary mb-3 md:mb-6 drop-shadow-[0_0_10px_var(--color-primary)]" />
+                <h4 className="text-xs md:text-base font-inter text-on-surface-variant mb-1 md:mb-2">AI Predictability</h4>
+                <p className="text-3xl md:text-5xl lg:text-6xl font-manrope font-black text-white">99.8%</p>
+                <div className="w-full h-1 md:h-1.5 bg-surface-container-highest mt-3 md:mt-6 rounded-full overflow-hidden">
+                  <div className="h-full bg-primary w-[99.8%] shadow-[0_0_15px_var(--color-primary)]" />
                 </div>
               </motion.div>
-
-              <motion.div variants={fadeUpScroll} className="bg-surface-container p-10 rounded-[2rem] border border-outline-variant/20 flex-1 flex flex-col justify-center shadow-lg min-h-[250px]">
-                <i className="pi pi-server text-4xl text-secondary mb-6"></i>
-                <h4 className="text-sm md:text-base font-inter text-on-surface-variant mb-2">Energy Grid Reroutes</h4>
-                <p className="text-5xl lg:text-6xl font-manrope font-black text-white">14,092<span className="text-xl text-secondary ml-3 font-normal">/ hr</span></p>
+              <motion.div variants={fadeUpScroll} className="bg-surface-container p-5 md:p-10 rounded-xl md:rounded-[2rem] border border-outline-variant/20 flex flex-col justify-center shadow-lg">
+                <i className="pi pi-server text-2xl md:text-4xl text-secondary mb-3 md:mb-6" />
+                <h4 className="text-xs md:text-base font-inter text-on-surface-variant mb-1 md:mb-2">Grid Reroutes</h4>
+                <p className="text-3xl md:text-5xl lg:text-6xl font-manrope font-black text-white">14,092<span className="text-sm md:text-xl text-secondary ml-2 font-normal">/hr</span></p>
               </motion.div>
             </div>
 
             {/* Bottom Row: Data Table (Tableau) */}
-            <motion.div variants={fadeUpScroll} className="lg:col-span-12 bg-surface-container-low p-10 lg:p-12 rounded-[2rem] border border-outline-variant/30 overflow-hidden shadow-2xl mt-8">
-              <h3 className="text-2xl font-manrope font-bold text-white mb-8 flex items-center gap-4">
-                <i className="pi pi-list text-primary text-2xl"></i> Live Node Tableau Matrix
+            <motion.div variants={fadeUpScroll} className="lg:col-span-12 bg-surface-container-low p-5 md:p-10 lg:p-12 rounded-xl md:rounded-[2rem] border border-outline-variant/30 overflow-hidden shadow-2xl mt-4 md:mt-8">
+              <h3 className="text-lg md:text-2xl font-manrope font-bold text-white mb-5 md:mb-8 flex items-center gap-3 md:gap-4">
+                <i className="pi pi-list text-primary text-lg md:text-2xl" /> Live Node Matrix
               </h3>
               <div className="w-full overflow-x-auto">
                 <table className="w-full text-left border-collapse min-w-[1000px]">
@@ -734,23 +678,23 @@ export default function HomePage() {
       </section>
 
       {/* 3. LIVE DASHBOARD BARS (SCROLL ANIMATED) */}
-      <section className="py-32 px-8 lg:px-24 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[600px] bg-secondary/5 blur-[200px] rounded-[100%] pointer-events-none"></div>
+      <section className="py-12 md:py-24 px-5 sm:px-8 lg:px-24 relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[1200px] h-[400px] md:h-[600px] bg-secondary/5 blur-[200px] rounded-[100%] pointer-events-none" />
         <motion.div
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-80px" }}
           variants={staggerContainer}
-          className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-20 relative z-10"
+          className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-8 md:gap-20 relative z-10"
         >
 
-          <motion.div variants={fadeUpScroll} className="flex-1 w-full bg-surface-container/50 backdrop-blur-3xl p-10 lg:p-16 rounded-[3rem] border border-outline-variant/30 shadow-[0_50px_100px_rgba(0,0,0,0.8)] min-h-[600px] flex flex-col justify-between">
-            <div className="flex justify-between items-end mb-12 border-b border-outline-variant/30 pb-6">
+          <motion.div variants={fadeUpScroll} className="flex-1 w-full bg-surface-container/50 backdrop-blur-3xl p-6 md:p-10 lg:p-16 rounded-2xl md:rounded-[3rem] border border-outline-variant/30 shadow-[0_20px_60px_rgba(0,0,0,0.5)] flex flex-col justify-between">
+            <div className="flex justify-between items-center mb-6 md:mb-12 border-b border-outline-variant/30 pb-4 md:pb-6">
               <div>
-                <h3 className="text-3xl font-manrope font-bold text-on-surface">Data Saturation</h3>
-                <p className="text-sm font-mono text-outline uppercase tracking-widest mt-2">Live Feed - Sector Alpha</p>
+                <h3 className="text-xl md:text-3xl font-manrope font-bold text-on-surface">Data Saturation</h3>
+                <p className="text-xs md:text-sm font-mono text-outline uppercase tracking-widest mt-1 md:mt-2">Live Feed - Sector Alpha</p>
               </div>
-              <span className="text-primary-container bg-primary/10 p-3 rounded-full border border-primary/30"><i className="pi pi-spin pi-cog text-3xl"></i></span>
+              <span className="text-primary-container bg-primary/10 p-2 md:p-3 rounded-full border border-primary/30"><i className="pi pi-spin pi-cog text-xl md:text-3xl" /></span>
             </div>
 
             <div className="flex flex-col gap-10">
@@ -790,9 +734,9 @@ export default function HomePage() {
             </div>
           </motion.div>
 
-          <div className="flex-1 flex flex-col gap-8 w-full">
-            <motion.h2 variants={fadeUpScroll} className="text-5xl lg:text-7xl font-manrope font-extrabold text-on-surface leading-tight">Interactive <br /> Telemetry</motion.h2>
-            <motion.p variants={fadeUpScroll} className="text-xl md:text-2xl text-on-surface-variant font-inter leading-relaxed font-light">
+          <div className="flex-1 flex flex-col gap-5 md:gap-8 w-full">
+            <motion.h2 variants={fadeUpScroll} className="text-3xl md:text-5xl lg:text-7xl font-manrope font-extrabold text-on-surface leading-tight">Interactive <br /> Telemetry</motion.h2>
+            <motion.p variants={fadeUpScroll} className="text-sm md:text-xl lg:text-2xl text-on-surface-variant font-inter leading-relaxed font-light">
               Don't just watch your infrastructure—orchestrate it. The Smart Vue command center renders millions of gigabytes into actionable alerts.
             </motion.p>
             <motion.ul variants={staggerContainer} className="flex flex-col gap-6 mt-6 font-inter text-on-surface text-lg">
