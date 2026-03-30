@@ -49,9 +49,9 @@ export default function HomePage() {
           variants={staggerContainer}
           initial="hidden"
           animate="show"
-          className="relative z-30 flex flex-col items-center justify-center text-center px-4 w-full mt-24"
+          className="relative z-30 flex flex-col items-center justify-center text-center px-4 w-full mt-16 md:mt-24"
         >
-          <motion.div variants={fadeUpScroll} className="w-24 h-24 border-t-[3px] border-r-[3px] border-primary-container rounded-tr-[2rem] rounded-bl-[2rem] flex items-center justify-center relative shadow-[0_0_30px_rgba(0,229,255,0.4)] mb-8">
+          <motion.div variants={fadeUpScroll} className="w-14 h-14 md:w-24 md:h-24 border-t-[3px] border-r-[3px] border-primary-container rounded-tr-[2rem] rounded-bl-[2rem] flex items-center justify-center relative shadow-[0_0_30px_rgba(0,229,255,0.4)] mb-6 md:mb-8">
             <motion.div
               animate={{ scale: [1, 1.8, 1], opacity: [1, 0, 1] }}
               transition={{ duration: 2.5, repeat: Infinity }}
@@ -59,11 +59,11 @@ export default function HomePage() {
             />
           </motion.div>
 
-          <motion.span variants={fadeUpScroll} className="inline-block px-6 py-2 rounded-full border border-primary/40 bg-primary/10 text-primary-fixed-dim text-sm font-mono tracking-widest mb-6 uppercase shadow-[0_0_20px_rgba(0,229,255,0.1)] backdrop-blur-md">
+          <motion.span variants={fadeUpScroll} className="inline-block px-4 md:px-6 py-2 rounded-full border border-primary/40 bg-primary/10 text-primary-fixed-dim text-xs md:text-sm font-mono tracking-widest mb-5 md:mb-6 uppercase shadow-[0_0_20px_rgba(0,229,255,0.1)] backdrop-blur-md">
             The Digital Monolith v1.0
           </motion.span>
 
-          <motion.h1 variants={fadeUpScroll} className="text-[4rem] sm:text-[6rem] lg:text-[8rem] leading-[0.7] tracking-tighter font-manrope font-extrabold drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] uppercase flex flex-col items-center">
+          <motion.h1 variants={fadeUpScroll} className="text-[3.5rem] sm:text-[5rem] lg:text-[8rem] leading-[0.8] tracking-tighter font-manrope font-extrabold drop-shadow-[0_10px_30px_rgba(0,0,0,0.8)] uppercase flex flex-col items-center">
             {/* LINE 1: VERA AI */}
             {/* LINE 1: VERA AI (LAMPE TORCHE INITIALIZATION - ZERO MARGIN) */}
             <div className="relative group flex items-center justify-center">
@@ -81,7 +81,7 @@ export default function HomePage() {
                 animate="visible"
               >
                 {/* VERA AI LETTER BY LETTER (INTENSIFIED) */}
-                {["V", "E", "R", "A", " ", "A", "I"].map((char, index) => (
+                   {["V", "E", "R", "A", " ", "A", "I"].map((char, index) => (
                   <motion.div
                     key={index}
                     variants={{
@@ -90,26 +90,20 @@ export default function HomePage() {
                         opacity: 1,
                         scale: 1,
                         filter: ["brightness(12)", "brightness(1)"],
-                        transition: {
-                          duration: 1.2,
-                          delay: index * 0.12,
-                          filter: { duration: 0.4 }
-                        }
+                        transition: { duration: 1.2, delay: index * 0.12, filter: { duration: 0.4 } }
                       }
                     }}
                     className="relative"
                   >
-                    {/* SMARPHONE PULSE / STROBE */}
                     <motion.div
                       initial={{ opacity: 0, scale: 0 }}
                       animate={{ opacity: [0, 1, 0], scale: [0, 4, 1] }}
                       transition={{ delay: index * 0.15, duration: 0.6 }}
                       className="absolute inset-0 bg-white rounded-full blur-[20px] pointer-events-none z-10"
                     />
-
                     <span className={`font-black tracking-tighter select-none leading-none block
-                         ${index === 0 ? "text-[140px] -mb-2" : "text-[100px]"}
-                         ${char === " " ? "w-10" : "text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]"}
+                         ${index === 0 ? "text-[80px] sm:text-[140px] -mb-2" : "text-[60px] sm:text-[100px]"}
+                         ${char === " " ? "w-6 sm:w-10" : "text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]"}
                       `}>
                       {char}
                     </span>
@@ -118,7 +112,7 @@ export default function HomePage() {
               </motion.div>
             </div>
 
-            {/* LINE 2: THE UNIVERSAL NEURAL CONSOLE (DYNAMIC MIGRATION TO TOPBAR - RESTORED) */}
+            {/* LINE 2: NEURAL CONSOLE - hidden on mobile, shown on md+ */}
             <motion.div
               initial={{ opacity: 0, scale: 1, y: 0 }}
               animate={{
@@ -127,12 +121,8 @@ export default function HomePage() {
                 y: [0, 0, -420],
                 x: 0
               }}
-              transition={{
-                delay: 1,
-                duration: 6,
-                times: [0, 0.7, 1]
-              }}
-              className="relative w-full max-w-7xl h-32 flex items-center justify-between px-12 z-[100]"
+              transition={{ delay: 1, duration: 6, times: [0, 0.7, 1] }}
+              className="relative hidden md:flex w-full max-w-7xl h-32 items-center justify-between px-12 z-[100]"
             >
 
               {/* CONNECT NODE (LEFT - ORIGINAL STYLE) */}
@@ -259,7 +249,7 @@ export default function HomePage() {
             </motion.p>
           </div>
 
-          <motion.div variants={fadeUpScroll} className="flex flex-col sm:flex-row gap-8 mt-12 w-full max-w-2xl justify-center">
+          <motion.div variants={fadeUpScroll} className="flex flex-col sm:flex-row gap-4 md:gap-8 mt-8 md:mt-12 w-full max-w-2xl justify-center px-4">
             <Link href="/login" className="flex-1">
               <button className="bg-gradient-to-br from-primary to-primary-container hover:from-primary-fixed-dim hover:to-primary text-surface px-8 py-5 rounded-2xl font-bold font-inter transform transition-all shadow-[0_0_30px_rgba(0,229,255,0.3)] hover:shadow-[0_0_60px_rgba(0,229,255,0.6)] hover:scale-105 flex items-center justify-center gap-4 w-full text-base tracking-widest uppercase">
                 Secure Portal <i className="pi pi-bolt text-lg"></i>

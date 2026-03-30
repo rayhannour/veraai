@@ -19,7 +19,7 @@ export default function AiHubPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen relative bg-surface w-full h-[100vh] overflow-hidden">
+    <div className="flex flex-col min-h-screen relative bg-surface w-full h-[100svh] overflow-hidden">
       
       {/* ── NEURAL NEWS TICKER (TOP BANNER) ── */}
       <div className="absolute top-0 inset-x-0 h-10 border-b border-white/5 z-50 flex items-center overflow-hidden" style={{ backgroundColor: 'transparent' }}>
@@ -143,12 +143,12 @@ export default function AiHubPage() {
 
           <VeraStreamingAvatar ref={avatarRef}>
             {/* Interaction Controls (Bottom Center) */}
-            <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-[3000] w-full max-w-2xl px-4 pointer-events-auto">
-              <div className="bg-surface-container-high/80 backdrop-blur-2xl p-4 rounded-2xl flex items-center gap-4 border border-outline-variant/20 shadow-2xl shadow-primary/5">
-                <VeraButton variant="ghost" icon="pi pi-microphone" className="rounded-full w-12 h-12 p-0 flex items-center justify-center bg-surface-container hover:bg-surface-container-highest border border-outline-variant/30 text-on-surface" />
+            <div className="absolute bottom-4 md:bottom-12 left-1/2 transform -translate-x-1/2 z-[3000] w-full max-w-2xl px-3 md:px-4 pointer-events-auto">
+              <div className="bg-surface-container-high/80 backdrop-blur-2xl p-3 md:p-4 rounded-xl md:rounded-2xl flex items-center gap-2 md:gap-4 border border-outline-variant/20 shadow-2xl shadow-primary/5">
+                <VeraButton variant="ghost" icon="pi pi-microphone" className="rounded-full w-9 h-9 md:w-12 md:h-12 p-0 flex items-center justify-center bg-surface-container hover:bg-surface-container-highest border border-outline-variant/30 text-on-surface flex-shrink-0" />
                 <VeraInput
                   aiAssisted
-                  className="flex-1 bg-surface-container-lowest/50 text-white"
+                  className="flex-1 bg-surface-container-lowest/50 text-white text-sm"
                   placeholder="Give Vera a command..."
                   value={inputText}
                   onChange={(e) => setInputText(e.target.value)}
@@ -157,23 +157,22 @@ export default function AiHubPage() {
                 <VeraButton
                   variant="primary"
                   icon="pi pi-send"
-                  className="rounded-full w-12 h-12 p-0 flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.4)]"
+                  className="rounded-full w-9 h-9 md:w-12 md:h-12 p-0 flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.4)] flex-shrink-0"
                   onClick={handleSend}
                 />
-                
                 {/* EMERGENCY DISCONNECT BUTTON */}
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={() => avatarRef.current?.terminateSession()}
-                  className="rounded-full w-12 h-12 p-0 flex items-center justify-center bg-error border-2 border-white/20 text-white shadow-[0_0_30px_rgba(255,51,102,0.6)] animate-pulse hover:animate-none"
+                  className="rounded-full w-9 h-9 md:w-12 md:h-12 p-0 flex-shrink-0 flex items-center justify-center bg-error border-2 border-white/20 text-white shadow-[0_0_30px_rgba(255,51,102,0.6)] animate-pulse hover:animate-none"
                   title="Emergency Termination"
                 >
-                  <i className="pi pi-power-off text-lg"></i>
+                  <i className="pi pi-power-off text-sm md:text-lg"></i>
                 </motion.button>
               </div>
-              <div className="text-center mt-3">
-                <span className="text-[10px] font-mono tracking-widest text-outline">Listening: System Optimization Ready...</span>
+              <div className="text-center mt-2">
+                <span className="text-[9px] md:text-[10px] font-mono tracking-widest text-outline">Listening: System Optimization Ready...</span>
               </div>
             </div>
           </VeraStreamingAvatar>
