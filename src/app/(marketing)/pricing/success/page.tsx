@@ -1,10 +1,10 @@
 "use client";
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-export default function PaymentSuccessPage() {
+function PaymentSuccessContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session_id');
@@ -64,5 +64,13 @@ export default function PaymentSuccessPage() {
         </div>
       </motion.div>
     </div>
+  );
+}
+
+export default function PaymentSuccessPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-background flex items-center justify-center p-8 font-inter"><div className="text-white/40 text-xs font-mono tracking-widest uppercase animate-pulse">Neural Core Booting...</div></div>}>
+      <PaymentSuccessContent />
+    </Suspense>
   );
 }
