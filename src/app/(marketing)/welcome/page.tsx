@@ -102,8 +102,8 @@ export default function HomePage() {
                       className="absolute inset-0 bg-white rounded-full blur-[20px] pointer-events-none z-10"
                     />
                     <span className={`font-black tracking-tighter select-none leading-none block
-                         ${index === 0 ? "text-[80px] sm:text-[140px] -mb-2" : "text-[60px] sm:text-[100px]"}
-                         ${char === " " ? "w-6 sm:w-10" : "text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]"}
+                         ${index === 0 ? "text-[60px] sm:text-[140px] -mb-1 sm:-mb-2" : "text-[45px] sm:text-[100px]"}
+                         ${char === " " ? "w-4 sm:w-10" : "text-transparent bg-clip-text bg-gradient-to-b from-white to-white/40 drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]"}
                       `}>
                       {char}
                     </span>
@@ -224,7 +224,7 @@ export default function HomePage() {
               className="absolute inset-y-0 w-80 bg-gradient-to-r from-transparent via-white/40 to-transparent blur-[60px] z-20 pointer-events-none"
             />
 
-            <motion.p className="text-xl md:text-2xl text-on-surface-variant font-inter leading-relaxed drop-shadow-lg font-light flex flex-wrap gap-x-[0.2em]">
+            <motion.p className="text-base sm:text-lg md:text-2xl text-on-surface-variant font-inter leading-relaxed drop-shadow-lg font-light flex flex-wrap gap-x-[0.2em] justify-center text-center">
               {"Vera merges global telecommunications throughput with proactive energy grid optimization. Directed by your dedicated Autonomous AI Agent.".split(" ").map((word, wIndex) => (
                 <span key={wIndex} className="relative flex whitespace-nowrap overflow-visible">
                   {word.split("").map((char, cIndex) => (
@@ -250,9 +250,9 @@ export default function HomePage() {
           </div>
 
           <motion.div variants={fadeUpScroll} className="flex flex-col sm:flex-row gap-4 md:gap-8 mt-8 md:mt-12 w-full max-w-2xl justify-center px-4">
-            <Link href="/login" className="flex-1">
-              <button className="bg-gradient-to-br from-primary to-primary-container hover:from-primary-fixed-dim hover:to-primary text-surface px-8 py-5 rounded-2xl font-bold font-inter transform transition-all shadow-[0_0_30px_rgba(0,229,255,0.3)] hover:shadow-[0_0_60px_rgba(0,229,255,0.6)] hover:scale-105 flex items-center justify-center gap-4 w-full text-base tracking-widest uppercase">
-                Secure Portal <i className="pi pi-bolt text-lg"></i>
+            <Link href="/login" className="flex-1 w-full">
+              <button className="bg-gradient-to-br from-primary to-primary-container hover:from-primary-fixed-dim hover:to-primary text-surface px-6 py-4 md:px-8 md:py-5 rounded-2xl font-bold font-inter transform transition-all shadow-[0_0_30px_rgba(0,229,255,0.3)] hover:shadow-[0_0_60px_rgba(0,229,255,0.6)] hover:scale-105 flex items-center justify-center gap-3 md:gap-4 w-full text-sm md:text-base tracking-widest uppercase">
+                Secure Portal <i className="pi pi-bolt text-base md:text-lg"></i>
               </button>
             </Link>
           </motion.div>
@@ -298,7 +298,7 @@ export default function HomePage() {
               ].map((partner, i) => (
                 <div key={i} className="flex items-center gap-6 group/logo">
                   <div className="w-2 h-2 bg-primary rounded-full group-hover/logo:scale-150 transition-transform shadow-[0_0_10px_var(--color-primary)]"></div>
-                  <span className="text-3xl font-manrope font-black tracking-tighter text-white opacity-40 group-hover/logo:opacity-100 group-hover/logo:text-primary transition-all duration-300">
+                  <span className="text-xl md:text-3xl font-manrope font-black tracking-tighter text-white opacity-40 group-hover/logo:opacity-100 group-hover/logo:text-primary transition-all duration-300">
                     {partner}
                   </span>
                   <span className="text-xs font-mono text-outline-variant opacity-20 font-light">CORE.STREAM</span>
@@ -565,20 +565,20 @@ export default function HomePage() {
                 <motion.div
                   key={i}
                   variants={fadeUpScroll}
-                  className={`flex-none w-[400px] bg-surface-container p-8 rounded-[2.5rem] border transition-all duration-500 group flex flex-col gap-6 relative overflow-hidden ${item.color}`}
+                  className={`flex-none w-[280px] md:w-[400px] bg-surface-container p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border transition-all duration-500 group flex flex-col gap-6 relative overflow-hidden ${item.color}`}
                 >
                   <div className="absolute top-0 right-0 p-6 text-6xl font-manrope font-black opacity-5 text-white pointer-events-none group-hover:opacity-10 transition-opacity">
                     {item.step}
                   </div>
 
-                  <div className="w-full h-48 rounded-2xl overflow-hidden relative border border-outline-variant/10 shadow-inner">
+                  <div className="w-full h-40 md:h-48 rounded-2xl overflow-hidden relative border border-outline-variant/10 shadow-inner">
                     <Image src={item.img} alt={item.title} fill className="object-cover group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-100" />
                     <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-surface-container to-transparent" />
                   </div>
 
                   <div>
-                    <h3 className="text-2xl font-manrope font-bold text-white mb-3 group-hover:text-primary transition-colors">{item.title}</h3>
-                    <p className="text-sm text-on-surface-variant font-inter leading-relaxed font-light whitespace-normal">
+                    <h3 className="text-xl md:text-2xl font-manrope font-bold text-white mb-2 md:mb-3 group-hover:text-primary transition-colors">{item.title}</h3>
+                    <p className="text-xs md:text-sm text-on-surface-variant font-inter leading-relaxed font-light whitespace-normal">
                       {item.desc}
                     </p>
                   </div>
@@ -603,20 +603,20 @@ export default function HomePage() {
                 <motion.div
                   key={i + 10}
                   variants={fadeUpScroll}
-                  className={`flex-none w-[400px] bg-surface-container p-8 rounded-[2.5rem] border transition-all duration-500 group flex flex-col gap-6 relative overflow-hidden ${item.color}`}
+                  className={`flex-none w-[280px] md:w-[400px] bg-surface-container p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] border transition-all duration-500 group flex flex-col gap-6 relative overflow-hidden ${item.color}`}
                 >
                   <div className="absolute top-0 right-0 p-6 text-6xl font-manrope font-black opacity-5 text-white pointer-events-none group-hover:opacity-10 transition-opacity">
                     {item.step}
                   </div>
 
-                  <div className="w-full h-48 rounded-2xl overflow-hidden relative border border-outline-variant/10 shadow-inner">
+                  <div className="w-full h-40 md:h-48 rounded-2xl overflow-hidden relative border border-outline-variant/10 shadow-inner">
                     <Image src={item.img} alt={item.title} fill className="object-cover group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-100" />
                     <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-surface-container to-transparent" />
                   </div>
 
                   <div>
-                    <h3 className="text-2xl font-manrope font-bold text-white mb-3 group-hover:text-primary transition-colors">{item.title}</h3>
-                    <p className="text-sm text-on-surface-variant font-inter leading-relaxed font-light whitespace-normal">
+                    <h3 className="text-xl md:text-2xl font-manrope font-bold text-white mb-2 md:mb-3 group-hover:text-primary transition-colors">{item.title}</h3>
+                    <p className="text-xs md:text-sm text-on-surface-variant font-inter leading-relaxed font-light whitespace-normal">
                       {item.desc}
                     </p>
                   </div>
@@ -703,8 +703,8 @@ export default function HomePage() {
                 <div className="absolute bottom-6 left-6 bg-background/90 backdrop-blur-xl border border-primary/30 p-6 rounded-2xl shadow-[0_0_30px_rgba(0,229,255,0.15)]">
                   <p className="text-xs text-primary-fixed-dim font-mono tracking-widest mb-2">NETWORK STRESS</p>
                   <div className="flex items-end gap-3">
-                    <span className="text-4xl font-manrope font-bold text-white">12.4</span>
-                    <span className="text-sm text-on-surface-variant font-mono mb-1">Terabytes/s</span>
+                    <span className="text-2xl md:text-4xl font-manrope font-bold text-white">12.4</span>
+                    <span className="text-xs md:text-sm text-on-surface-variant font-mono mb-1">Terabytes/s</span>
                   </div>
                 </div>
               </div>
@@ -819,14 +819,14 @@ export default function HomePage() {
               ))}
             </div>
 
-            <div className="mt-auto pt-10 border-t border-outline-variant/30 grid grid-cols-2 gap-8">
-              <div className="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/20 shadow-inner">
-                <p className="text-xs uppercase font-mono text-on-surface-variant tracking-widest mb-2">Active Packets</p>
-                <p className="text-4xl font-manrope font-black text-white">3.2B</p>
+            <div className="mt-auto pt-6 md:pt-10 border-t border-outline-variant/30 grid grid-cols-2 gap-4 md:gap-8">
+              <div className="bg-surface-container-lowest p-4 md:p-6 rounded-2xl border border-outline-variant/20 shadow-inner">
+                <p className="text-[10px] md:text-xs uppercase font-mono text-on-surface-variant tracking-widest mb-1 md:mb-2 text-center md:text-left">Active Packets</p>
+                <p className="text-2xl md:text-4xl font-manrope font-black text-white text-center md:text-left">3.2B</p>
               </div>
-              <div className="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/20 shadow-inner">
-                <p className="text-xs uppercase font-mono text-on-surface-variant tracking-widest mb-2">Load Stress</p>
-                <p className="text-4xl font-manrope font-black text-primary-fixed-dim">Nominal</p>
+              <div className="bg-surface-container-lowest p-4 md:p-6 rounded-2xl border border-outline-variant/20 shadow-inner">
+                <p className="text-[10px] md:text-xs uppercase font-mono text-on-surface-variant tracking-widest mb-1 md:mb-2 text-center md:text-left">Load Stress</p>
+                <p className="text-2xl md:text-4xl font-manrope font-black text-primary-fixed-dim text-center md:text-left">Nominal</p>
               </div>
             </div>
           </motion.div>
