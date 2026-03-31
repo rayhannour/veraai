@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -284,7 +284,7 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background z-10" />
 
         <div className="max-w-7xl mx-auto relative z-20">
-          <p className="text-center text-[10px] font-mono tracking-[0.2em] md:tracking-[0.4em] text-primary uppercase mb-6 md:mb-12 animate-pulse font-bold">Flux de Données Réseaux Partenaires</p>
+          <p className="text-center text-[10px] font-mono tracking-[0.2em] md:tracking-[0.4em] text-primary uppercase mb-6 md:mb-12 animate-pulse font-bold">Flux de Donn├®es R├®seaux Partenaires</p>
 
           <div className="flex overflow-hidden w-full select-none">
             {/* Infinite Horizontal Scroll with Framer Motion */}
@@ -294,7 +294,7 @@ export default function HomePage() {
               className="flex flex-none gap-24 items-center whitespace-nowrap px-12"
             >
               {[
-                "EDF GÉNÉRATION", "TOTAL ÉNERGIES", "ENGIE SOLUTIONS", "OHM ÉNERGIE", "GS ÉLECTRICITÉ", "ENI PRO", "VATTENFALL", "IBERDROLA"
+                "EDF G├ëN├ëRATION", "TOTAL ├ëNERGIES", "ENGIE SOLUTIONS", "OHM ├ëNERGIE", "GS ├ëLECTRICIT├ë", "ENI PRO", "VATTENFALL", "IBERDROLA"
               ].map((partner, i) => (
                 <div key={i} className="flex items-center gap-6 group/logo">
                   <div className="w-2 h-2 bg-primary rounded-full group-hover/logo:scale-150 transition-transform shadow-[0_0_10px_var(--color-primary)]"></div>
@@ -306,7 +306,7 @@ export default function HomePage() {
               ))}
               {/* Repeat for seamless loop */}
               {[
-                "EDF GÉNÉRATION", "TOTAL ÉNERGIES", "ENGIE SOLUTIONS", "OHM ÉNERGIE", "GS ÉLECTRICITÉ", "ENI PRO", "VATTENFALL", "IBERDROLA"
+                "EDF G├ëN├ëRATION", "TOTAL ├ëNERGIES", "ENGIE SOLUTIONS", "OHM ├ëNERGIE", "GS ├ëLECTRICIT├ë", "ENI PRO", "VATTENFALL", "IBERDROLA"
               ].map((partner, i) => (
                 <div key={i + 10} className="flex items-center gap-6 group/logo">
                   <div className="w-2 h-2 bg-primary rounded-full group-hover/logo:scale-150 transition-transform shadow-[0_0_10px_var(--color-primary)]"></div>
@@ -333,9 +333,9 @@ export default function HomePage() {
         >
           {[
             { img: '/agent.png', title: 'Intelligence Autonome', subtitle: 'Global Orchestration' },
-            { img: '/energy.png', title: 'Réseaux de Verre', subtitle: 'Luminescence Énergétique' },
+            { img: '/energy.png', title: 'R├®seaux de Verre', subtitle: 'Luminescence ├ënerg├®tique' },
             { img: '/energy-grid-bg.png', title: 'Grille Proactive', subtitle: 'Dynamic Power Flow' },
-            { img: '/telecom.png', title: 'Hyper Connectivité', subtitle: 'Neural Data Stream' },
+            { img: '/telecom.png', title: 'Hyper Connectivit├®', subtitle: 'Neural Data Stream' },
           ].map((slide, i) => (
             <div key={i} className="flex-none w-[260px] md:w-[500px] lg:w-[800px] h-[200px] md:h-[340px] lg:h-[450px] relative rounded-2xl md:rounded-[3rem] overflow-hidden group border border-outline-variant/30 shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
               <Image src={slide.img} alt={slide.title} fill className="object-cover transition-transform duration-1000 group-hover:scale-110 opacity-70 group-hover:opacity-100" />
@@ -351,9 +351,9 @@ export default function HomePage() {
           {/* Repeat for seamless loop */}
           {[
             { img: '/agent.png', title: 'Intelligence Autonome', subtitle: 'Global Orchestration' },
-            { img: '/energy.png', title: 'Réseaux de Verre', subtitle: 'Luminescence Énergétique' },
+            { img: '/energy.png', title: 'R├®seaux de Verre', subtitle: 'Luminescence ├ënerg├®tique' },
             { img: '/energy-grid-bg.png', title: 'Grille Proactive', subtitle: 'Dynamic Power Flow' },
-            { img: '/telecom.png', title: 'Hyper Connectivité', subtitle: 'Neural Data Stream' },
+            { img: '/telecom.png', title: 'Hyper Connectivit├®', subtitle: 'Neural Data Stream' },
           ].map((slide, i) => (
             <div key={i + 10} className="flex-none w-[260px] md:w-[500px] lg:w-[800px] h-[200px] md:h-[340px] lg:h-[450px] relative rounded-2xl md:rounded-[3rem] overflow-hidden group border border-outline-variant/30 shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
               <Image src={slide.img} alt={slide.title} fill className="object-cover transition-transform duration-1000 group-hover:scale-110 opacity-70 group-hover:opacity-100" />
@@ -381,14 +381,14 @@ export default function HomePage() {
           className="max-w-7xl mx-auto relative z-10 w-full flex flex-col items-center"
         >
           <motion.div variants={fadeUpScroll} className="text-center mb-10 md:mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-6xl font-manrope font-black text-white mb-4 md:mb-6 uppercase tracking-tight">Nos Offres Énergie</h2>
+            <h2 className="text-3xl md:text-4xl lg:text-6xl font-manrope font-black text-white mb-4 md:mb-6 uppercase tracking-tight">Nos Offres ├ënergie</h2>
             <p className="text-base md:text-xl text-on-surface-variant font-inter max-w-3xl mx-auto font-light leading-relaxed">
-              Interagissez avec Vera pour explorer les solutions énergétiques de demain.
+              Interagissez avec Vera pour explorer les solutions ├®nerg├®tiques de demain.
             </p>
           </motion.div>
 
-          {/* OFFER CARDS - Stacked on mobile & tablet, completely hidden on Desktop */}
-          <div className="w-full grid lg:hidden grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          {/* OFFER CARDS - Stacked on mobile, side by side on desktop */}
+          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
 
             {/* B2B OFFER CARD */}
             <motion.div
@@ -398,12 +398,12 @@ export default function HomePage() {
             >
               <div className="flex flex-col gap-4 md:gap-6">
                 <div className="flex justify-between items-start">
-                  <span className="bg-primary/20 text-primary border border-primary/30 text-[10px] font-mono px-3 py-1.5 rounded-full uppercase tracking-widest font-black">B2B · GS ÉLECTRICITÉ PRO</span>
+                  <span className="bg-primary/20 text-primary border border-primary/30 text-[10px] font-mono px-3 py-1.5 rounded-full uppercase tracking-widest font-black">B2B ┬À GS ├ëLECTRICIT├ë PRO</span>
                   <i className="pi pi-building text-xl md:text-2xl text-primary/40"></i>
                 </div>
                 <h3 className="text-2xl md:text-4xl font-manrope font-black text-white italic tracking-tight">Expansion Industrielle</h3>
                 <p className="text-sm md:text-base text-on-surface-variant font-inter leading-relaxed font-light">
-                  Optimisation multi-sites massive avec une réduction garantie de <span className="text-primary font-bold">25%</span> de vos dépenses énergétiques via l'IA.
+                  Optimisation multi-sites massive avec une r├®duction garantie de <span className="text-primary font-bold">25%</span> de vos d├®penses ├®nerg├®tiques via l'IA.
                 </p>
                 <button className="w-full py-4 md:py-5 bg-gradient-to-r from-primary to-primary-container text-surface font-manrope font-black text-sm uppercase tracking-widest rounded-xl md:rounded-2xl hover:shadow-[0_20px_40px_rgba(0,229,255,0.3)] transition-all">Consulter Devis Pro</button>
               </div>
@@ -417,113 +417,16 @@ export default function HomePage() {
             >
               <div className="flex flex-col gap-4 md:gap-6">
                 <div className="flex justify-between items-start">
-                  <span className="bg-secondary/20 text-secondary border border-secondary/30 text-[10px] font-mono px-3 py-1.5 rounded-full uppercase tracking-widest font-black">B2C · OHM ÉNERGIE SMART</span>
+                  <span className="bg-secondary/20 text-secondary border border-secondary/30 text-[10px] font-mono px-3 py-1.5 rounded-full uppercase tracking-widest font-black">B2C ┬À OHM ├ëNERGIE SMART</span>
                   <i className="pi pi-home text-xl md:text-2xl text-secondary/40"></i>
                 </div>
-                <h3 className="text-2xl md:text-4xl font-manrope font-black text-white italic tracking-tight">Maison Connectée</h3>
+                <h3 className="text-2xl md:text-4xl font-manrope font-black text-white italic tracking-tight">Maison Connect├®e</h3>
                 <p className="text-sm md:text-base text-on-surface-variant font-inter leading-relaxed font-light">
-                  Énergie <span className="text-secondary font-bold">100% Verte</span> pour votre foyer. Suivi live via Vera et facturation transparente instantanée.
+                  ├ënergie <span className="text-secondary font-bold">100% Verte</span> pour votre foyer. Suivi live via Vera et facturation transparente instantan├®e.
                 </p>
-                <button className="w-full py-4 md:py-5 bg-gradient-to-r from-secondary to-[#00f28e] text-surface font-manrope font-black text-sm uppercase tracking-widest rounded-xl md:rounded-2xl hover:shadow-[0_20px_40px_rgba(43,255,160,0.3)] transition-all">Souscription Immédiate</button>
+                <button className="w-full py-4 md:py-5 bg-gradient-to-r from-secondary to-[#00f28e] text-surface font-manrope font-black text-sm uppercase tracking-widest rounded-xl md:rounded-2xl hover:shadow-[0_20px_40px_rgba(43,255,160,0.3)] transition-all">Souscription Imm├®diate</button>
               </div>
             </motion.div>
-          </div>
-
-          {/* INTERACTIVE ORBITAL CENTER - DESKTOP ONLY */}
-          <div className="relative hidden w-full h-[600px] lg:flex items-center justify-center group/orbit mt-12">
-
-            {/* 1. THE CENTRAL VERA CIRCLE */}
-            <motion.div
-              whileHover={{ scale: 1.15 }}
-              className="relative w-56 h-56 rounded-full border-2 border-primary/30 z-30 bg-surface-container-high shadow-[0_0_80px_rgba(0,229,255,0.3)] flex items-center justify-center overflow-hidden cursor-pointer"
-            >
-              <Image src="/agent.png" alt="Vera AI Core" fill className="object-cover scale-150 opacity-80 group-hover/orbit:opacity-100 transition-all duration-700" />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent" />
-              <div className="absolute inset-x-0 bottom-6 text-center z-10">
-                <p className="text-[10px] font-mono text-primary font-black uppercase tracking-widest animate-pulse">VERA CORE</p>
-              </div>
-              {/* Pulsing Neural Rings */}
-              <div className="absolute inset-x-0 inset-y-0 border-2 border-primary/40 rounded-full animate-ping opacity-20" />
-            </motion.div>
-
-            {/* 2. THE FLOATING OFFER CARDS (ORBITAL OFFSET) */}
-
-            {/* B2B OFFER CARD - ANIMATED POSITION ON CURSOR HOVER OR LOAD */}
-            <motion.div
-              initial={{ x: 0, opacity: 0, scale: 0.8 }}
-              whileInView={{ x: -380, opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.05, zIndex: 40 }}
-              className="absolute z-20 w-[450px] bg-surface-container-low/90 backdrop-blur-3xl p-10 rounded-[3rem] border border-primary/30 shadow-[0_40px_100px_rgba(0,0,0,0.6)] transition-all duration-700 pointer-events-auto"
-            >
-              <div className="flex flex-col gap-6">
-                <div className="flex justify-between items-start">
-                  <span className="bg-primary/20 text-primary border border-primary/30 text-[10px] font-mono px-4 py-1.5 rounded-full uppercase tracking-widest font-black">B2B : GS ÉLECTRICITÉ PRO</span>
-                  <i className="pi pi-building text-2xl text-primary/40"></i>
-                </div>
-                <h3 className="text-3xl font-manrope font-black text-white italic tracking-tight">Expansion Industrielle</h3>
-                <p className="text-sm text-on-surface-variant font-inter leading-relaxed font-light">
-                  Optimisation multi-sites massive avec une réduction garantie de <span className="text-primary font-bold">25%</span> de vos dépenses énergétiques via l'IA.
-                </p>
-                <div className="border-t border-outline-variant/10 pt-6 mt-2">
-                  <button className="w-full py-4 bg-gradient-to-r from-primary to-primary-container text-surface font-manrope font-black text-sm uppercase tracking-widest rounded-xl md:rounded-2xl shadow-[0_20px_40px_rgba(0,229,255,0.2)] hover:shadow-[0_40px_80px_rgba(0,229,255,0.4)] transition-all">Consulter Devis Pro</button>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* B2C OFFER CARD */}
-            <motion.div
-              initial={{ x: 0, opacity: 0, scale: 0.8 }}
-              whileInView={{ x: 380, opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.05, zIndex: 40 }}
-              className="absolute z-20 w-[450px] bg-surface-container-low/90 backdrop-blur-3xl p-10 rounded-[3rem] border border-secondary/30 shadow-[0_40px_100px_rgba(0,0,0,0.6)] transition-all duration-700 pointer-events-auto"
-            >
-              <div className="flex flex-col gap-6">
-                <div className="flex justify-between items-start">
-                  <span className="bg-secondary/20 text-secondary border border-secondary/30 text-[10px] font-mono px-4 py-1.5 rounded-full uppercase tracking-widest font-black">B2C : OHM ÉNERGIE SMART</span>
-                  <i className="pi pi-home text-2xl text-secondary/40"></i>
-                </div>
-                <h3 className="text-3xl font-manrope font-black text-white italic tracking-tight">Maison Connectée</h3>
-                <p className="text-sm text-on-surface-variant font-inter leading-relaxed font-light">
-                  Énergie <span className="text-secondary font-bold">100% Verte</span> pour votre foyer. Suivi live via Vera et facturation transparente instantanée.
-                </p>
-                <div className="border-t border-outline-variant/10 pt-6 mt-2">
-                  <button className="w-full py-4 bg-gradient-to-r from-secondary to-[#00f28e] text-surface font-manrope font-black text-sm uppercase tracking-widest rounded-xl md:rounded-2xl shadow-[0_20px_40px_rgba(43,255,160,0.2)] hover:shadow-[0_40px_80px_rgba(43,255,160,0.4)] transition-all">Souscription Immédiate</button>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Neural Connector Lines (SVG Animated) */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-visible" viewBox="0 0 1000 600">
-              <motion.path
-                initial={{ pathLength: 0, opacity: 0 }}
-                whileInView={{ pathLength: 1, opacity: 1 }}
-                transition={{ duration: 1.5, ease: "easeInOut" }}
-                d="M 500,300 L 120,300"
-                stroke="url(#veraPrimaryGrad)"
-                strokeWidth="2"
-                strokeDasharray="10,10"
-              />
-              <motion.path
-                initial={{ pathLength: 0, opacity: 0 }}
-                whileInView={{ pathLength: 1, opacity: 1 }}
-                transition={{ duration: 1.5, ease: "easeInOut", delay: 0.2 }}
-                d="M 500,300 L 880,300"
-                stroke="url(#veraSecondaryGrad)"
-                strokeWidth="2"
-                strokeDasharray="10,10"
-              />
-              <defs>
-                <linearGradient id="veraPrimaryGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="var(--color-primary)" />
-                  <stop offset="100%" stopColor="transparent" />
-                </linearGradient>
-                <linearGradient id="veraSecondaryGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="transparent" />
-                  <stop offset="100%" stopColor="var(--color-secondary)" />
-                </linearGradient>
-              </defs>
-            </svg>
-
           </div>
         </motion.div>
       </section>
@@ -540,10 +443,10 @@ export default function HomePage() {
           className="relative z-10 w-full"
         >
           <motion.div variants={fadeUpScroll} className="text-center mb-8 md:mb-16 max-w-7xl mx-auto px-5 sm:px-8">
-            <span className="text-primary font-mono text-xs uppercase tracking-[0.3em] md:tracking-[0.5em] mb-3 md:mb-4 inline-block font-bold">Zéro Lenteur · Zéro Papier</span>
+            <span className="text-primary font-mono text-xs uppercase tracking-[0.3em] md:tracking-[0.5em] mb-3 md:mb-4 inline-block font-bold">Z├®ro Lenteur ┬À Z├®ro Papier</span>
             <h2 className="text-3xl md:text-5xl lg:text-7xl font-manrope font-black text-white mb-4 md:mb-8 uppercase tracking-tighter">Cycle Contractuel <span className="text-primary italic">Vera</span></h2>
             <p className="text-sm md:text-xl text-on-surface-variant font-inter max-w-3xl mx-auto font-light leading-relaxed">
-              Dites adieu aux formulaires classiques. Vera automatise votre transition énergétique en temps réel, du premier mot à la signature finale.
+              Dites adieu aux formulaires classiques. Vera automatise votre transition ├®nerg├®tique en temps r├®el, du premier mot ├á la signature finale.
             </p>
           </motion.div>
 
@@ -555,12 +458,12 @@ export default function HomePage() {
               className="flex flex-none gap-10 items-stretch h-full cursor-grab active:cursor-grabbing"
             >
               {[
-                { step: "01", title: "Contact & Dialogue Voice", desc: "Parlez directement à Vera. Elle comprend vos besoins instantanément via reconnaissance vocale neuronale.", img: "/step-voice.png", color: "border-primary/20 hover:border-primary" },
-                { step: "02", title: "Scan de Facture IA", desc: "Téléversez votre ancienne facture. Vera extrait les données de consommation en 0.4 seconde avec précision laser.", img: "/step-bill.png", color: "border-secondary/20 hover:border-secondary shadow-[0_0_20px_rgba(43,255,160,0.05)]" },
-                { step: "03", title: "Comparatif & Remises", desc: "Vera génère une liste d'offres exclusives Ohm et GS avec des remises appliquées selon votre profil.", img: "/energy.png", color: "border-primary/20 hover:border-primary" },
-                { step: "04", title: "Génération de Devis", desc: "Obtenez un devis contractuel complet, sans frais cachés, prêt pour validation en un clic.", img: "/telecom.png", color: "border-secondary/20 hover:border-secondary" },
-                { step: "05", title: "Signature Biométrique", desc: "Signez votre contrat numériquement avec une sécurité de grade militaire (FaceID/Fingerprint).", img: "/agent.png", color: "border-primary/20 hover:border-primary" },
-                { step: "06", title: "Paiement & Activation", desc: "Réglez en ligne et activez votre nouveau contrat. Transition terminée en moins de 2 minutes.", img: "/energy-grid-bg.png", color: "border-tertiary-fixed-dim/20 hover:border-tertiary-fixed-dim" }
+                { step: "01", title: "Contact & Dialogue Voice", desc: "Parlez directement ├á Vera. Elle comprend vos besoins instantan├®ment via reconnaissance vocale neuronale.", img: "/step-voice.png", color: "border-primary/20 hover:border-primary" },
+                { step: "02", title: "Scan de Facture IA", desc: "T├®l├®versez votre ancienne facture. Vera extrait les donn├®es de consommation en 0.4 seconde avec pr├®cision laser.", img: "/step-bill.png", color: "border-secondary/20 hover:border-secondary shadow-[0_0_20px_rgba(43,255,160,0.05)]" },
+                { step: "03", title: "Comparatif & Remises", desc: "Vera g├®n├¿re une liste d'offres exclusives Ohm et GS avec des remises appliqu├®es selon votre profil.", img: "/energy.png", color: "border-primary/20 hover:border-primary" },
+                { step: "04", title: "G├®n├®ration de Devis", desc: "Obtenez un devis contractuel complet, sans frais cach├®s, pr├¬t pour validation en un clic.", img: "/telecom.png", color: "border-secondary/20 hover:border-secondary" },
+                { step: "05", title: "Signature Biom├®trique", desc: "Signez votre contrat num├®riquement avec une s├®curit├® de grade militaire (FaceID/Fingerprint).", img: "/agent.png", color: "border-primary/20 hover:border-primary" },
+                { step: "06", title: "Paiement & Activation", desc: "R├®glez en ligne et activez votre nouveau contrat. Transition termin├®e en moins de 2 minutes.", img: "/energy-grid-bg.png", color: "border-tertiary-fixed-dim/20 hover:border-tertiary-fixed-dim" }
               ].map((item, i) => (
                 <motion.div
                   key={i}
@@ -584,7 +487,7 @@ export default function HomePage() {
                   </div>
 
                   <div className="mt-auto pt-6 flex justify-between items-center text-[10px] font-mono tracking-widest uppercase text-outline-variant">
-                    <span>Temps réel</span>
+                    <span>Temps r├®el</span>
                     <span className="flex items-center gap-2">
                       Processus AI <i className="pi pi-bolt text-primary animate-pulse"></i>
                     </span>
@@ -593,12 +496,12 @@ export default function HomePage() {
               ))}
               {/* Duplicate for seamlessness */}
               {[
-                { step: "01", title: "Contact & Dialogue Voice", desc: "Parlez directement à Vera. Elle comprend vos besoins instantanément via reconnaissance vocale neuronale.", img: "/step-voice.png", color: "border-primary/20 hover:border-primary" },
-                { step: "02", title: "Scan de Facture IA", desc: "Téléversez votre ancienne facture. Vera extrait les données de consommation en 0.4 seconde avec précision laser.", img: "/step-bill.png", color: "border-secondary/20 hover:border-secondary shadow-[0_0_20px_rgba(43,255,160,0.05)]" },
-                { step: "03", title: "Comparatif & Remises", desc: "Vera génère une liste d'offres exclusives Ohm et GS avec des remises appliquées selon votre profil.", img: "/energy.png", color: "border-primary/20 hover:border-primary" },
-                { step: "04", title: "Génération de Devis", desc: "Obtenez un devis contractuel complet, sans frais cachés, prêt pour validation en un clic.", img: "/telecom.png", color: "border-secondary/20 hover:border-secondary" },
-                { step: "05", title: "Signature Biométrique", desc: "Signez votre contrat numériquement avec une sécurité de grade militaire (FaceID/Fingerprint).", img: "/agent.png", color: "border-primary/20 hover:border-primary" },
-                { step: "06", title: "Paiement & Activation", desc: "Réglez en ligne et activez votre nouveau contrat. Transition terminée en moins de 2 minutes.", img: "/energy-grid-bg.png", color: "border-tertiary-fixed-dim/20 hover:border-tertiary-fixed-dim" }
+                { step: "01", title: "Contact & Dialogue Voice", desc: "Parlez directement ├á Vera. Elle comprend vos besoins instantan├®ment via reconnaissance vocale neuronale.", img: "/step-voice.png", color: "border-primary/20 hover:border-primary" },
+                { step: "02", title: "Scan de Facture IA", desc: "T├®l├®versez votre ancienne facture. Vera extrait les donn├®es de consommation en 0.4 seconde avec pr├®cision laser.", img: "/step-bill.png", color: "border-secondary/20 hover:border-secondary shadow-[0_0_20px_rgba(43,255,160,0.05)]" },
+                { step: "03", title: "Comparatif & Remises", desc: "Vera g├®n├¿re une liste d'offres exclusives Ohm et GS avec des remises appliqu├®es selon votre profil.", img: "/energy.png", color: "border-primary/20 hover:border-primary" },
+                { step: "04", title: "G├®n├®ration de Devis", desc: "Obtenez un devis contractuel complet, sans frais cach├®s, pr├¬t pour validation en un clic.", img: "/telecom.png", color: "border-secondary/20 hover:border-secondary" },
+                { step: "05", title: "Signature Biom├®trique", desc: "Signez votre contrat num├®riquement avec une s├®curit├® de grade militaire (FaceID/Fingerprint).", img: "/agent.png", color: "border-primary/20 hover:border-primary" },
+                { step: "06", title: "Paiement & Activation", desc: "R├®glez en ligne et activez votre nouveau contrat. Transition termin├®e en moins de 2 minutes.", img: "/energy-grid-bg.png", color: "border-tertiary-fixed-dim/20 hover:border-tertiary-fixed-dim" }
               ].map((item, i) => (
                 <motion.div
                   key={i + 10}
@@ -622,7 +525,7 @@ export default function HomePage() {
                   </div>
 
                   <div className="mt-auto pt-6 flex justify-between items-center text-[10px] font-mono tracking-widest uppercase text-outline-variant">
-                    <span>Temps réel</span>
+                    <span>Temps r├®el</span>
                     <span className="flex items-center gap-2">
                       Processus AI <i className="pi pi-bolt text-primary animate-pulse"></i>
                     </span>
@@ -834,7 +737,7 @@ export default function HomePage() {
           <div className="flex-1 flex flex-col gap-5 md:gap-8 w-full">
             <motion.h2 variants={fadeUpScroll} className="text-3xl md:text-5xl lg:text-7xl font-manrope font-extrabold text-on-surface leading-tight">Interactive <br /> Telemetry</motion.h2>
             <motion.p variants={fadeUpScroll} className="text-sm md:text-xl lg:text-2xl text-on-surface-variant font-inter leading-relaxed font-light">
-              Don't just watch your infrastructure—orchestrate it. The Smart Vue command center renders millions of gigabytes into actionable alerts.
+              Don't just watch your infrastructureÔÇöorchestrate it. The Smart Vue command center renders millions of gigabytes into actionable alerts.
             </motion.p>
             <motion.ul variants={staggerContainer} className="flex flex-col gap-3 md:gap-6 mt-4 md:mt-6 font-inter text-on-surface text-sm md:text-lg">
               <motion.li variants={fadeUpScroll} className="flex items-center gap-3 md:gap-5 bg-surface-container-low p-3 md:p-4 rounded-xl border border-outline-variant/10"><i className="pi pi-check-circle text-primary text-lg md:text-2xl" /> Millisecond reaction times.</motion.li>
@@ -889,15 +792,15 @@ export default function HomePage() {
                 </div>
               </div>
             </motion.div>
-            <motion.div variants={fadeUpScroll} className="flex-1 w-full flex flex-col gap-4 md:gap-6 order-1 lg:order-2">
-              <span className="text-primary-container font-mono tracking-widest uppercase text-xs md:text-sm border-l-2 border-primary-container pl-4">Energy Node Telemetry</span>
-              <h2 className="text-3xl md:text-5xl lg:text-7xl font-manrope font-black text-on-surface leading-tight">Proactive <br />Grid AI</h2>
-              <p className="text-sm md:text-xl text-on-surface-variant font-inter font-light leading-relaxed max-w-xl">
+            <motion.div variants={fadeUpScroll} className="flex-1 w-full flex flex-col gap-6 order-1 lg:order-2 px-4 lg:px-0">
+              <span className="text-primary-container font-mono tracking-widest uppercase text-sm border-l-2 border-primary-container pl-4">Energy Node Telemetry</span>
+              <h2 className="text-5xl lg:text-7xl font-manrope font-black text-on-surface leading-tight">Proactive <br />Grid AI</h2>
+              <p className="text-xl text-on-surface-variant font-inter font-light leading-relaxed max-w-xl">
                 Our deep learning architecture actively anticipates power drops and seamlessly redistributes global energy capacity across multi-regional nodes.
               </p>
-              <ul className="flex flex-col gap-2 md:gap-4 mt-2 md:mt-4 font-inter text-sm md:text-lg text-white">
-                <li className="flex items-center gap-3 md:gap-4"><i className="pi pi-angle-right text-primary" /> 48x faster failure resolution.</li>
-                <li className="flex items-center gap-3 md:gap-4"><i className="pi pi-angle-right text-primary" /> Advanced glass-style visualization layer.</li>
+              <ul className="flex flex-col gap-4 mt-4 font-inter text-lg text-white">
+                <li className="flex items-center gap-4"><i className="pi pi-angle-right text-primary"></i> 48x faster failure resolution.</li>
+                <li className="flex items-center gap-4"><i className="pi pi-angle-right text-primary"></i> Advanced glass-style visualization layer.</li>
               </ul>
             </motion.div>
           </div>
@@ -994,7 +897,7 @@ export default function HomePage() {
                     <Image src="/agent.png" alt="Vera" width={40} height={40} className="object-cover scale-150" />
                   </div>
                   <p className="text-sm italic text-secondary-fixed-dim/80 font-inter leading-snug">
-                    "Votre routeur Zain affiche une LED rouge ? Pointez votre caméra vers les câbles. Je vais synchroniser votre Monolith box instantanément."
+                    "Votre routeur Zain affiche une LED rouge ? Pointez votre cam├®ra vers les c├óbles. Je vais synchroniser votre Monolith box instantan├®ment."
                   </p>
                 </div>
               </div>
@@ -1057,7 +960,7 @@ export default function HomePage() {
                 className="absolute bottom-4 md:bottom-12 left-4 md:left-12 z-50 bg-[#FF7900]/90 backdrop-blur-xl border border-white/20 px-4 md:px-8 py-3 md:py-5 rounded-full shadow-[0_20px_50px_rgba(255,121,0,0.3)] flex items-center gap-2 md:gap-4"
               >
                 <i className="pi pi-shield text-sm md:text-xl text-white" />
-                <p className="text-[10px] md:text-xs font-manrope font-black text-white uppercase tracking-widest">Guide Activé</p>
+                <p className="text-[10px] md:text-xs font-manrope font-black text-white uppercase tracking-widest">Guide Activ├®</p>
               </motion.div>
             </motion.div>
           </div>
