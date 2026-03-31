@@ -792,15 +792,15 @@ export default function HomePage() {
                 </div>
               </div>
             </motion.div>
-            <motion.div variants={fadeUpScroll} className="flex-1 w-full flex flex-col gap-6 order-1 lg:order-2 px-4 lg:px-0">
-              <span className="text-primary-container font-mono tracking-widest uppercase text-sm border-l-2 border-primary-container pl-4">Energy Node Telemetry</span>
-              <h2 className="text-5xl lg:text-7xl font-manrope font-black text-on-surface leading-tight">Proactive <br />Grid AI</h2>
-              <p className="text-xl text-on-surface-variant font-inter font-light leading-relaxed max-w-xl">
+            <motion.div variants={fadeUpScroll} className="flex-1 w-full flex flex-col gap-4 md:gap-6 order-1 lg:order-2">
+              <span className="text-primary-container font-mono tracking-widest uppercase text-xs md:text-sm border-l-2 border-primary-container pl-4">Energy Node Telemetry</span>
+              <h2 className="text-3xl md:text-5xl lg:text-7xl font-manrope font-black text-on-surface leading-tight">Proactive <br />Grid AI</h2>
+              <p className="text-sm md:text-xl text-on-surface-variant font-inter font-light leading-relaxed max-w-xl">
                 Our deep learning architecture actively anticipates power drops and seamlessly redistributes global energy capacity across multi-regional nodes.
               </p>
-              <ul className="flex flex-col gap-4 mt-4 font-inter text-lg text-white">
-                <li className="flex items-center gap-4"><i className="pi pi-angle-right text-primary"></i> 48x faster failure resolution.</li>
-                <li className="flex items-center gap-4"><i className="pi pi-angle-right text-primary"></i> Advanced glass-style visualization layer.</li>
+              <ul className="flex flex-col gap-2 md:gap-4 mt-2 md:mt-4 font-inter text-sm md:text-lg text-white">
+                <li className="flex items-center gap-3 md:gap-4"><i className="pi pi-angle-right text-primary" /> 48x faster failure resolution.</li>
+                <li className="flex items-center gap-3 md:gap-4"><i className="pi pi-angle-right text-primary" /> Advanced glass-style visualization layer.</li>
               </ul>
             </motion.div>
           </div>
