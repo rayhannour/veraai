@@ -271,7 +271,7 @@ export default function HomePage() {
       </section>
 
       {/* 1.5 ANIMATED LOGO TICKER (NEWS STYLE) */}
-      <section className="py-20 bg-surface-container-low border-b border-outline-variant/10 relative overflow-hidden group">
+      <section className="py-10 md:py-20 bg-surface-container-low border-b border-outline-variant/10 relative overflow-hidden group">
         {/* Abstract Energy Background Image */}
         <div className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity duration-1000 grayscale pointer-events-none">
           <Image
@@ -284,7 +284,7 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background z-10" />
 
         <div className="max-w-7xl mx-auto relative z-20">
-          <p className="text-center text-[10px] font-mono tracking-[0.4em] text-primary uppercase mb-12 animate-pulse font-bold">Flux de Données Réseaux Partenaires</p>
+          <p className="text-center text-[10px] font-mono tracking-[0.2em] md:tracking-[0.4em] text-primary uppercase mb-6 md:mb-12 animate-pulse font-bold">Flux de Données Réseaux Partenaires</p>
 
           <div className="flex overflow-hidden w-full select-none">
             {/* Infinite Horizontal Scroll with Framer Motion */}
@@ -310,7 +310,7 @@ export default function HomePage() {
               ].map((partner, i) => (
                 <div key={i + 10} className="flex items-center gap-6 group/logo">
                   <div className="w-2 h-2 bg-primary rounded-full group-hover/logo:scale-150 transition-transform shadow-[0_0_10px_var(--color-primary)]"></div>
-                  <span className="text-3xl font-manrope font-black tracking-tighter text-white opacity-40 group-hover/logo:opacity-100 group-hover/logo:text-primary transition-all duration-300">
+                  <span className="text-lg md:text-3xl font-manrope font-black tracking-tighter text-white opacity-40 group-hover/logo:opacity-100 group-hover/logo:text-primary transition-all duration-300">
                     {partner}
                   </span>
                   <span className="text-xs font-mono text-outline-variant opacity-20 font-light">CORE.STREAM</span>
@@ -322,7 +322,7 @@ export default function HomePage() {
       </section>
 
       {/* 1.55 FULL-WIDTH CINEMATIC DYNAMIC SLIDER (AUTO) */}
-      <section className="w-full h-[600px] bg-background relative overflow-hidden flex flex-col justify-center">
+      <section className="w-full h-[280px] md:h-[500px] lg:h-[600px] bg-background relative overflow-hidden flex flex-col justify-center">
         <div className="absolute top-0 left-0 w-full h-px bg-primary/20" />
         <div className="absolute bottom-0 left-0 w-full h-px bg-primary/20" />
 
@@ -337,12 +337,12 @@ export default function HomePage() {
             { img: '/energy-grid-bg.png', title: 'Grille Proactive', subtitle: 'Dynamic Power Flow' },
             { img: '/telecom.png', title: 'Hyper Connectivité', subtitle: 'Neural Data Stream' },
           ].map((slide, i) => (
-            <div key={i} className="flex-none w-[800px] h-[450px] relative rounded-[3rem] overflow-hidden group border border-outline-variant/30 shadow-[0_50px_100px_rgba(0,0,0,0.6)]">
+            <div key={i} className="flex-none w-[260px] md:w-[500px] lg:w-[800px] h-[200px] md:h-[340px] lg:h-[450px] relative rounded-2xl md:rounded-[3rem] overflow-hidden group border border-outline-variant/30 shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
               <Image src={slide.img} alt={slide.title} fill className="object-cover transition-transform duration-1000 group-hover:scale-110 opacity-70 group-hover:opacity-100" />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-black/20 to-transparent z-10" />
-              <div className="absolute bottom-12 left-12 z-20">
-                <p className="text-primary font-mono text-xs uppercase tracking-[0.4em] mb-2">{slide.subtitle}</p>
-                <h3 className="text-5xl font-manrope font-black text-white uppercase tracking-tighter drop-shadow-2xl">{slide.title}</h3>
+              <div className="absolute bottom-4 md:bottom-12 left-4 md:left-12 z-20">
+                <p className="text-primary font-mono text-[9px] md:text-xs uppercase tracking-[0.3em] md:tracking-[0.4em] mb-1 md:mb-2">{slide.subtitle}</p>
+                <h3 className="text-lg md:text-3xl lg:text-5xl font-manrope font-black text-white uppercase tracking-tighter drop-shadow-2xl">{slide.title}</h3>
               </div>
               {/* Decorative Neon Element */}
               <div className="absolute top-8 right-8 w-24 h-24 border-t-2 border-r-2 border-primary/40 rounded-tr-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -355,12 +355,12 @@ export default function HomePage() {
             { img: '/energy-grid-bg.png', title: 'Grille Proactive', subtitle: 'Dynamic Power Flow' },
             { img: '/telecom.png', title: 'Hyper Connectivité', subtitle: 'Neural Data Stream' },
           ].map((slide, i) => (
-            <div key={i + 10} className="flex-none w-[800px] h-[450px] relative rounded-[3rem] overflow-hidden group border border-outline-variant/30 shadow-[0_50px_100px_rgba(0,0,0,0.6)]">
+            <div key={i + 10} className="flex-none w-[260px] md:w-[500px] lg:w-[800px] h-[200px] md:h-[340px] lg:h-[450px] relative rounded-2xl md:rounded-[3rem] overflow-hidden group border border-outline-variant/30 shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
               <Image src={slide.img} alt={slide.title} fill className="object-cover transition-transform duration-1000 group-hover:scale-110 opacity-70 group-hover:opacity-100" />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-black/20 to-transparent z-10" />
-              <div className="absolute bottom-12 left-12 z-20">
-                <p className="text-primary font-mono text-xs uppercase tracking-[0.4em] mb-2">{slide.subtitle}</p>
-                <h3 className="text-5xl font-manrope font-black text-white uppercase tracking-tighter drop-shadow-2xl">{slide.title}</h3>
+              <div className="absolute bottom-4 md:bottom-12 left-4 md:left-12 z-20">
+                <p className="text-primary font-mono text-[9px] md:text-xs uppercase tracking-[0.3em] mb-1 md:mb-2">{slide.subtitle}</p>
+                <h3 className="text-lg md:text-3xl lg:text-5xl font-manrope font-black text-white uppercase tracking-tighter drop-shadow-2xl">{slide.title}</h3>
               </div>
               {/* Decorative Neon Element */}
               <div className="absolute top-8 right-8 w-24 h-24 border-t-2 border-r-2 border-primary/40 rounded-tr-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -739,10 +739,10 @@ export default function HomePage() {
             <motion.p variants={fadeUpScroll} className="text-sm md:text-xl lg:text-2xl text-on-surface-variant font-inter leading-relaxed font-light">
               Don't just watch your infrastructure—orchestrate it. The Smart Vue command center renders millions of gigabytes into actionable alerts.
             </motion.p>
-            <motion.ul variants={staggerContainer} className="flex flex-col gap-6 mt-6 font-inter text-on-surface text-lg">
-              <motion.li variants={fadeUpScroll} className="flex items-center gap-5 bg-surface-container-low p-4 rounded-xl border border-outline-variant/10"><i className="pi pi-check-circle text-primary text-2xl"></i> Millisecond reaction times.</motion.li>
-              <motion.li variants={fadeUpScroll} className="flex items-center gap-5 bg-surface-container-low p-4 rounded-xl border border-outline-variant/10"><i className="pi pi-check-circle text-primary text-2xl"></i> Visual Network Topology graphs.</motion.li>
-              <motion.li variants={fadeUpScroll} className="flex items-center gap-5 bg-surface-container-low p-4 rounded-xl border border-outline-variant/10"><i className="pi pi-check-circle text-primary text-2xl"></i> Proactive bandwidth healing.</motion.li>
+            <motion.ul variants={staggerContainer} className="flex flex-col gap-3 md:gap-6 mt-4 md:mt-6 font-inter text-on-surface text-sm md:text-lg">
+              <motion.li variants={fadeUpScroll} className="flex items-center gap-3 md:gap-5 bg-surface-container-low p-3 md:p-4 rounded-xl border border-outline-variant/10"><i className="pi pi-check-circle text-primary text-lg md:text-2xl" /> Millisecond reaction times.</motion.li>
+              <motion.li variants={fadeUpScroll} className="flex items-center gap-3 md:gap-5 bg-surface-container-low p-3 md:p-4 rounded-xl border border-outline-variant/10"><i className="pi pi-check-circle text-primary text-lg md:text-2xl" /> Visual Network Topology graphs.</motion.li>
+              <motion.li variants={fadeUpScroll} className="flex items-center gap-3 md:gap-5 bg-surface-container-low p-3 md:p-4 rounded-xl border border-outline-variant/10"><i className="pi pi-check-circle text-primary text-lg md:text-2xl" /> Proactive bandwidth healing.</motion.li>
             </motion.ul>
             <motion.div variants={fadeUpScroll} className="mt-8">
               <Link href="/smart-vue">
@@ -757,7 +757,7 @@ export default function HomePage() {
       </section>
 
       {/* 4. HARDWARE NODES: ENERGY & TELECOM (GLASS STYLE) */}
-      <section className="py-24 px-8 lg:px-24 bg-surface-container-lowest relative overflow-hidden">
+      <section className="py-12 md:py-24 px-5 sm:px-8 lg:px-24 bg-surface-container-lowest relative overflow-hidden">
         <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_right,_var(--color-primary)_0%,_transparent_30%)] opacity-5 pointer-events-none"></div>
         <div className="absolute top-1/2 left-0 w-full h-full bg-[radial-gradient(circle_at_left,_var(--color-secondary)_0%,_transparent_30%)] opacity-5 pointer-events-none"></div>
 
@@ -766,11 +766,11 @@ export default function HomePage() {
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="max-w-7xl mx-auto flex flex-col gap-32 relative z-10"
+          className="max-w-7xl mx-auto flex flex-col gap-12 md:gap-32 relative z-10"
         >
           {/* Component 1: Energy Grid (AI Energy Word) */}
-          <div className="flex flex-col lg:flex-row items-center gap-16 group">
-            <motion.div variants={fadeUpScroll} className="flex-1 w-full order-2 lg:order-1 relative min-h-[500px] h-[600px] rounded-[3rem] overflow-hidden border border-primary/20 shadow-[0_30px_80px_rgba(0,229,255,0.15)] flex items-center justify-center bg-surface-container-low">
+          <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-16 group">
+            <motion.div variants={fadeUpScroll} className="flex-1 w-full order-2 lg:order-1 relative min-h-[260px] md:min-h-[500px] h-[300px] md:h-[500px] lg:h-[600px] rounded-2xl md:rounded-[3rem] overflow-hidden border border-primary/20 shadow-[0_20px_60px_rgba(0,229,255,0.1)] flex items-center justify-center bg-surface-container-low">
               {/* Translucent Glass Image Mask overlay */}
               <div className="absolute inset-0 z-20 bg-gradient-to-tr from-background/80 via-transparent to-background/20 mix-blend-overlay"></div>
               {/* 3D Glass Image representing AI Energy Statistics */}
@@ -780,14 +780,14 @@ export default function HomePage() {
                 fill
                 className="object-cover z-10 transition-transform duration-1000 group-hover:scale-105"
               />
-              <div className="absolute bottom-8 left-8 right-8 z-30 pointer-events-none">
-                <div className="bg-background/80 backdrop-blur-2xl border border-primary/30 p-6 rounded-3xl shadow-2xl flex items-center justify-between">
+              <div className="absolute bottom-4 md:bottom-8 left-4 md:left-8 right-4 md:right-8 z-30 pointer-events-none">
+                <div className="bg-background/80 backdrop-blur-2xl border border-primary/30 p-4 md:p-6 rounded-xl md:rounded-3xl shadow-2xl flex items-center justify-between">
                   <div>
-                    <p className="text-xs font-mono uppercase text-primary-fixed-dim tracking-widest mb-1">Grid Saturation</p>
-                    <p className="text-3xl font-manrope font-bold text-white">412.5 Terawatts</p>
+                    <p className="text-[10px] md:text-xs font-mono uppercase text-primary-fixed-dim tracking-widest mb-1">Grid Saturation</p>
+                    <p className="text-xl md:text-3xl font-manrope font-bold text-white">412.5 Terawatts</p>
                   </div>
-                  <div className="w-16 h-16 rounded-full border border-primary/40 flex items-center justify-center bg-primary/10">
-                    <i className="pi pi-bolt text-2xl text-primary animate-pulse"></i>
+                  <div className="w-10 h-10 md:w-16 md:h-16 rounded-full border border-primary/40 flex items-center justify-center bg-primary/10">
+                    <i className="pi pi-bolt text-lg md:text-2xl text-primary animate-pulse" />
                   </div>
                 </div>
               </div>
@@ -810,8 +810,7 @@ export default function HomePage() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="w-screen relative -mx-[max(2rem,6vw)] bg-surface-container-low border-y border-secondary/20 overflow-hidden py-10 my-24 group"
-          >
+            className="w-full bg-surface-container-low border-y border-secondary/20 overflow-hidden py-6 md:py-10 my-10 md:my-24 group rounded-2xl md:rounded-none">
             {/* Animated Grid Background for the Banner */}
             <div className="absolute inset-0 opacity-10">
               <svg width="100%" height="100%">
@@ -822,32 +821,32 @@ export default function HomePage() {
               </svg>
             </div>
 
-            <div className="max-w-[1800px] mx-auto flex flex-col md:flex-row items-center justify-between px-12 gap-12 relative z-10">
-              <div className="flex flex-col gap-2">
+            <div className="max-w-[1800px] mx-auto flex flex-col md:flex-row items-center justify-between px-5 md:px-12 gap-6 md:gap-12 relative z-10">
+              <div className="flex flex-col gap-1 md:gap-2">
                 <div className="flex items-center gap-3">
-                  <span className="w-2 h-2 bg-secondary rounded-full animate-ping"></span>
-                  <span className="text-secondary font-mono text-[10px] font-black tracking-[0.4em] uppercase">VERA_NEURAL_LINK_STABLE</span>
+                  <span className="w-2 h-2 bg-secondary rounded-full animate-ping" />
+                  <span className="text-secondary font-mono text-[10px] font-black tracking-[0.2em] md:tracking-[0.4em] uppercase">VERA_NEURAL_LINK_STABLE</span>
                 </div>
-                <h4 className="text-3xl font-manrope font-black text-white italic tracking-tighter uppercase">Riyadh-Dammam Core Backbone</h4>
+                <h4 className="text-xl md:text-3xl font-manrope font-black text-white italic tracking-tighter uppercase">Riyadh-Dammam Core Backbone</h4>
               </div>
 
-              <div className="flex flex-wrap items-center gap-12">
+              <div className="grid grid-cols-2 md:flex md:flex-wrap items-center gap-4 md:gap-12 w-full md:w-auto">
                 {[
                   { label: 'Latency', value: '8ms', icon: 'pi-bolt', color: 'text-secondary' },
                   { label: 'Throughput', value: '420 Gbps', icon: 'pi-cloud-download', color: 'text-white' },
                   { label: 'Zain Nodes', value: 'ACTIVE', icon: 'pi-server', color: 'text-[#FF7900]' },
                   { label: 'Orange Flux', value: 'NOMINAL', icon: 'pi-wifi', color: 'text-primary' },
                 ].map((stat, i) => (
-                  <div key={i} className="flex flex-col gap-1 border-l-2 border-outline-variant/10 pl-6 h-full group/stat">
-                    <p className="text-[10px] font-mono font-bold text-outline-variant uppercase tracking-widest flex items-center gap-2 group-hover/stat:text-white transition-colors">
-                      <i className={`pi ${stat.icon} text-[8px]`}></i> {stat.label}
+                  <div key={i} className="flex flex-col gap-1 border-l-2 border-outline-variant/10 pl-3 md:pl-6 h-full group/stat">
+                    <p className="text-[9px] md:text-[10px] font-mono font-bold text-outline-variant uppercase tracking-widest flex items-center gap-1 md:gap-2 group-hover/stat:text-white transition-colors">
+                      <i className={`pi ${stat.icon} text-[8px]`} /> {stat.label}
                     </p>
-                    <p className={`text-xl font-mono font-black ${stat.color}`}>{stat.value}</p>
+                    <p className={`text-sm md:text-xl font-mono font-black ${stat.color}`}>{stat.value}</p>
                   </div>
                 ))}
               </div>
 
-              <div className="flex-1 flex justify-center overflow-hidden h-12 relative">
+              <div className="hidden md:flex flex-1 justify-center overflow-hidden h-12 relative">
                 <motion.div
                   animate={{ x: [1000, -1000] }}
                   transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
@@ -865,16 +864,16 @@ export default function HomePage() {
           </motion.div>
 
           {/* Component 2: Vera Neural Support (Connect Section) */}
-          <div className="flex flex-col lg:flex-row items-center gap-16 group">
-            <motion.div variants={fadeUpScroll} className="flex-1 w-full flex flex-col gap-6 px-4 lg:px-0">
-              <div className="flex items-center gap-4">
-                <span className="w-12 h-[2px] bg-gradient-to-r from-[#FF7900] to-transparent"></span>
-                <span className="text-[#FF7900] font-mono tracking-[0.3em] uppercase text-xs font-black">Orange & Zain Hybrid Support</span>
+          <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-16 group">
+            <motion.div variants={fadeUpScroll} className="flex-1 w-full flex flex-col gap-4 md:gap-6">
+              <div className="flex items-center gap-3 md:gap-4">
+                <span className="w-8 md:w-12 h-[2px] bg-gradient-to-r from-[#FF7900] to-transparent" />
+                <span className="text-[#FF7900] font-mono tracking-[0.2em] md:tracking-[0.3em] uppercase text-xs font-black">Orange & Zain Hybrid Support</span>
               </div>
-              <h2 className="text-6xl lg:text-8xl font-manrope font-black text-on-surface leading-[0.9] tracking-tighter">
+              <h2 className="text-3xl md:text-5xl lg:text-8xl font-manrope font-black text-on-surface leading-[0.9] tracking-tighter">
                 Zero Human. <br /> <span className="text-secondary">Vera</span> Support.
               </h2>
-              <p className="text-xl text-on-surface-variant font-inter font-light leading-relaxed max-w-xl">
+              <p className="text-sm md:text-xl text-on-surface-variant font-inter font-light leading-relaxed max-w-xl">
                 Vera eliminates the need for calls or technicians. Using advanced Computer Vision, she sees what you see, diagnoses hardware faults in milliseconds, and guides you to a 100% resolution.
               </p>
 
@@ -904,7 +903,7 @@ export default function HomePage() {
               </div>
             </motion.div>
 
-            <motion.div variants={fadeUpScroll} className="flex-1 w-full relative min-h-[600px] h-[700px] rounded-[4rem] overflow-hidden border border-secondary/20 shadow-[0_50px_150px_rgba(0,0,0,0.4)] flex items-center justify-center bg-surface-container-low">
+            <motion.div variants={fadeUpScroll} className="flex-1 w-full relative min-h-[280px] md:min-h-[500px] h-[320px] md:h-[600px] lg:h-[700px] rounded-2xl md:rounded-[4rem] overflow-hidden border border-secondary/20 shadow-[0_20px_80px_rgba(0,0,0,0.4)] flex items-center justify-center bg-surface-container-low">
               {/* Translucent Glass Image Mask overlay */}
               <div className="absolute inset-0 z-30 bg-gradient-to-tr from-background/90 via-transparent to-black/10 mix-blend-overlay"></div>
 
@@ -933,8 +932,7 @@ export default function HomePage() {
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.5 }}
-                className="absolute top-12 right-12 z-50 bg-black/60 backdrop-blur-3xl border border-secondary/30 p-6 rounded-3xl shadow-2xl max-w-[280px]"
-              >
+                className="absolute top-4 md:top-12 right-4 md:right-12 z-50 bg-black/60 backdrop-blur-3xl border border-secondary/30 p-3 md:p-6 rounded-2xl md:rounded-3xl shadow-2xl max-w-[180px] md:max-w-[280px]">
                 <p className="text-[10px] font-mono text-secondary mb-2 animate-pulse font-black uppercase">Analyse de Flux Orange.sa</p>
                 <div className="space-y-3">
                   <div className="flex justify-between items-center text-xs">
@@ -959,10 +957,10 @@ export default function HomePage() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.8 }}
-                className="absolute bottom-12 left-12 z-50 bg-[#FF7900]/90 backdrop-blur-xl border border-white/20 px-8 py-5 rounded-full shadow-[0_20px_50px_rgba(255,121,0,0.3)] flex items-center gap-4"
+                className="absolute bottom-4 md:bottom-12 left-4 md:left-12 z-50 bg-[#FF7900]/90 backdrop-blur-xl border border-white/20 px-4 md:px-8 py-3 md:py-5 rounded-full shadow-[0_20px_50px_rgba(255,121,0,0.3)] flex items-center gap-2 md:gap-4"
               >
-                <i className="pi pi-shield text-xl text-white"></i>
-                <p className="text-xs font-manrope font-black text-white uppercase tracking-widest">Guide de Résolution Activé</p>
+                <i className="pi pi-shield text-sm md:text-xl text-white" />
+                <p className="text-[10px] md:text-xs font-manrope font-black text-white uppercase tracking-widest">Guide Activé</p>
               </motion.div>
             </motion.div>
           </div>
@@ -971,13 +969,13 @@ export default function HomePage() {
       </section>
 
       {/* 5. FINAL CTA (SCROLL ANIMATED) */}
-      <section className="py-40 px-8 lg:px-24">
+      <section className="py-16 md:py-40 px-5 sm:px-8 lg:px-24">
         <motion.div
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-80px" }}
           variants={fadeUpScroll}
-          className="max-w-7xl mx-auto bg-gradient-to-r from-surface-container-high to-surface-container border-2 border-primary/30 rounded-[4rem] p-16 lg:p-24 text-center relative overflow-hidden shadow-[0_0_100px_rgba(0,229,255,0.1)]"
+          className="max-w-7xl mx-auto bg-gradient-to-r from-surface-container-high to-surface-container border-2 border-primary/30 rounded-2xl md:rounded-[4rem] p-8 md:p-16 lg:p-24 text-center relative overflow-hidden shadow-[0_0_60px_rgba(0,229,255,0.1)]"
         >
           <motion.div
             animate={{ rotate: 360 }}
@@ -985,19 +983,19 @@ export default function HomePage() {
             className="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--color-primary-container)_0%,_transparent_50%)] opacity-20"
           />
 
-          <h2 className="text-5xl lg:text-7xl font-manrope font-black text-white mb-8 relative z-10 drop-shadow-lg">Are you ready to initialize?</h2>
-          <p className="text-xl md:text-2xl text-on-surface-variant font-inter max-w-3xl mx-auto mb-16 relative z-10 font-light leading-relaxed">
+          <h2 className="text-3xl md:text-5xl lg:text-7xl font-manrope font-black text-white mb-4 md:mb-8 relative z-10 drop-shadow-lg">Are you ready to initialize?</h2>
+          <p className="text-sm md:text-xl lg:text-2xl text-on-surface-variant font-inter max-w-3xl mx-auto mb-8 md:mb-16 relative z-10 font-light leading-relaxed">
             Join tier-1 organizations streamlining their infrastructure with Vera's intelligent routing. Deploy the Monolith structure to your private cloud today.
           </p>
 
-          <div className="flex flex-col sm:flex-row justify-center gap-8 relative z-10">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 md:gap-8 relative z-10">
             <Link href="/contact">
-              <button className="bg-primary text-background px-12 py-6 rounded-2xl font-bold font-inter transform transition-all shadow-[0_0_40px_rgba(0,229,255,0.4)] hover:shadow-[0_0_80px_rgba(0,229,255,0.8)] hover:-translate-y-2 flex items-center justify-center gap-4 w-full sm:w-auto uppercase tracking-widest text-base">
-                Initialize Contact <i className="pi pi-send text-xl"></i>
+              <button className="bg-primary text-background px-8 md:px-12 py-4 md:py-6 rounded-xl md:rounded-2xl font-bold font-inter transform transition-all shadow-[0_0_40px_rgba(0,229,255,0.4)] hover:shadow-[0_0_80px_rgba(0,229,255,0.8)] hover:-translate-y-2 flex items-center justify-center gap-3 md:gap-4 w-full sm:w-auto uppercase tracking-widest text-sm md:text-base">
+                Initialize Contact <i className="pi pi-send" />
               </button>
             </Link>
             <Link href="/pricing">
-              <button className="bg-transparent border-2 border-outline-variant hover:border-primary/60 text-white px-12 py-6 rounded-2xl font-bold font-inter transition-all hover:bg-surface-container w-full sm:w-auto uppercase tracking-widest text-base text-center hover:-translate-y-2">
+              <button className="bg-transparent border-2 border-outline-variant hover:border-primary/60 text-white px-8 md:px-12 py-4 md:py-6 rounded-xl md:rounded-2xl font-bold font-inter transition-all hover:bg-surface-container w-full sm:w-auto uppercase tracking-widest text-sm md:text-base text-center hover:-translate-y-2">
                 View Licensing
               </button>
             </Link>
