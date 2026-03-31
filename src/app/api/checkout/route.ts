@@ -1,10 +1,12 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
-
 export async function POST(req: Request) {
   try {
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string || 'sk_test_mock', {
+      apiVersion: '2026-03-25.dahlia', // Use a default or valid API version
+    });
+
     const { priceId } = await req.json();
 
     if (!priceId) {
