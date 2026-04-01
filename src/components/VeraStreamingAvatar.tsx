@@ -161,7 +161,7 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
     terminateSession: async () => {
       if (!avatar.current) return;
       setIsShuttingDown(true);
-      
+
       // Wait for the "TV OFF" animation to complete before stopping the avatar
       setTimeout(async () => {
         await avatar.current?.stopAvatar();
@@ -415,8 +415,11 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
                 x: 0
               }}
               exit={{ opacity: 0, scale: 0.5, x: 20 }}
-              className={`absolute z-[4000] flex items-end gap-1 h-20 pointer-events-none transition-all duration-700 ${isFullPage ? "top-24 right-24" : "top-12 right-12"
-                }`}
+              className={`absolute z-[4000] flex items-end gap-[2px] md:gap-1 pointer-events-none transition-all duration-700 ${
+                isFullPage 
+                  ? "h-20 top-12 right-24" 
+                  : "h-8 top-5 right-16 md:h-16 md:top-6 md:right-20"
+              }`}
             >
               {audioLevels.slice(0, 16).map((lvl, i) => { // Compact view for corner
                 // Boost the level based on its position
@@ -433,7 +436,7 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
                       stiffness: 400,
                       damping: 20
                     }}
-                    className="w-1.5 rounded-full shadow-[0_0_25px_rgba(0,229,255,0.6)]"
+                    className="w-1 md:w-1.5 rounded-full shadow-[0_0_25px_rgba(0,229,255,0.6)]"
                     style={{
                       backgroundColor: i % 2 === 0 ? "var(--color-primary)" : "var(--color-primary-fixed-dim)",
                       opacity: 0.4 + (displayHeight / 100),
@@ -446,12 +449,16 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
         </AnimatePresence>
 
         {/* TRUE FULLSCREEN TOGGLE BUTTON (F11 STYLE) */}
-        <button
+        <motion.div
+          role="button"
+          tabIndex={0}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
           onClick={toggleFullscreen}
-          className="absolute top-8 right-8 z-[100] w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 flex items-center justify-center transition-all group backdrop-blur-md"
+          className="absolute z-[100] !w-10 !h-10 !min-w-[40px] !min-h-[40px] md:!w-12 md:!h-12 md:!min-w-[48px] md:!min-h-[48px] !p-0 !m-0 aspect-square flex-shrink-0 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 cursor-pointer shadow-[inset_0_0_0_1px_rgba(255,255,255,0.1)] hover:shadow-[0_0_20px_rgba(255,255,255,0.3),inset_0_0_0_1px_rgba(255,255,255,0.3)] text-white/70 hover:text-white transition-all group backdrop-blur-md top-4 right-4 md:top-6 md:right-6 outline-none"
         >
-          <i className={`pi ${isFullPage ? 'pi-window-minimize' : 'pi-window-maximize'} text-white/70 group-hover:text-white transition-colors`}></i>
-        </button>
+          <i className={`pi ${isFullPage ? 'pi-window-minimize' : 'pi-window-maximize'} text-sm md:text-base`}></i>
+        </motion.div>
 
         {/* FRONTAL LASER SWEEP (DIAGNOSTIC SCANBAR) */}
         <motion.div
@@ -481,12 +488,12 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
               {/* Vertical Collapse Line */}
               <motion.div
                 initial={{ height: "100%", width: "100%", opacity: 1, backgroundColor: "#fff" }}
-                animate={{ 
+                animate={{
                   height: ["100%", "2px", "0px"],
                   width: ["100%", "100%", "0px"],
                   opacity: [1, 1, 0]
                 }}
-                transition={{ 
+                transition={{
                   duration: 0.8,
                   times: [0, 0.6, 1],
                   ease: "easeInOut"
@@ -495,8 +502,8 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
                 style={{ boxShadow: "0 0 40px #fff" }}
               />
               {/* White Center Flash */}
-              <motion.div 
-                animate={{ 
+              <motion.div
+                animate={{
                   scale: [0, 15, 0],
                   opacity: [0, 1, 0]
                 }}
@@ -526,47 +533,52 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
       {/* 3. PERIPHERAL GLOW */}
       <div className={`absolute -inset-16 bg-blue-500/10 blur-[120px] rounded-[4rem] -z-10 animate-pulse ${isFullPage ? 'hidden' : ''}`} />
 
-      {/* 4. IMPRESSIVE NEURAL DIALOGUE HISTORY (Left Floating) */}
+      {/* 4. NEURAL DIALOGUE HISTORY */}
       <AnimatePresence>
         {doorsOpen && isFullPage && (
           <motion.div
-            initial={{ opacity: 0, x: -100 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="absolute left-12 bottom-48 z-[100] w-[500px] max-h-[650px] overflow-y-auto hidden xl:flex flex-col gap-6 p-10 bg-background/40 backdrop-blur-3xl rounded-[3.5rem] border border-white/10 fitness-scrollbar shadow-[0_40px_120px_rgba(0,0,0,0.7)] pointer-events-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            className={`z-[100] hidden lg:flex flex-col gap-3 bg-background/60 backdrop-blur-2xl border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.6)] fitness-scrollbar pointer-events-auto overflow-hidden ${isFullPage
+                ? "absolute left-12 bottom-48 w-[480px] max-h-[600px] overflow-y-auto rounded-[3rem] p-8"
+                : "absolute bottom-[140px] left-1/2 -translate-x-1/2 w-full max-w-2xl rounded-3xl overflow-hidden"
+              }`}
           >
-            <div className="flex items-center gap-3 mb-4 opacity-50">
-              <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-white font-bold">Neural_Link_Protocol_Active</span>
+            {/* HEADER */}
+            <div className="flex items-center gap-2 px-5 py-3 border-b border-white/5 bg-white/5 flex-shrink-0">
+              <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-white/50 font-bold">Neural_Link_Protocol_Active</span>
             </div>
 
-            {chatHistory.map((msg, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'} max-w-full`}
-              >
-                <div className={`flex items-center gap-2 mb-2 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
-                  <span className={`text-[10px] font-mono font-black tracking-widest uppercase ${msg.role === 'user' ? 'text-white/30' : 'text-primary'}`}>
-                    {msg.role === 'user' ? 'Authorized_User' : 'Vera_Neural_Core'}
-                  </span>
-                  <div className={`w-1.5 h-1.5 rounded-full ${msg.role === 'user' ? 'bg-white/10' : 'bg-primary/60 animate-pulse'}`} />
-                </div>
-
-                <p className={`text-[13px] font-inter leading-relaxed p-5 rounded-[2.2rem] shadow-xl relative group overflow-hidden ${msg.role === 'user'
-                  ? 'bg-white/5 text-secondary rounded-tr-none border border-white/5 shadow-inner'
-                  : 'bg-primary/10 text-primary border border-primary/20 rounded-tl-none backdrop-blur-md shadow-lg shadow-primary/10'
-                  }`}>
-                  <span className="relative z-10 drop-shadow-[0_0_8px_rgba(0,229,255,0.4)]">
+            {/* MESSAGES */}
+            <div className={`overflow-y-auto flex flex-col gap-4 fitness-scrollbar ${isFullPage ? "max-h-[480px] p-2" : "max-h-52 p-4 md:p-5"}`}>
+              {chatHistory.map((msg, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'} max-w-full`}
+                >
+                  <div className={`flex items-center gap-2 mb-1 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
+                    <span className={`text-[10px] font-mono font-black tracking-widest uppercase ${msg.role === 'user' ? 'text-white/30' : 'text-primary'}`}>
+                      {msg.role === 'user' ? 'Authorized_User' : 'Vera_Neural_Core'}
+                    </span>
+                    <div className={`w-1.5 h-1.5 rounded-full ${msg.role === 'user' ? 'bg-white/10' : 'bg-primary/60 animate-pulse'}`} />
+                  </div>
+                  <p className={`text-[12px] font-inter leading-relaxed px-4 py-2 rounded-2xl relative overflow-hidden ${msg.role === 'user'
+                    ? 'bg-white/5 text-white/80 rounded-tr-none border border-white/5'
+                    : 'bg-primary/10 text-primary border border-primary/20 rounded-tl-none'
+                    }`}>
                     {msg.role === 'vera' && isVeraTalking && i === chatHistory.length - 1 && (
                       <span className="absolute left-0 top-0 w-full h-full bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full animate-[shimmer_2s_infinite]" />
                     )}
                     {msg.text}
-                  </span>
-                </p>
-              </motion.div>
-            ))}
-            <div ref={chatEndRef} />
+                  </p>
+                </motion.div>
+              ))}
+              <div ref={chatEndRef} />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
