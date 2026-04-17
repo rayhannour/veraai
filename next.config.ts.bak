@@ -1,0 +1,22 @@
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        path: false,
+        crypto: false,
+      };
+    }
+    // Ignore warnings regarding missing ort modules gracefully
+    config.ignoreWarnings = [
+      ...(config.ignoreWarnings || []),
+      { module: /@paddleocr\/paddleocr-js/ }
+    ];
+    return config;
+  },
+};
+
+export default nextConfig;

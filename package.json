@@ -2,6 +2,11 @@
   "name": "vera",
   "version": "0.1.0",
   "private": true,
+  "browser": {
+    "fs": false,
+    "path": false,
+    "crypto": false
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,18 +14,22 @@
     "lint": "eslint"
   },
   "dependencies": {
+ "@heygen/liveavatar-web-sdk": "latest",
     "@heygen/streaming-avatar": "^2.1.0",
+    "@paddleocr/paddleocr-js": "^0.2.0",
     "@stripe/stripe-js": "^9.0.0",
     "firebase": "^12.11.0",
     "framer-motion": "^12.38.0",
     "next": "16.2.0",
+    "pdfjs-dist": "^4.10.38",
     "primeflex": "^4.0.0",
     "primeicons": "^7.0.0",
     "primereact": "^10.9.7",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-firebase-hooks": "^5.1.1",
-    "stripe": "^21.0.1"
+    "stripe": "^21.0.1",
+    "tesseract.js": "^7.0.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

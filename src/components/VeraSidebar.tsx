@@ -12,6 +12,7 @@ const menuItems = [
   { name: 'Connect & Telecom', icon: 'pi-wifi', path: '/dashboard/connect' },
   { name: 'AI Mailbox', icon: 'pi-envelope', path: '/dashboard/mailbox' },
   { name: 'Smart Vue Hub', icon: 'pi-th-large', path: '/dashboard/smart-vue' },
+  { name: 'Canvas', icon: 'pi-pen-to-square', path: '/dashboard/canvas' },
   { name: 'AI Avatar Live', icon: 'pi-video', path: '/dashboard/ai-hub' },
   { name: 'System Parameters', icon: 'pi-cog', path: '/dashboard/settings' },
 ];

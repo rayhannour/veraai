@@ -35,6 +35,8 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
     try {
       setDebug("NEGOTIATING_HANDSHAKE...");
       const response = await fetch("/api/get-access-token", { method: "POST" });
+
+
       const data = await response.json();
 
       return data.token;
@@ -49,18 +51,15 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
     setIsLoading(true);
     setDebug("LOADING_SDK...");
 
-    let StreamingAvatar: any, AvatarQuality: any, StreamingEvents: any,
-      VoiceChatTransport: any, VoiceEmotion: any;
+    let LiveAvatarSession: any, SessionEvent: any, AgentEventsEnum: any;
     try {
-      const sdk = await import("@heygen/streaming-avatar");
-      StreamingAvatar = sdk.default;
-      AvatarQuality = sdk.AvatarQuality;
-      StreamingEvents = sdk.StreamingEvents;
-      VoiceChatTransport = sdk.VoiceChatTransport;
-      VoiceEmotion = sdk.VoiceEmotion;
-      taskRef.current = { TaskType: sdk.TaskType, TaskMode: sdk.TaskMode };
-    } catch {
-      setSdkError("SDK_NOT_INSTALLED — Run: npm install @heygen/streaming-avatar@^2.1.0");
+      const sdk = await import("@heygen/liveavatar-web-sdk");
+      LiveAvatarSession = sdk.LiveAvatarSession;
+      SessionEvent = sdk.SessionEvent;
+      AgentEventsEnum = sdk.AgentEventsEnum;
+    } catch (e) {
+      console.error(e);
+      setSdkError("SDK_NOT_INSTALLED — Run: npm install @heygen/liveavatar-web-sdk");
       setDebug("SDK_MISSING");
       setIsLoading(false);
       return;
@@ -70,28 +69,36 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
     const newToken = await fetchAccessToken();
     if (!newToken) { setIsLoading(false); return; }
 
-    avatar.current = new StreamingAvatar({ token: newToken });
+    avatar.current = new LiveAvatarSession(newToken);
 
-    avatar.current.on(StreamingEvents.STREAM_READY, (event: any) => {
-      setStream(event.detail);
+    avatar.current.on(SessionEvent.SESSION_STREAM_READY, () => {
+      // The SDK auto-manages the stream, but we might still need to let UI know
       setDebug("NEURAL_LINK_ESTABLISHED");
-      // TEST: Show visualizer for 5 seconds on link start
       setIsVeraTalking(true);
       setTimeout(() => setIsVeraTalking(false), 5000);
+
+      // Attempt to attach stream to video element
+      if (mediaStream.current) {
+        avatar.current.attach(mediaStream.current);
+        // Expose stream for the audio analyzer
+        setTimeout(() => {
+          if (mediaStream.current?.srcObject) {
+            setStream(mediaStream.current.srcObject as MediaStream);
+          }
+        }, 500);
+      }
     });
 
-    // Handle both potential naming conventions for events
+
     const handleTalking = (event: any) => {
-      console.log("AVATAR_TALK_EVENT:", event);
       setIsVeraTalking(true);
-      const message = event.detail?.message || event.message;
-      console.log("message", event.detail?.message)
+      const message = event.text; // Note: For LiveAvatar, event is AgentEventData with event.text
       if (message) {
         setChatHistory(prev => {
           const newHistory = [...prev];
           const lastMsg = newHistory[newHistory.length - 1];
           if (lastMsg && lastMsg.role === "vera") {
-            lastMsg.text = (lastMsg.text === "..." ? "" : lastMsg.text) + message;
+            lastMsg.text = (lastMsg.text === "..." ? "" : lastMsg.text) + " " + message;
             return newHistory;
           } else {
             return [...prev, { role: "vera", text: message }];
@@ -100,34 +107,20 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
       }
     };
 
-    avatar.current.on(StreamingEvents.AVATAR_TALKING_MESSAGE, handleTalking);
+    avatar.current.on(AgentEventsEnum.AVATAR_TRANSCRIPTION, handleTalking);
 
-    avatar.current.on(StreamingEvents.AVATAR_START_MESSAGE, () => {
-      console.log("AVATAR_START_TALKING");
+    avatar.current.on(AgentEventsEnum.AVATAR_SPEAK_STARTED, () => {
       setIsVeraTalking(true);
     });
 
-    avatar.current.on(StreamingEvents.AVATAR_END_MESSAGE, () => {
-      console.log("AVATAR_END_TALKING");
+    avatar.current.on(AgentEventsEnum.AVATAR_SPEAK_ENDED, () => {
       setIsVeraTalking(false);
       setDebug("SYSTEM_READY");
     });
 
-
     try {
-      await avatar.current.createStartAvatar({
-        quality: AvatarQuality.Low,
-        avatarName: "Katya_Chair_Sitting_public",
-        knowledgeId: "dfb28b59140f4ea188f1b9e19326bb2c",
-        voice: {
-          rate: 1.2,
-          emotion: VoiceEmotion.EXCITED,
-          model: ElevenLabsModel.eleven_flash_v2_5,
-        },
-        language: "fr",
-        voiceChatTransport: VoiceChatTransport.LIVEKIT,
-        sttSettings: { provider: STTProvider.DEEPGRAM },
-      });
+      await avatar.current.start();
+      setDoorsOpen(true);
     } catch (e) {
       console.error("Avatar start failed:", e);
       setDebug("BOOT_CRITICAL_FAILURE");
@@ -139,18 +132,14 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
   // 3. EXPOSE CHAT INTERFACE
   useImperativeHandle(ref, () => ({
     sendMessage: async (text: string) => {
-      if (!avatar.current || !taskRef.current) return;
+      if (!avatar.current) return;
 
       // Add user message to local history
       setChatHistory(prev => [...prev, { role: "user", text }]);
 
       try {
-        // Use .speak() with TALK / ASYNC as documented
-        await avatar.current.speak({
-          text,
-          taskType: taskRef.current.TaskType.TALK,
-          taskMode: taskRef.current.TaskMode.ASYNC
-        });
+        // Use liveavatar's repeat method since conversational message is not permitted in LITE mode
+        avatar.current.message(text);
 
         // Add a visual indicator for Vera's response
         setChatHistory(prev => [...prev, { role: "vera", text: "..." }]);
@@ -164,7 +153,7 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
 
       // Wait for the "TV OFF" animation to complete before stopping the avatar
       setTimeout(async () => {
-        await avatar.current?.stopAvatar();
+        await avatar.current?.stop();
         setStream(undefined);
         setDoorsOpen(false);
         setIsShuttingDown(false);
@@ -176,7 +165,7 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
   // 3. CLEANUP ON TERMINATION
   useEffect(() => {
     return () => {
-      avatar.current?.stopAvatar();
+      avatar.current?.stop();
     };
   }, []);
 
@@ -345,7 +334,6 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
                 whileHover={{ scale: 1.05 }}
                 className="absolute z-50 cursor-pointer group"
                 onClick={() => {
-                  setDoorsOpen(true);
                   startSession();
                 }}
               >
@@ -415,11 +403,10 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
                 x: 0
               }}
               exit={{ opacity: 0, scale: 0.5, x: 20 }}
-              className={`absolute z-[4000] flex items-end gap-[2px] md:gap-1 pointer-events-none transition-all duration-700 ${
-                isFullPage 
-                  ? "h-20 top-12 right-24" 
-                  : "h-8 top-5 right-16 md:h-16 md:top-6 md:right-20"
-              }`}
+              className={`absolute z-[4000] flex items-end gap-[2px] md:gap-1 pointer-events-none transition-all duration-700 ${isFullPage
+                ? "h-20 top-12 right-24"
+                : "h-8 top-5 right-16 md:h-16 md:top-6 md:right-20"
+                }`}
             >
               {audioLevels.slice(0, 16).map((lvl, i) => { // Compact view for corner
                 // Boost the level based on its position
@@ -541,8 +528,8 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             className={`z-[100] hidden lg:flex flex-col gap-3 bg-background/60 backdrop-blur-2xl border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.6)] fitness-scrollbar pointer-events-auto overflow-hidden ${isFullPage
-                ? "absolute left-12 bottom-48 w-[480px] max-h-[600px] overflow-y-auto rounded-[3rem] p-8"
-                : "absolute bottom-[140px] left-1/2 -translate-x-1/2 w-full max-w-2xl rounded-3xl overflow-hidden"
+              ? "absolute left-12 bottom-48 w-[480px] max-h-[600px] overflow-y-auto rounded-[3rem] p-8"
+              : "absolute bottom-[140px] left-1/2 -translate-x-1/2 w-full max-w-2xl rounded-3xl overflow-hidden"
               }`}
           >
             {/* HEADER */}

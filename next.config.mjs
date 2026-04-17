@@ -1,6 +1,33 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   allowedDevOrigins: ['192.168.160.64'],
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        path: false,
+        crypto: false,
+      };
+    }
+    config.ignoreWarnings = [
+      ...(config.ignoreWarnings || []),
+      { module: /@paddleocr\/paddleocr-js/ },
+      { module: /onnxruntime-web/ },
+      { module: /@techstark\/opencv-js/ }
+    ];
+    return config;
+  },
+  experimental: {
+    turbo: {
+      resolveAlias: {
+        fs: './src/lib/empty.ts',
+        path: './src/lib/empty.ts',
+        crypto: './src/lib/empty.ts',
+        'ort.bundle.min.mjs': './src/lib/empty.ts'
+      }
+    }
+  }
 };
 
 export default nextConfig;
