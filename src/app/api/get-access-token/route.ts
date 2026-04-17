@@ -39,9 +39,9 @@ export async function POST(request: NextRequest) {
         mode: "FULL",
         avatar_id: "073b60a9-89a8-45aa-8902-c358f64d2852",
         avatar_persona: {
-          voice_id: "513fd1b7-7ef9-466d-9af2-344e51eeb833",
+          voice_id: "e948b062-7dce-4f2b-bcf6-98bd3511106b",
           context_id: "5b9dba8a-aa31-11f0-a6ee-066a7fa2e369",
-          language: "en",
+          language: "ar",
         },
       }),
     });
