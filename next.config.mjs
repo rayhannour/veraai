@@ -18,14 +18,12 @@ const nextConfig = {
     ];
     return config;
   },
-  experimental: {
-    turbo: {
-      resolveAlias: {
-        fs: './src/lib/empty.ts',
-        path: './src/lib/empty.ts',
-        crypto: './src/lib/empty.ts',
-        'ort.bundle.min.mjs': './src/lib/empty.ts'
-      }
+  turbopack: {
+    resolveAlias: {
+      fs: './src/lib/empty.ts',
+      path: './src/lib/empty.ts',
+      crypto: './src/lib/empty.ts',
+      'ort.bundle.min.mjs': './src/lib/empty.ts'
     }
   }
 };
