@@ -20,8 +20,8 @@ const nextConfig = {
   },
   turbopack: {
     resolveAlias: {
-      fs: './src/lib/empty.ts',
-      path: './src/lib/empty.ts',
+      fs: './src/lib/stub-fs.ts',
+      path: './src/lib/stub-path.ts',
       'ort.bundle.min.mjs': './src/lib/empty.ts'
     }
   }
