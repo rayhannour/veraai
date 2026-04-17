@@ -8,6 +8,7 @@
     "crypto": false
   },
   "scripts": {
+    "postinstall": "node patch-ocr.js",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
