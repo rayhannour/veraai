@@ -75,7 +75,7 @@ export default function CanvasPage() {
     (async () => {
       try {
         // Dynamically import to ensure browser-only (client-side) execution
-        const { PaddleOCR } = await import("@paddleocr/paddleocr-js");
+        const { PaddleOCR } = await import(/* turbopack-ignore */ "@paddleocr/paddleocr-js");
         
         const ocr = await PaddleOCR.create({
           // Use the Universal Multilingual engine which supports Arabic & 80+ other languages natively
