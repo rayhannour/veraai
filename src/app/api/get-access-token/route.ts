@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
         mode: "FULL",
         avatar_id: "073b60a9-89a8-45aa-8902-c358f64d2852",
         avatar_persona: {
-          voice_id: "c2527536-6d1f-4412-a643-53a3497dada9",
+          voice_id: "513fd1b7-7ef9-466d-9af2-344e51eeb833",
           context_id: "5b9dba8a-aa31-11f0-a6ee-066a7fa2e369",
           language: "en",
         },
