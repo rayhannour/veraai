@@ -1014,6 +1014,171 @@ const ProcessGraph = ({ revealedCount }: { revealedCount: number }) => (
   </motion.div>
 );
 
+// ─── ORBITAL CANVAS DIAGRAM (SLIDE 2) ─────────────────────────────────────────
+
+const OrbitalCanvasDiagram = ({ slide, currentPointIndex }: { slide: any; currentPointIndex: number }) => {
+  const points = slide.points;
+  const radius = 130; 
+
+  const activePoint = currentPointIndex > -1 ? points[currentPointIndex] : null;
+
+  return (
+    <div className="w-full relative flex flex-col items-center justify-start mt-2">
+      <div className="relative w-[300px] h-[300px] flex items-center justify-center portrait:max-lg:w-[240px] portrait:max-lg:h-[240px] z-10">
+        
+        {/* Connection Lines SVG */}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible">
+          {points.map((pt: any, i: number) => {
+            const angle = (i * (360 / points.length)) - 90;
+            const rad = (angle * Math.PI) / 180;
+            const currentRadius = 130; 
+            
+            const startX = 150; 
+            const startY = 150;
+            
+            const endX = startX + Math.cos(rad) * currentRadius;
+            const endY = startY + Math.sin(rad) * currentRadius;
+
+            const isRevealed = i <= currentPointIndex;
+            const isActive = i === currentPointIndex;
+
+            return (
+              <motion.line 
+                key={i}
+                x1={startX} y1={startY} 
+                x2={endX} y2={endY}
+                stroke={isRevealed ? pt.accentColor : "rgba(255,255,255,0.1)"}
+                strokeWidth={isActive ? 2 : 1}
+                strokeDasharray={isActive ? "none" : "4,4"}
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: isRevealed ? (isActive ? 1 : 0.4) : 0.1,
+                }}
+                transition={{ duration: 0.8 }}
+                className="portrait:max-lg:hidden"
+              />
+            )
+          })}
+        </svg>
+
+        {/* Central Core */}
+        <motion.div 
+          animate={{ 
+            boxShadow: [`0 0 20px rgba(0, 255, 170, 0.2)`, `0 0 60px rgba(0, 255, 170, 0.5)`, `0 0 20px rgba(0, 255, 170, 0.2)`] 
+          }}
+          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+          className="relative z-20 w-24 h-24 rounded-full border border-white/20 flex flex-col items-center justify-center"
+          style={{ background: 'linear-gradient(135deg, rgba(0,0,0,0.8), rgba(0,0,0,0.4))', backdropFilter: 'blur(30px)' }}
+        >
+          <div className="absolute inset-0 rounded-full border border-[#00ffaa] opacity-30 animate-ping" style={{ animationDuration: '3s' }} />
+          <i className="pi pi-share-alt text-2xl text-[#00ffaa] mb-1" />
+          <span className="text-[10px] font-mono font-bold text-white tracking-widest uppercase">Canvas</span>
+        </motion.div>
+
+        {/* Orbiting Cards */}
+        {points.map((pt: any, i: number) => {
+            const angle = (i * (360 / points.length)) - 90;
+            const rad = (angle * Math.PI) / 180;
+            
+            const isActive = i === currentPointIndex;
+            const isRevealed = i <= currentPointIndex;
+            
+            const tx = Math.cos(rad) * radius;
+            const ty = Math.sin(rad) * radius;
+
+            return (
+              <motion.div
+                key={pt.id}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ 
+                  opacity: isRevealed ? 1 : 0.2, 
+                  scale: isRevealed ? (isActive ? 1.15 : 0.85) : 0.6,
+                  x: tx,
+                  y: ty,
+                  rotate: isActive ? [-1, 1, -1] : 0
+                }}
+                transition={{ duration: 0.6, rotate: { repeat: Infinity, duration: 2, ease: "linear" } }}
+                className="absolute w-24 h-24 flex items-center justify-center z-30"
+              >
+                  <div className="flex flex-col items-center justify-center">
+                    <motion.div
+                      animate={{
+                        borderColor: isActive ? pt.accentColor : 'rgba(255,255,255,0.1)',
+                        boxShadow: isActive ? `0 0 30px ${pt.accentColor}66` : 'none',
+                        background: isActive ? `${pt.accentColor}22` : 'rgba(255,255,255,0.02)'
+                      }}
+                      className="w-14 h-14 rounded-2xl border flex items-center justify-center backdrop-blur-md mb-2 relative overflow-hidden"
+                    >
+                      <i className={`pi ${pt.icon} text-xl relative z-10`} style={{ color: isActive ? '#fff' : pt.accentColor }} />
+                    </motion.div>
+                    
+                    <h4 className="text-[9px] font-bold text-center line-clamp-2 px-1 whitespace-nowrap" style={{ color: isActive ? pt.accentColor : 'rgba(255,255,255,0.4)', textShadow: isActive ? `0 0 10px ${pt.accentColor}` : 'none' }}>
+                      {pt.label}
+                    </h4>
+                  </div>
+              </motion.div>
+            )
+        })}
+      </div>
+
+      {/* Detail Card Overlay below graph */}
+      <div className="w-full max-w-lg mt-8 z-40">
+        <AnimatePresence mode="wait">
+          {activePoint && (
+            <motion.div
+              key={activePoint.id}
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: -10 }}
+              transition={{ type: 'spring', damping: 20 }}
+              className="rounded-2xl border p-4 bg-black/50 backdrop-blur-2xl relative overflow-hidden group shadow-2xl portrait:max-lg:p-3"
+              style={{
+                borderColor: `${activePoint.accentColor}44`,
+                boxShadow: `0 20px 40px rgba(0,0,0,0.5), inset 0 0 30px ${activePoint.accentColor}15`
+              }}
+            >
+              <div 
+                className="absolute -top-10 -right-10 w-32 h-32 rounded-full blur-[40px] opacity-40 pointer-events-none"
+                style={{ background: activePoint.accentColor }}
+              />
+
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center border" style={{ borderColor: `${activePoint.accentColor}44`, backgroundColor: `${activePoint.accentColor}22` }}>
+                    <i className={`pi ${activePoint.icon} text-sm`} style={{ color: activePoint.accentColor }} />
+                  </div>
+                  <h3 className="text-base font-bold text-white shrink-0">{activePoint.label}</h3>
+                  <div className="flex-1 h-px bg-white/10 mx-2 hidden sm:block"></div>
+                </div>
+
+                <p className="text-sm text-white/80 leading-relaxed font-inter portrait:max-lg:text-xs">
+                  {activePoint.detail}
+                </p>
+
+                {activePoint.subPoints && activePoint.subPoints.length > 0 && (
+                  <div className="grid grid-cols-2 gap-2 mt-4 portrait:max-lg:grid-cols-1">
+                    {activePoint.subPoints.map((sp: any, idx: number) => (
+                      <div key={idx} className="flex items-center gap-2 p-2 rounded-xl border border-white/5 bg-white/5 hover:bg-white/10 transition-colors">
+                        <div className="w-6 h-6 rounded-md flex items-center justify-center border shrink-0" style={{ borderColor: `${sp.color || activePoint.accentColor}33`, background: `${sp.color || activePoint.accentColor}11` }}>
+                          <i className={`pi ${sp.icon || 'pi-check'} text-[10px]`} style={{ color: sp.color || activePoint.accentColor }} />
+                        </div>
+                        <div className="flex flex-col flex-1 min-w-0">
+                          <span className="text-[10px] text-white font-mono font-bold truncate">{sp.label}</span>
+                          {sp.value && <span className="text-[8px] uppercase tracking-widest text-white/50">{sp.value}</span>}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+};
+
 // ─── MAIN COMPONENT ───────────────────────────────────────────────────────────
 
 interface PresentationProps {
@@ -1155,19 +1320,23 @@ const Presentation = React.forwardRef<PresentationHandle, PresentationProps>(({ 
             <ProcessGraph revealedCount={currentPointIndex + 1} />
           )}
 
-          {/* Points list */}
+          {/* Points list or Orbital Graph */}
           {!isOutroActive && (
-            <div className="flex flex-col gap-4 mt-2">
-              <AnimatePresence mode="popLayout">
-                {sortedPoints.map((point, idx) => (
-                  <PointCard
-                    key={`${currentSlideIndex}-${point.id}`}
-                    point={point}
-                    isCurrent={idx === 0}
-                    idx={idx}
-                  />
-                ))}
-              </AnimatePresence>
+            <div className={`flex flex-col gap-4 mt-2 ${currentSlide.id === 'tech' ? 'h-full justify-center' : ''}`}>
+              {currentSlide.id === 'tech' ? (
+                <OrbitalCanvasDiagram slide={currentSlide} currentPointIndex={currentPointIndex} />
+              ) : (
+                <AnimatePresence mode="popLayout">
+                  {sortedPoints.map((point, idx) => (
+                    <PointCard
+                      key={`${currentSlideIndex}-${point.id}`}
+                      point={point}
+                      isCurrent={idx === 0}
+                      idx={idx}
+                    />
+                  ))}
+                </AnimatePresence>
+              )}
             </div>
           )}
         </div>
