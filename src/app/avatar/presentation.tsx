@@ -474,14 +474,35 @@ const PointCard = ({ point, isCurrent, idx }: { point: Point; isCurrent: boolean
           {point.label}
         </h4>
         {isCurrent && (
-          <motion.p
-            initial={{ opacity: 0, y: 5 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-sm font-mono text-white/40 mt-1 leading-relaxed portrait:max-lg:text-[10px] portrait:max-lg:font-inter portrait:max-lg:text-white/60"
+          <motion.div
+            initial={{ opacity: 0, y: 15, height: 0 }}
+            animate={{ opacity: 1, y: 0, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ delay: 0.2, type: 'spring', stiffness: 200, damping: 20 }}
+            className="mt-4 rounded-2xl border p-4 relative overflow-hidden group portrait:max-lg:mt-3 portrait:max-lg:p-3"
+            style={{
+              background: `linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2))`,
+              borderColor: `${point.accentColor}33`,
+              boxShadow: `inset 0 0 20px ${point.accentColor}11`,
+              backdropFilter: 'blur(20px)'
+            }}
           >
-            {point.detail}
-          </motion.p>
+            {/* Soft decorative background glow inside the explanation card */}
+            <div
+              className="absolute -top-10 -right-10 w-32 h-32 rounded-full blur-[40px] opacity-30 pointer-events-none transition-opacity duration-700 group-hover:opacity-50"
+              style={{ background: point.accentColor }}
+            />
+            
+            <div className="flex items-start gap-3 relative z-10">
+              <div 
+                className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full" 
+                style={{ backgroundColor: point.accentColor, boxShadow: `0 0 8px ${point.accentColor}` }} 
+              />
+              <p className="text-sm font-inter text-white/80 leading-relaxed portrait:max-lg:text-[10px] portrait:max-lg:leading-relaxed">
+                {point.detail}
+              </p>
+            </div>
+          </motion.div>
         )}
       </div>
 
