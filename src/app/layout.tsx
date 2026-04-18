@@ -4,10 +4,7 @@ import Image from "next/image";
 import { Providers } from "./providers";
 import { VeraNavbar } from "@/components/VeraNavbar";
 import { VeraFooter } from "@/components/VeraFooter";
-import "primereact/resources/themes/lara-dark-blue/theme.css";
-import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import "primeflex/primeflex.css";
 import "./globals.css";
 
 const manrope = Manrope({

@@ -1,8 +1,6 @@
 "use client";
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Avatar } from 'primereact/avatar';
-import { Toast } from 'primereact/toast';
 import { VeraCard } from '@/components/VeraCard';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
@@ -11,7 +9,7 @@ import { auth, googleProvider, facebookProvider, githubProvider } from '@/lib/fi
 
 export default function NeuralLogin() {
   const router = useRouter();
-  const toast = useRef<Toast>(null);
+  const [errorToast, setErrorToast] = useState<{ summary: string; detail: string } | null>(null);
   const [scanning, setScanning] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
 
@@ -22,12 +20,8 @@ export default function NeuralLogin() {
     if (code === 'auth/email-already-in-use') detailMsg = "Cette identité est déjà enregistrée dans le réseau.";
     if (code === 'auth/invalid-credential' || message === 'Mot de passe incorrect.') detailMsg = "Accès refusé. Identifiants neuronaux incorrects.";
 
-    toast.current?.show({
-      severity: 'error',
-      summary: 'SÉCURITÉ SYSTÈME',
-      detail: detailMsg,
-      life: 5000,
-    });
+    setErrorToast({ summary: 'SÉCURITÉ SYSTÈME', detail: detailMsg });
+    setTimeout(() => setErrorToast(null), 5000);
   };
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -122,15 +116,27 @@ export default function NeuralLogin() {
   return (
     <div className="flex flex-col min-h-screen relative overflow-hidden items-center justify-center">
 
-      <Toast ref={toast} position="top-center" pt={{
-        root: { className: 'w-full max-w-md mt-4' },
-        message: { className: 'bg-surface-container-high/90 backdrop-blur-xl border border-error/50 text-on-surface shadow-[0_0_30px_rgba(255,180,171,0.15)] font-mono rounded-xl p-4' },
-        icon: { className: 'text-error text-2xl drop-shadow-[0_0_10px_rgba(255,180,171,0.8)]' },
-        text: { className: 'ml-4 flex-1' },
-        summary: { className: 'tracking-[0.2em] uppercase text-xs font-bold text-error mb-1 block' },
-        detail: { className: 'text-xs text-on-surface-variant opacity-90' },
-        closeButton: { className: 'text-on-surface-variant hover:text-error transition-colors rounded-full' }
-      }} />
+      <div className="absolute top-4 left-1/2 -translate-x-1/2 w-full max-w-md z-50 px-4 pointer-events-none">
+        <AnimatePresence>
+          {errorToast && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="bg-surface-container-high/90 backdrop-blur-xl border border-error/50 text-on-surface shadow-[0_0_30px_rgba(255,180,171,0.15)] font-mono rounded-xl p-4 flex items-start gap-4 pointer-events-auto"
+            >
+              <i className="pi pi-exclamation-circle text-error text-2xl drop-shadow-[0_0_10px_rgba(255,180,171,0.8)] mt-1"></i>
+              <div className="flex-1">
+                <span className="tracking-[0.2em] uppercase text-xs font-bold text-error mb-1 block">{errorToast.summary}</span>
+                <span className="text-xs text-on-surface-variant opacity-90">{errorToast.detail}</span>
+              </div>
+              <button type="button" onClick={() => setErrorToast(null)} className="text-on-surface-variant flex-shrink-0 hover:text-error transition-colors p-1">
+                <i className="pi pi-times"></i>
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
 
       {/* Ambient background glows */}
       <motion.div
@@ -372,7 +378,9 @@ export default function NeuralLogin() {
                 animate={{ opacity: 1, y: 0 }}
                 className="flex items-center gap-4 bg-surface-container-low p-4 rounded-xl border border-primary/30 w-full"
               >
-                <Avatar icon="pi pi-user" shape="circle" className="bg-surface text-primary border border-primary/50 flex-shrink-0" />
+                <div className="w-10 h-10 rounded-full bg-surface text-primary border border-primary/50 flex flex-shrink-0 items-center justify-center">
+                  <i className="pi pi-user"></i>
+                </div>
                 <div className="flex flex-col text-left">
                   <span className="text-[10px] text-primary font-mono tracking-widest uppercase">Agent Vera</span>
                   <span className="text-sm font-inter text-on-surface">Identity confirmed. Welcome back to the command center.</span>

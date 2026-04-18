@@ -413,9 +413,8 @@ const PointCard = ({ point, isCurrent, idx }: { point: Point; isCurrent: boolean
       filter: isCurrent ? 'blur(0px)' : `blur(${idx * 3}px)`,
       zIndex: isCurrent ? 10 : 10 - idx,
     }}
-    exit={{ opacity: 0, y: -30, scale: 0.9 }}
     transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-    className="relative w-full rounded-[2.5rem] overflow-hidden"
+    className={`relative w-full rounded-[2.5rem] overflow-hidden portrait:max-lg:rounded-3xl ${!isCurrent ? 'portrait:max-lg:hidden' : ''}`}
     style={{
       background: isCurrent
         ? `linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02))`
@@ -435,10 +434,11 @@ const PointCard = ({ point, isCurrent, idx }: { point: Point; isCurrent: boolean
       />
     )}
 
-    <div className="relative z-10 flex items-center gap-6 p-6 lg:p-8">
+    <div className="relative z-10 flex items-center gap-6 p-6 lg:p-8 portrait:max-lg:gap-4 portrait:max-lg:p-4">
       {/* Icon */}
       <motion.div
-        className="shrink-0 w-16 h-16 rounded-2xl flex items-center justify-center"
+        className="shrink-0 w-16 h-16 rounded-2xl flex items-center justify-center portrait:max-lg:w-12 portrait:max-lg:h-12 portrait:max-lg:rounded-xl"
+
         animate={{
           background: isCurrent ? `${point.accentColor}22` : 'rgba(255,255,255,0.03)',
           borderColor: isCurrent ? `${point.accentColor}88` : 'rgba(255,255,255,0.06)',
@@ -465,7 +465,7 @@ const PointCard = ({ point, isCurrent, idx }: { point: Point; isCurrent: boolean
           )}
         </AnimatePresence>
         <h4
-          className="text-xl lg:text-3xl font-black tracking-tight leading-tight"
+          className="text-xl lg:text-3xl font-black tracking-tight leading-tight portrait:max-lg:text-lg"
           style={{
             color: isCurrent ? '#fff' : 'rgba(255,255,255,0.15)',
             textShadow: isCurrent ? `0 0 30px ${point.accentColor}44` : 'none',
@@ -478,7 +478,7 @@ const PointCard = ({ point, isCurrent, idx }: { point: Point; isCurrent: boolean
             initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-sm font-mono text-white/40 mt-1 leading-relaxed"
+            className="text-sm font-mono text-white/40 mt-1 leading-relaxed portrait:max-lg:text-[10px] portrait:max-lg:font-inter portrait:max-lg:text-white/60"
           >
             {point.detail}
           </motion.p>
@@ -525,11 +525,12 @@ const SlideHeader = ({ slide, slideIndex }: { slide: Slide; slideIndex: number }
         initial={{ opacity: 0, letterSpacing: '0.2em' }}
         animate={{ opacity: 1, letterSpacing: '0.6em' }}
         transition={{ duration: 0.8, delay: 0.1 }}
-        className="text-[10px] font-mono font-black uppercase text-primary block mb-4"
+        className="text-[10px] font-mono font-black uppercase text-primary block mb-4 portrait:max-lg:mb-2"
       >
         {slide.chapter}
       </motion.span>
-      <h2 className="text-2xl lg:text-4xl font-sans font-black uppercase tracking-tight leading-none mb-3 whitespace-nowrap overflow-hidden py-1">
+      <h2 className="text-2xl lg:text-4xl font-sans font-black uppercase tracking-tight leading-none mb-3 py-1 whitespace-nowrap overflow-hidden portrait:max-lg:whitespace-normal portrait:max-lg:text-xl portrait:max-lg:mb-2">
+
         {chars.map((ch, i) => (
           <motion.span
             key={i}
@@ -546,7 +547,7 @@ const SlideHeader = ({ slide, slideIndex }: { slide: Slide; slideIndex: number }
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.5 }}
         transition={{ delay: 0.7 }}
-        className="text-sm lg:text-base font-mono uppercase tracking-[0.4em] text-secondary"
+        className="text-sm lg:text-base font-mono uppercase tracking-[0.4em] text-secondary portrait:max-lg:tracking-[0.2em] portrait:max-lg:text-xs"
       >
         {slide.subtitle}
       </motion.h3>
@@ -653,12 +654,13 @@ const ControlBar = ({
   onToggle: () => void;
   onAdvance: () => void;
 }) => (
-  <div className="shrink-0 h-28 flex items-center justify-center relative z-40">
+  <div className="shrink-0 h-28 flex items-center justify-center relative z-40 portrait:max-lg:h-20 portrait:max-lg:pb-2">
     <motion.div
       initial={{ y: 40, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: 0.5, type: 'spring', stiffness: 200 }}
-      className="flex items-center gap-4 px-6 py-4 rounded-full border border-white/10"
+      className="flex items-center gap-4 px-6 py-4 rounded-full border border-white/10 portrait:max-lg:scale-90 portrait:max-lg:px-4 portrait:max-lg:py-2 portrait:max-lg:gap-2"
+
       style={{
         background: 'rgba(0,0,0,0.6)',
         backdropFilter: 'blur(40px)',
@@ -762,8 +764,9 @@ const SpeechTicker = ({ text, active }: { text: string; active: boolean }) => {
           </div>
 
           {/* Scrolling text */}
-          <div className="flex-1 overflow-hidden py-2.5 px-5 relative">
-            <p className="text-[11px] font-mono text-white/70 leading-relaxed tracking-widest">
+          <div className="flex-1 overflow-hidden py-2.5 px-5 relative portrait:max-lg:flex portrait:max-lg:items-center portrait:max-lg:h-10 portrait:max-lg:py-0">
+            <p className="text-[11px] font-mono text-white/70 leading-relaxed tracking-widest portrait:max-lg:whitespace-nowrap portrait:max-lg:overflow-hidden portrait:max-lg:text-ellipsis portrait:max-lg:w-full portrait:max-lg:leading-none">
+
               {displayed}
               {wordIdx < words.length && (
                 <motion.span
@@ -788,19 +791,19 @@ const SpeechTicker = ({ text, active }: { text: string; active: boolean }) => {
 // ─── PROCESS GRAPH ───────────────────────────────────────────────────────────
 
 const SESP_STEPS = [
-  { label: "Contact",    icon: "pi-phone",      color: "#f59e0b" },
-  { label: "Analyse",    icon: "pi-chart-line",  color: "#00e5ff" },
-  { label: "Proposition",icon: "pi-file-edit",   color: "#a855f7" },
-  { label: "Activation", icon: "pi-verified",    color: "#00ffaa" },
+  { label: "Contact", icon: "pi-phone", color: "#f59e0b" },
+  { label: "Analyse", icon: "pi-chart-line", color: "#00e5ff" },
+  { label: "Proposition", icon: "pi-file-edit", color: "#a855f7" },
+  { label: "Activation", icon: "pi-verified", color: "#00ffaa" },
 ];
 
 const ProcessGraph = ({ revealedCount }: { revealedCount: number }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
-    className="w-full mt-4 mb-2"
+    className="w-full mt-4 mb-2 portrait:max-lg:overflow-x-auto portrait:max-lg:pb-2 fitness-scrollbar portrait:max-lg:mt-2"
   >
-    <div className="flex items-center justify-between px-2 relative">
+    <div className="flex items-center justify-between px-2 relative portrait:max-lg:min-w-[280px]">
       {SESP_STEPS.map((step, i) => {
         const active = i < revealedCount;
         const isCurrent = i === revealedCount - 1;
@@ -992,8 +995,8 @@ const Presentation = React.forwardRef<PresentationHandle, PresentationProps>(({ 
         isOutro={isOutroActive}
       />
 
-      {/* Stat HUD — fixed bottom-right */}
-      <div className="absolute bottom-52 right-6 lg:right-10 z-50 pointer-events-none">
+      {/* Stat HUD — fixed bottom-right, centered at bottom on mobile */}
+      <div className="absolute bottom-52 right-6 lg:right-10 z-50 pointer-events-none portrait:max-lg:bottom-36 portrait:max-lg:left-1/2 portrait:max-lg:-translate-x-1/2 portrait:max-lg:right-auto portrait:max-lg:scale-90">
         <AnimatePresence>
           {activePoint && activePoint.stats && (
             <StatHudCard key={activePoint.id} point={activePoint} />
@@ -1002,7 +1005,7 @@ const Presentation = React.forwardRef<PresentationHandle, PresentationProps>(({ 
       </div>
 
       {/* Main content */}
-      <div className="flex-1 flex flex-col items-center justify-start px-6 lg:px-20 pt-20 lg:pt-24 relative z-20 overflow-hidden">
+      <div className="flex-1 flex flex-col items-center justify-start px-6 lg:px-20 pt-20 lg:pt-24 relative z-20 overflow-hidden portrait:max-lg:overflow-y-auto portrait:max-lg:pt-16 portrait:max-lg:px-4 portrait:max-lg:pb-4 fitness-scrollbar">
         <div className="w-full max-w-3xl flex flex-col items-stretch">
 
           {/* Slide header */}
@@ -1037,17 +1040,20 @@ const Presentation = React.forwardRef<PresentationHandle, PresentationProps>(({ 
         </div>
       </div>
 
-      {/* Speech ticker — above control bar */}
-      <SpeechTicker text={speakingText} active={isAutoplaying} />
+      {/* Controls Container */}
+      <div className="shrink-0 flex flex-col z-40 relative">
+        {/* Speech ticker — above control bar */}
+        <SpeechTicker text={speakingText} active={isAutoplaying} />
 
-      {/* Control bar */}
-      <ControlBar
-        isAutoplaying={isAutoplaying}
-        isOutroActive={isOutroActive}
-        onBack={handleBack}
-        onToggle={handleToggle}
-        onAdvance={handleAdvance}
-      />
+        {/* Control bar */}
+        <ControlBar
+          isAutoplaying={isAutoplaying}
+          isOutroActive={isOutroActive}
+          onBack={handleBack}
+          onToggle={handleToggle}
+          onAdvance={handleAdvance}
+        />
+      </div>
     </div>
   );
 });

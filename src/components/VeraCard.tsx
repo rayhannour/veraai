@@ -1,20 +1,16 @@
 "use client";
 import React from 'react';
-import { classNames } from 'primereact/utils';
 
 export interface VeraCardProps extends React.HTMLAttributes<HTMLDivElement> {
   glass?: boolean;
 }
 
 export function VeraCard({ glass, className, children, ...props }: VeraCardProps) {
-  const baseClass = classNames(
+  const baseClass = [
     'p-6 overflow-hidden relative vera-ambient-shadow transition-colors duration-300',
-    {
-      'vera-glass-panel': glass,
-      'bg-surface-container rounded-[1rem] hover:bg-surface-container-low': !glass,
-    },
+    glass ? 'vera-glass-panel' : 'bg-surface-container rounded-[1rem] hover:bg-surface-container-low',
     className
-  );
+  ].filter(Boolean).join(' ');
 
   return (
     <div className={baseClass} {...props}>
