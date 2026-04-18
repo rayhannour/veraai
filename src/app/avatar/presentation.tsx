@@ -916,6 +916,38 @@ const SpeechTicker = ({ text, active }: { text: string; active: boolean }) => {
   );
 };
 
+// ─── TORCH LINE SEPARATOR ────────────────────────────────────────────────
+
+const TorchLine = ({ color = '#00e5ff', delay = 0 }: { color?: string; delay?: number }) => (
+  <div className="relative w-full h-px my-0 overflow-hidden">
+    {/* Base track */}
+    <div className="absolute inset-0" style={{ background: 'rgba(255,255,255,0.06)' }} />
+    {/* Torch light sweep */}
+    <motion.div
+      className="absolute top-0 h-full rounded-full"
+      style={{
+        width: '25%',
+        background: `linear-gradient(90deg, transparent, ${color}88, ${color}, ${color}88, transparent)`,
+        boxShadow: `0 0 15px 4px ${color}66, 0 0 40px 8px ${color}22`,
+        filter: 'blur(1px)',
+      }}
+      animate={{ x: ['-30%', '500%'] }}
+      transition={{
+        duration: 2.8,
+        ease: 'easeInOut',
+        repeat: Infinity,
+        repeatDelay: 1.5,
+        delay,
+      }}
+    />
+    {/* Faint permanent glow at center */}
+    <div
+      className="absolute inset-0"
+      style={{ background: `radial-gradient(ellipse 60% 100% at 50% 50%, ${color}18, transparent)` }}
+    />
+  </div>
+);
+
 // ─── PROCESS GRAPH ───────────────────────────────────────────────────────────
 
 const SESP_STEPS = [
@@ -1290,7 +1322,7 @@ const Presentation = React.forwardRef<PresentationHandle, PresentationProps>(({ 
 
       {/* ─── BOOK CHAPTER NAV BANNER ─── */}
       <div
-        className="absolute top-0 left-0 right-0 z-50 flex items-stretch gap-0 overflow-x-auto"
+        className="absolute top-0 left-0 right-0 z-50 flex items-stretch gap-0 overflow-x-auto justify-center portrait:max-lg:justify-start"
         style={{
           background: 'linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 100%)',
           backdropFilter: 'blur(40px)',
@@ -1431,11 +1463,11 @@ const Presentation = React.forwardRef<PresentationHandle, PresentationProps>(({ 
         </AnimatePresence>
       </div>
 
-      {/* Main content */}
+      {/* Main content — Header | TorchLine | Content | TorchLine | Footer */}
       <div className="flex-1 flex flex-col items-center justify-start px-6 lg:px-20 pt-36 lg:pt-40 relative z-20 overflow-hidden portrait:max-lg:overflow-y-auto portrait:max-lg:pt-28 portrait:max-lg:px-4 portrait:max-lg:pb-4 fitness-scrollbar">
-        <div className="w-full max-w-3xl flex flex-col items-stretch">
+        <div className="w-full max-w-3xl flex flex-col items-stretch flex-1">
 
-          {/* Slide header */}
+          {/* ── HEADER ZONE ── */}
           <AnimatePresence mode="wait">
             {!isOutroActive ? (
               <SlideHeader key={currentSlide.id} slide={currentSlide} slideIndex={currentSlideIndex} />
@@ -1444,30 +1476,106 @@ const Presentation = React.forwardRef<PresentationHandle, PresentationProps>(({ 
             )}
           </AnimatePresence>
 
-          {/* Process Graph (only for SESP slide) */}
-          {!isOutroActive && currentSlide.id === "sesp" && (
-            <ProcessGraph revealedCount={currentPointIndex + 1} />
+          {/* ── TORCH LINE 1 (under header) ── */}
+          {!isOutroActive && (
+            <TorchLine
+              color={activePoint?.accentColor ?? currentSlide.points[0]?.accentColor ?? '#00e5ff'}
+              delay={0}
+            />
           )}
 
-          {/* Points list or Orbital Graph */}
+          {/* ── CONTENT ZONE ── */}
           {!isOutroActive && (
-            <div className={`flex flex-col gap-4 mt-2 ${currentSlide.id === 'tech' ? 'h-full justify-center' : ''}`}>
-              {currentSlide.id === 'tech' ? (
-                <OrbitalCanvasDiagram slide={currentSlide} currentPointIndex={currentPointIndex} />
-              ) : (
-                <AnimatePresence mode="popLayout">
-                  {sortedPoints.map((point, idx) => (
-                    <PointCard
-                      key={`${currentSlideIndex}-${point.id}`}
-                      point={point}
-                      isCurrent={idx === 0}
-                      idx={idx}
-                    />
-                  ))}
-                </AnimatePresence>
+            <div className={`flex flex-col gap-4 py-4 ${currentSlide.id === 'tech' ? 'items-center justify-center' : ''}`}>
+              {/* Process Graph (only for SESP slide) */}
+              {currentSlide.id === 'sesp' && (
+                <ProcessGraph revealedCount={currentPointIndex + 1} />
               )}
+
+              {/* Points or Orbital */}
+              <div className={`flex flex-col gap-4 ${currentSlide.id === 'tech' ? 'items-center w-full' : ''}`}>
+                {currentSlide.id === 'tech' ? (
+                  <OrbitalCanvasDiagram slide={currentSlide} currentPointIndex={currentPointIndex} />
+                ) : (
+                  <AnimatePresence mode="popLayout">
+                    {sortedPoints.map((point, idx) => (
+                      <PointCard
+                        key={`${currentSlideIndex}-${point.id}`}
+                        point={point}
+                        isCurrent={idx === 0}
+                        idx={idx}
+                      />
+                    ))}
+                  </AnimatePresence>
+                )}
+              </div>
             </div>
           )}
+
+          {/* ── TORCH LINE 2 (above footer) ── */}
+          {!isOutroActive && (
+            <TorchLine
+              color={activePoint?.accentColor ?? currentSlide.points[0]?.accentColor ?? '#00e5ff'}
+              delay={1.4}
+            />
+          )}
+
+          {/* ── FOOTER ZONE ── */}
+          {!isOutroActive && (
+            <motion.div
+              key={`footer-${currentSlide.id}-${currentPointIndex}`}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex items-center justify-between py-3 portrait:max-lg:py-2"
+            >
+              {/* Left: slide info */}
+              <div className="flex items-center gap-2">
+                <span className="text-[8px] font-mono uppercase tracking-[0.4em] text-white/20">
+                  {currentSlide.chapter}
+                </span>
+              </div>
+
+              {/* Center: point progress dots */}
+              <div className="flex items-center gap-2">
+                {currentSlide.points.map((pt, pi) => (
+                  <motion.div
+                    key={pt.id}
+                    animate={{
+                      backgroundColor:
+                        pi === currentPointIndex
+                          ? pt.accentColor
+                          : pi < currentPointIndex
+                          ? 'rgba(255,255,255,0.3)'
+                          : 'rgba(255,255,255,0.1)',
+                      scale: pi === currentPointIndex ? 1.5 : 1,
+                      boxShadow: pi === currentPointIndex ? `0 0 8px ${pt.accentColor}` : 'none',
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="w-1.5 h-1.5 rounded-full"
+                  />
+                ))}
+              </div>
+
+              {/* Right: point label */}
+              <AnimatePresence mode="wait">
+                {activePoint && (
+                  <motion.span
+                    key={activePoint.id}
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-[8px] font-mono uppercase tracking-widest"
+                    style={{ color: activePoint.accentColor }}
+                  >
+                    {activePoint.label}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          )}
+
         </div>
       </div>
 
