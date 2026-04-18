@@ -39,168 +39,168 @@ interface Slide {
 export const PRESENTATION_SLIDES: Slide[] = [
   {
     id: "intro",
-    title: "Project Vera",
-    subtitle: "The Kinetic Intelligence",
-    chapter: "SEQUENCE // 01",
-    gradient: "from-[#00e5ff]/10 via-transparent to-[#7000ff]/5",
-    introScript: "Welcome to Project Vera. I am a kinetic intelligence, built to be your digital command center.",
+    title: "استغلال الأوامر",
+    subtitle: "الأداء الوظيفي في التقييم",
+    chapter: "المرحلة // 01",
+    gradient: "from-[#00e5ff]/10 via-transparent to-[#ff00ff]/5",
+    introScript: "مرحباً. سأقدم لكم اليوم عرضاً مفصلاً حول كيفية استغلال الأوامر الإدارية والبطاقات المنظمة للعمل في كافة الميادين داخل المنظومة السجنية والإصلاحية بتونس.",
     points: [
       {
         id: "p1",
-        label: "Autonomous AI Interface",
-        detail: "Fully self-directed neural processing — no manual input required.",
-        script: "I am a fully autonomous AI interface, designed to operate without manual intervention.",
-        icon: "pi-microchip",
+        label: "الأوامر الإدارية",
+        detail: "توظيف الأوامر الإدارية كموجه أساسي في هيكلة العمل.",
+        script: "نبدأ بالاستغلال الأمثل للأوامر الإدارية الشاملة وتوظيفها كموجه أساسي لتنظيم العمل اليومي.",
+        icon: "pi-book",
         accentColor: "#00e5ff",
-        stats: { type: 'donut', value: 95, label: "Autonomy", color: "#00e5ff", unit: "%" }
+        stats: { type: 'donut', value: 95, label: "تفاعلات", color: "#00e5ff", unit: "%" }
       },
       {
         id: "p2",
-        label: "Dynamic Streaming Core",
-        detail: "High-throughput data pipelines with sub-millisecond sync latency.",
-        script: "My core is built on high-performance streaming technology for zero-latency interactions.",
-        icon: "pi-wave-pulse",
+        label: "البطاقات المنظمة",
+        detail: "تفعيل البطاقات الإجرائية في جميع الميادين الميدانية.",
+        script: "ننتقل إلى تفعيل البطاقات المنظمة للعمل لضمان سير المهام الميدانية والإدارية بكل دقة واحترافية.",
+        icon: "pi-id-card",
         accentColor: "#ff00ff",
-        stats: { type: 'bar', values: [40, 60, 85, 95], label: "Latency_ms", color: "#ff00ff" }
+        stats: { type: 'bar', values: [40, 60, 85, 95], label: "مؤشرات", color: "#ff00ff" }
       },
       {
         id: "p3",
-        label: "Unified Command Center",
-        detail: "Cross-platform system integration with real-time telemetry feeds.",
-        script: "I integrate directly with your systems to serve as a unified command center for all your data.",
-        icon: "pi-sliders-h",
+        label: "المنظومة السجنية",
+        detail: "توحيد جهود العمل عبر كافة الهياكل السجنية التونسية.",
+        script: "يتم كل ذلك لتوحيد جهود العمل داخل المنظومة السجنية والإصلاحية التونسية لبناء بيئة متطورة.",
+        icon: "pi-sitemap",
         accentColor: "#00ffaa",
-        stats: { type: 'pulse', value: 99.7, label: "Uptime", color: "#00ffaa", unit: "%" }
+        stats: { type: 'pulse', value: 99.7, label: "استقرار", color: "#00ffaa", unit: "%" }
       }
     ]
   },
   {
     id: "tech",
-    title: "Core Infrastructure",
-    subtitle: "Quantum Encrypted Telemetry",
-    chapter: "SEQUENCE // 02",
+    title: "مخطط Canvas",
+    subtitle: "أسئلة كمؤشرات أداء",
+    chapter: "المرحلة // 02",
     gradient: "from-[#00ffaa]/10 via-transparent to-[#00e5ff]/5",
-    introScript: "My core infrastructure is powered by a secure global grid. Security is at the heart of everything I do.",
+    introScript: "لتبسيط التقييم، قمنا بتحويل هذه الأوامر إلى نموذج Canvas. يتكون هذا النموذج من أسئلة محورية تُستعمل كمؤشرات علمية لقياس أداء العمل.",
     points: [
       {
         id: "p4",
-        label: "Military-Grade Encryption",
-        detail: "Every byte sealed with AES-256 quantum-resistant ciphers.",
-        script: "Every byte of data sent through my neural link is protected by military-grade encryption.",
-        icon: "pi-shield",
+        label: "صياغة الأسئلة",
+        detail: "بناء أسئلة دقيقة مستخرجة مباشرة من النصوص الترتيبية.",
+        script: "نعتمد على صياغة أسئلة دقيقة، مستخرجة مباشرة من النصوص الترتيبية والتعليمات الرسمية.",
+        icon: "pi-question-circle",
         accentColor: "#00ffaa",
-        stats: { type: 'donut', value: 100, label: "Security", color: "#00ffaa", unit: "%" }
+        stats: { type: 'donut', value: 100, label: "تغطية", color: "#00ffaa", unit: "%" }
       },
       {
         id: "p5",
-        label: "Neural Link Privacy",
-        detail: "Isolated session sandboxes per user — zero data leakage.",
-        script: "I maintain a secure, private session for every authorized user, ensuring total privacy.",
-        icon: "pi-lock",
+        label: "مؤشرات القياس",
+        detail: "تحويل الإجابات إلى بيانات رقمية لقياس مردودية العمل.",
+        script: "عبر نموذجنا، نحول الإجابات الفردية إلى قواعد بيانات رقمية تقيس بدقة مردودية كل قسم.",
+        icon: "pi-chart-line",
         accentColor: "#00e5ff",
-        stats: { type: 'pulse', value: 0, label: "Breaches", color: "#00e5ff", unit: "" }
+        stats: { type: 'pulse', value: 1.2, label: "زمن_ث", color: "#00e5ff", unit: "s" }
       },
       {
         id: "p6",
-        label: "Global Edge Compute",
-        detail: "Distributed across 47 edge nodes spanning 6 continents.",
-        script: "I run across a global network of edge servers to provide the fastest response times possible.",
-        icon: "pi-globe",
+        label: "لوحة التحكم",
+        detail: "عرض بصري لنموذج Canvas لرصد الأداء بصفة آنية.",
+        script: "يتم تقديم مخرجات التقييم في لوحة تحكم بصرية، تمنح القيادة القدرة على رصد الأداء بصفة آنية.",
+        icon: "pi-desktop",
         accentColor: "#ffcc00",
-        stats: { type: 'bar', values: [90, 95, 98, 99], label: "Edge_Uptime", color: "#ffcc00" }
+        stats: { type: 'bar', values: [90, 95, 98, 99], label: "موثوقية", color: "#ffcc00" }
       }
     ]
   },
   {
     id: "impact",
-    title: "Strategic Impact",
-    subtitle: "Real-time Tactical Decisions",
-    chapter: "SEQUENCE // 03",
+    title: "المنهجية العلمية",
+    subtitle: "SWOT & Eisenhower",
+    chapter: "المرحلة // 03",
     gradient: "from-[#ff3366]/10 via-transparent to-[#ff00ff]/5",
-    introScript: "By mapping vast arrays of data into coherent intelligence, I enable you to make immediate, tactical decisions.",
+    introScript: "لا نكتفي بجمع البيانات، بل نقيمها بطريقة علمية حديثة باستخدام تحليل نقاط القوة والضعف SWOT، بالإضافة إلى مصفوفة آيزنهاور لترتيب الأولويات.",
     points: [
       {
         id: "p7",
-        label: "Tactical Visualization",
-        detail: "Complex datasets rendered as clear, actionable visual intelligence.",
-        script: "I turn complex datasets into clear, actionable visual representations in real-time.",
-        icon: "pi-chart-bar",
+        label: "تحليل SWOT",
+        detail: "تحديد نقاط القوة، الضعف، الفرص، والتهديدات.",
+        script: "نطبق تحليل SWOT الشامل لتسليط الضوء على نقاط القوة وتدارك الضعف، مع رصد الفرص والتصدي للتهديدات.",
+        icon: "pi-table",
         accentColor: "#00e5ff",
-        stats: { type: 'bar', values: [30, 45, 75, 90], label: "Decision_IQ", color: "#00e5ff" }
+        stats: { type: 'bar', values: [30, 45, 75, 90], label: "دقة_SWOT", color: "#00e5ff" }
       },
       {
         id: "p8",
-        label: "Neural Logic Execution",
-        detail: "Surgical-precision command routing across your operational stack.",
-        script: "I don't just analyze; I execute commands with surgical precision across your operational stack.",
-        icon: "pi-bolt",
+        label: "مصفوفة آيزنهاور",
+        detail: "تصنيف المهام حسب الأهمية وحالة الاستعجال.",
+        script: "بواسطة مصفوفة آيزنهاور، نقوم بتصنيف التدخلات والمهام الموزعة استناداً إلى معايير الأهمية والاستعجال.",
+        icon: "pi-th-large",
         accentColor: "#ff00ff",
-        stats: { type: 'pulse', value: 1.2, label: "Exec_ms", color: "#ff00ff", unit: "ms" }
+        stats: { type: 'pulse', value: 85, label: "نجاعة", color: "#ff00ff", unit: "%" }
       },
       {
         id: "p9",
-        label: "Efficiency Surge",
-        detail: "Average 420% operational uplift measured across all deployments.",
-        script: "On average, my deployment increases operational efficiency by over four hundred percent.",
+        label: "القرارات التكتيكية",
+        detail: "اتخاذ قرارات استراتيجية مبنية على مخرجات التحليل المهني.",
+        script: "هذا المزيج العلمي يمكننا من صياغة قرارات تكتيكية دقيقة وحلول هيكلية ترفع من مستوى الأداء المؤسسي.",
         icon: "pi-arrow-up-right",
         accentColor: "#ff3366",
-        stats: { type: 'donut', value: 420, label: "ROI_Boost", color: "#ff3366", max: 500, unit: "%" }
+        stats: { type: 'donut', value: 420, label: "عائد", color: "#ff3366", max: 500, unit: "%" }
       }
     ]
   },
   {
     id: "sesp",
-    title: "SESP Process",
-    subtitle: "Service Energie Solution Pipeline",
-    chapter: "SEQUENCE // 04",
+    title: "مسار التقييم",
+    subtitle: "تحصيل الإخلالات والمتابعة",
+    chapter: "المرحلة // 04",
     gradient: "from-[#f59e0b]/10 via-transparent to-[#ff3366]/5",
-    introScript: "Let me walk you through the complete SESP process — from first contact to full activation, each step is handled with precision and speed.",
+    introScript: "أخيراً، نستعرض معكم دورة التقييم الكاملة. من مرحلة رصد الإخلالات إلى إصدار التوصيات، متابعتها، وتبويب النتائج النهائية للتقييم.",
     points: [
       {
         id: "s1",
-        label: "Initial Contact",
-        detail: "Neural scan of client profile — needs captured in under 30 seconds.",
-        script: "The process begins with initial contact. I capture the client's full energy profile through voice or text in under thirty seconds.",
-        icon: "pi-phone",
+        label: "رصد الإخلالات",
+        detail: "تحديد فوري للنواقص والهفوات المسجلة في وحدات العمل.",
+        script: "الخطوة الأولى تتمثل في الجمع الدقيق والتحديد الفوري للنواقص والاخلالات المسجلة بجميع وحدات العمل.",
+        icon: "pi-exclamation-triangle",
         accentColor: "#f59e0b",
-        stats: { type: 'pulse', value: 28, label: "Contact_s", color: "#f59e0b", unit: "s" }
+        stats: { type: 'pulse', value: 28, label: "وقت_الرصد", color: "#f59e0b", unit: "s" }
       },
       {
         id: "s2",
-        label: "Data Analysis",
-        detail: "AI scans prior invoices and consumption history in 0.4 seconds.",
-        script: "Next, I perform a deep data analysis — scanning invoices, consumption patterns, and market rates in under half a second.",
-        icon: "pi-chart-line",
+        label: "صياغة التوصيات",
+        detail: "إقتراح حلول تصحيحية ووقائية استناداً للتحليل العلمي.",
+        script: "ثانياً، وانطلاقاً من مخرجات التحليلات، نقوم بصياغة واعتماد توصيات تصحيحية ووقائية محددة.",
+        icon: "pi-file-edit",
         accentColor: "#00e5ff",
-        stats: { type: 'donut', value: 98, label: "Accuracy", color: "#00e5ff", unit: "%" }
+        stats: { type: 'donut', value: 98, label: "مطابقة", color: "#00e5ff", unit: "%" }
       },
       {
         id: "s3",
-        label: "Tailored Proposal",
-        detail: "Personalized offer generated — exclusive discounts applied automatically.",
-        script: "Based on the analysis, I generate a tailored energy proposal with exclusive discounts, matched precisely to the client's profile.",
-        icon: "pi-file-edit",
+        label: "المتابعة المستمرة",
+        detail: "تتّبع دؤوب لمدى تنفيذ التوصيات وإصلاح الإخلالات.",
+        script: "الخطوة الثالثة هي المتابعة المستمرة والدؤوبة، للوقوف على مدى الجدية في تنفيذ التوصيات وإنجاز الإصلاحات.",
+        icon: "pi-sync",
         accentColor: "#a855f7",
-        stats: { type: 'bar', values: [20, 45, 78, 95], label: "Match_Score", color: "#a855f7" }
+        stats: { type: 'bar', values: [20, 45, 78, 95], label: "متابعة", color: "#a855f7" }
       },
       {
         id: "s4",
-        label: "Contract & Activation",
-        detail: "Digital signature + full service activation — complete in under 2 minutes.",
-        script: "Finally, the client signs digitally and the contract is activated — the entire process, from contact to activation, completed in under two minutes.",
+        label: "التحصيل النهائي",
+        detail: "الحصول على صورة التقييم الشاملة بموضوعية تامة وشفافية.",
+        script: "في النهاية نصل إلى تحصيل عملية التقييم. فنجمع كل النتائج لنخرج بصورة تقييمية شاملة وموضوعية وموثقة.",
         icon: "pi-verified",
         accentColor: "#00ffaa",
-        stats: { type: 'donut', value: 2, label: "Total_min", color: "#00ffaa", max: 5, unit: "m" }
+        stats: { type: 'donut', value: 100, label: "اكتمال", color: "#00ffaa", unit: "%" }
       }
     ]
   }
 ];
 
 const OUTRO_SLIDE = {
-  title: "Transmission Complete",
-  subtitle: "End of Neural Protocol",
-  script: "Thank you for your attention. I hope this presentation provided clear insight into my capabilities. I am now standing by for further instructions.",
-  content: "Neural link session standby. Thank you for your time."
+  title: "نهاية العرض",
+  subtitle: "إرساء التقييم المستدام",
+  script: "شكراً لاهتمامكم. أتمنى أن يكون هذا العرض قد أوضح بدقة مسار عمل التقييم وأهدافه الاستراتيجية. أنا في انتظار تعليماتكم التالية.",
+  content: "جلسة التقييم قيد الانتظار. شكراً لاهتمامكم."
 };
 
 // ─── MINI-CHARTS ─────────────────────────────────────────────────────────────
@@ -791,10 +791,10 @@ const SpeechTicker = ({ text, active }: { text: string; active: boolean }) => {
 // ─── PROCESS GRAPH ───────────────────────────────────────────────────────────
 
 const SESP_STEPS = [
-  { label: "Contact", icon: "pi-phone", color: "#f59e0b" },
-  { label: "Analyse", icon: "pi-chart-line", color: "#00e5ff" },
-  { label: "Proposition", icon: "pi-file-edit", color: "#a855f7" },
-  { label: "Activation", icon: "pi-verified", color: "#00ffaa" },
+  { label: "رصد", icon: "pi-search", color: "#f59e0b" },
+  { label: "توصيات", icon: "pi-file-edit", color: "#00e5ff" },
+  { label: "متابعة", icon: "pi-sync", color: "#a855f7" },
+  { label: "تحصيل", icon: "pi-check-circle", color: "#00ffaa" },
 ];
 
 const ProcessGraph = ({ revealedCount }: { revealedCount: number }) => (
