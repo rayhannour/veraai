@@ -644,7 +644,6 @@ const PointCard = ({ point, isCurrent, idx }: { point: Point; isCurrent: boolean
 // ─── SLIDE HEADER ─────────────────────────────────────────────────────────────
 
 const SlideHeader = ({ slide, slideIndex }: { slide: Slide; slideIndex: number }) => {
-  const chars = slide.title.split('');
   return (
     <motion.div
       key={slide.id}
@@ -655,32 +654,28 @@ const SlideHeader = ({ slide, slideIndex }: { slide: Slide; slideIndex: number }
       className="text-center mb-10 lg:mb-14"
     >
       <motion.span
-        initial={{ opacity: 0, letterSpacing: '0.2em' }}
-        animate={{ opacity: 1, letterSpacing: '0.6em' }}
+        initial={{ opacity: 0, letterSpacing: '0.05em' }}
+        animate={{ opacity: 1, letterSpacing: '0.2em' }}
         transition={{ duration: 0.8, delay: 0.1 }}
         className="text-[10px] font-mono font-black uppercase text-primary block mb-4 portrait:max-lg:mb-2"
       >
         {slide.chapter}
       </motion.span>
-      <h2 className="text-2xl lg:text-4xl font-sans font-black uppercase tracking-tight leading-none mb-3 py-1 whitespace-nowrap overflow-hidden portrait:max-lg:whitespace-normal portrait:max-lg:text-xl portrait:max-lg:mb-2">
-
-        {chars.map((ch, i) => (
-          <motion.span
-            key={i}
-            className="inline-block text-white"
-            initial={{ y: '110%', opacity: 0 }}
-            animate={{ y: '0%', opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 + i * 0.03, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {ch === ' ' ? '\u00A0' : ch}
-          </motion.span>
-        ))}
+      <h2 className="text-2xl lg:text-4xl font-sans font-black tracking-tight leading-none mb-3 py-1 whitespace-nowrap overflow-hidden portrait:max-lg:whitespace-normal portrait:max-lg:text-xl portrait:max-lg:mb-2">
+        <motion.span
+          className="inline-block text-white"
+          initial={{ y: '100%', opacity: 0 }}
+          animate={{ y: '0%', opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {slide.title}
+        </motion.span>
       </h2>
       <motion.h3
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.5 }}
         transition={{ delay: 0.7 }}
-        className="text-sm lg:text-base font-mono uppercase tracking-[0.4em] text-secondary portrait:max-lg:tracking-[0.2em] portrait:max-lg:text-xs"
+        className="text-sm lg:text-base font-mono uppercase tracking-[0.1em] text-secondary portrait:max-lg:tracking-[0.1em] portrait:max-lg:text-xs"
       >
         {slide.subtitle}
       </motion.h3>
@@ -1292,6 +1287,63 @@ const Presentation = React.forwardRef<PresentationHandle, PresentationProps>(({ 
         currentPoint={currentPointIndex}
         isOutro={isOutroActive}
       />
+
+      {/* ─── TOP SLIDE NAV BANNER ─── */}
+      <div className="absolute top-0 left-0 right-0 z-50 px-4 lg:px-8 py-1.5 flex items-center gap-2 overflow-x-auto portrait:max-lg:gap-1 portrait:max-lg:px-3" style={{ background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+        {PRESENTATION_SLIDES.map((sl, si) => {
+          const isSlideActive = si === currentSlideIndex && !isOutroActive;
+          const isPast = si < currentSlideIndex;
+          return (
+            <React.Fragment key={sl.id}>
+              <div className="shrink-0 flex flex-col items-start gap-1">
+                {/* Slide tab label */}
+                <motion.div
+                  animate={{
+                    color: isSlideActive ? '#00e5ff' : isPast ? 'rgba(255,255,255,0.35)' : 'rgba(255,255,255,0.18)',
+                    borderBottomColor: isSlideActive ? '#00e5ff' : 'transparent',
+                  }}
+                  transition={{ duration: 0.3 }}
+                  className="text-[8px] font-mono uppercase tracking-widest pb-0.5 border-b-2 whitespace-nowrap portrait:max-lg:text-[7px]"
+                >
+                  {sl.title}
+                </motion.div>
+                {/* Point dots */}
+                <div className="flex items-center gap-1">
+                  {sl.points.map((pt, pi) => {
+                    const isDotActive = isSlideActive && pi === currentPointIndex;
+                    const isDotPast = isPast || (isSlideActive && pi < currentPointIndex);
+                    return (
+                      <motion.div
+                        key={pt.id}
+                        title={pt.label}
+                        animate={{
+                          backgroundColor: isDotActive ? pt.accentColor : isDotPast ? 'rgba(255,255,255,0.35)' : 'rgba(255,255,255,0.1)',
+                          scale: isDotActive ? 1.4 : 1,
+                          boxShadow: isDotActive ? `0 0 6px ${pt.accentColor}` : 'none',
+                        }}
+                        transition={{ duration: 0.25 }}
+                        className="w-1.5 h-1.5 rounded-full"
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+              {/* Separator chevron between slides */}
+              {si < PRESENTATION_SLIDES.length - 1 && (
+                <i className="pi pi-angle-right text-white/10 text-[10px] shrink-0" />
+              )}
+            </React.Fragment>
+          );
+        })}
+        {/* Outro indicator */}
+        <i className="pi pi-angle-right text-white/10 text-[10px] shrink-0" />
+        <motion.div
+          animate={{ color: isOutroActive ? '#00ffaa' : 'rgba(255,255,255,0.15)' }}
+          className="text-[8px] font-mono uppercase tracking-widest whitespace-nowrap portrait:max-lg:text-[7px]"
+        >
+          نهاية العرض
+        </motion.div>
+      </div>
 
       {/* Stat HUD — fixed bottom-right, centered at bottom on mobile */}
       <div className="absolute bottom-52 right-6 lg:right-10 z-50 pointer-events-none portrait:max-lg:bottom-36 portrait:max-lg:left-1/2 portrait:max-lg:-translate-x-1/2 portrait:max-lg:right-auto portrait:max-lg:scale-90">
