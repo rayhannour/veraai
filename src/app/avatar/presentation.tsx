@@ -1288,60 +1288,137 @@ const Presentation = React.forwardRef<PresentationHandle, PresentationProps>(({ 
         isOutro={isOutroActive}
       />
 
-      {/* ─── TOP SLIDE NAV BANNER ─── */}
-      <div className="absolute top-0 left-0 right-0 z-50 px-4 lg:px-8 py-1.5 flex items-center gap-2 overflow-x-auto portrait:max-lg:gap-1 portrait:max-lg:px-3" style={{ background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+      {/* ─── BOOK CHAPTER NAV BANNER ─── */}
+      <div
+        className="absolute top-0 left-0 right-0 z-50 flex items-stretch gap-0 overflow-x-auto"
+        style={{
+          background: 'linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 100%)',
+          backdropFilter: 'blur(40px)',
+          borderBottom: '1px solid rgba(255,255,255,0.07)',
+          boxShadow: '0 4px 40px rgba(0,0,0,0.6)',
+        }}
+      >
         {PRESENTATION_SLIDES.map((sl, si) => {
           const isSlideActive = si === currentSlideIndex && !isOutroActive;
           const isPast = si < currentSlideIndex;
+          // Pick a primary accent from first point
+          const accent = sl.points[0]?.accentColor ?? '#00e5ff';
+
           return (
-            <React.Fragment key={sl.id}>
-              <div className="shrink-0 flex flex-col items-start gap-1">
-                {/* Slide tab label */}
+            <motion.div
+              key={sl.id}
+              animate={{
+                borderBottomColor: isSlideActive ? accent : 'transparent',
+                background: isSlideActive
+                  ? `linear-gradient(180deg, ${accent}12 0%, transparent 100%)`
+                  : isPast
+                  ? 'rgba(255,255,255,0.02)'
+                  : 'transparent',
+              }}
+              transition={{ duration: 0.4 }}
+              className="relative shrink-0 flex flex-col justify-between border-b-2 px-4 py-2.5 min-w-[130px] lg:min-w-[160px] portrait:max-lg:min-w-[110px] portrait:max-lg:px-3 portrait:max-lg:py-2 cursor-default"
+              style={{ borderRight: '1px solid rgba(255,255,255,0.05)' }}
+            >
+              {/* Active slide shimmer sweep */}
+              {isSlideActive && (
+                <motion.div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{ background: `linear-gradient(90deg, transparent, ${accent}08, transparent)` }}
+                  animate={{ x: ['-100%', '200%'] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', repeatDelay: 1 }}
+                />
+              )}
+
+              {/* Chapter number + chapter label row */}
+              <div className="flex items-center gap-2 mb-2">
+                {/* Spine / chapter number badge */}
                 <motion.div
                   animate={{
-                    color: isSlideActive ? '#00e5ff' : isPast ? 'rgba(255,255,255,0.35)' : 'rgba(255,255,255,0.18)',
-                    borderBottomColor: isSlideActive ? '#00e5ff' : 'transparent',
+                    backgroundColor: isSlideActive ? accent : isPast ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.06)',
+                    color: isSlideActive ? '#000' : isPast ? '#fff' : 'rgba(255,255,255,0.4)',
+                    boxShadow: isSlideActive ? `0 0 12px ${accent}88` : 'none',
                   }}
                   transition={{ duration: 0.3 }}
-                  className="text-[8px] font-mono uppercase tracking-widest pb-0.5 border-b-2 whitespace-nowrap portrait:max-lg:text-[7px]"
+                  className="shrink-0 w-5 h-5 rounded-md flex items-center justify-center text-[9px] font-black font-mono"
+                >
+                  {String(si + 1).padStart(2, '0')}
+                </motion.div>
+
+                {/* Chapter label */}
+                <motion.span
+                  animate={{
+                    color: isSlideActive ? '#fff' : isPast ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.2)',
+                  }}
+                  transition={{ duration: 0.3 }}
+                  className="text-[9px] font-mono uppercase tracking-widest leading-tight line-clamp-1 portrait:max-lg:text-[8px]"
                 >
                   {sl.title}
-                </motion.div>
-                {/* Point dots */}
-                <div className="flex items-center gap-1">
-                  {sl.points.map((pt, pi) => {
-                    const isDotActive = isSlideActive && pi === currentPointIndex;
-                    const isDotPast = isPast || (isSlideActive && pi < currentPointIndex);
-                    return (
+                </motion.span>
+              </div>
+
+              {/* Points list — stacked mini rows */}
+              <div className="flex flex-col gap-1">
+                {sl.points.map((pt, pi) => {
+                  const isDotActive = isSlideActive && pi === currentPointIndex;
+                  const isDotPast = isPast || (isSlideActive && pi < currentPointIndex);
+                  return (
+                    <div key={pt.id} className="flex items-center gap-1.5">
                       <motion.div
-                        key={pt.id}
-                        title={pt.label}
                         animate={{
-                          backgroundColor: isDotActive ? pt.accentColor : isDotPast ? 'rgba(255,255,255,0.35)' : 'rgba(255,255,255,0.1)',
-                          scale: isDotActive ? 1.4 : 1,
-                          boxShadow: isDotActive ? `0 0 6px ${pt.accentColor}` : 'none',
+                          backgroundColor: isDotActive
+                            ? pt.accentColor
+                            : isDotPast
+                            ? 'rgba(255,255,255,0.3)'
+                            : 'rgba(255,255,255,0.07)',
+                          boxShadow: isDotActive ? `0 0 8px ${pt.accentColor}` : 'none',
+                          scale: isDotActive ? 1.3 : 1,
                         }}
                         transition={{ duration: 0.25 }}
-                        className="w-1.5 h-1.5 rounded-full"
+                        className="shrink-0 w-1.5 h-1.5 rounded-full"
                       />
-                    );
-                  })}
-                </div>
+                      <motion.span
+                        animate={{
+                          color: isDotActive
+                            ? pt.accentColor
+                            : isDotPast
+                            ? 'rgba(255,255,255,0.4)'
+                            : 'rgba(255,255,255,0.15)',
+                          fontWeight: isDotActive ? 700 : 400,
+                        }}
+                        transition={{ duration: 0.25 }}
+                        className="text-[8px] font-mono leading-tight truncate portrait:max-lg:text-[7px]"
+                      >
+                        {pt.label}
+                      </motion.span>
+                    </div>
+                  );
+                })}
               </div>
-              {/* Separator chevron between slides */}
-              {si < PRESENTATION_SLIDES.length - 1 && (
-                <i className="pi pi-angle-right text-white/10 text-[10px] shrink-0" />
-              )}
-            </React.Fragment>
+            </motion.div>
           );
         })}
-        {/* Outro indicator */}
-        <i className="pi pi-angle-right text-white/10 text-[10px] shrink-0" />
+
+        {/* Outro chapter card */}
         <motion.div
-          animate={{ color: isOutroActive ? '#00ffaa' : 'rgba(255,255,255,0.15)' }}
-          className="text-[8px] font-mono uppercase tracking-widest whitespace-nowrap portrait:max-lg:text-[7px]"
+          animate={{
+            borderBottomColor: isOutroActive ? '#00ffaa' : 'transparent',
+            background: isOutroActive ? 'rgba(0, 255, 170, 0.06)' : 'transparent',
+          }}
+          transition={{ duration: 0.4 }}
+          className="relative shrink-0 flex flex-col justify-center items-center border-b-2 px-4 py-2.5 min-w-[80px]"
         >
-          نهاية العرض
+          <motion.div
+            animate={{ color: isOutroActive ? '#00ffaa' : 'rgba(255,255,255,0.12)' }}
+            className="text-[9px] font-mono uppercase tracking-widest"
+          >
+            ✦
+          </motion.div>
+          <motion.div
+            animate={{ color: isOutroActive ? '#00ffaa' : 'rgba(255,255,255,0.12)' }}
+            className="text-[8px] font-mono uppercase tracking-widest mt-1"
+          >
+            نهاية
+          </motion.div>
         </motion.div>
       </div>
 
@@ -1355,7 +1432,7 @@ const Presentation = React.forwardRef<PresentationHandle, PresentationProps>(({ 
       </div>
 
       {/* Main content */}
-      <div className="flex-1 flex flex-col items-center justify-start px-6 lg:px-20 pt-20 lg:pt-24 relative z-20 overflow-hidden portrait:max-lg:overflow-y-auto portrait:max-lg:pt-16 portrait:max-lg:px-4 portrait:max-lg:pb-4 fitness-scrollbar">
+      <div className="flex-1 flex flex-col items-center justify-start px-6 lg:px-20 pt-36 lg:pt-40 relative z-20 overflow-hidden portrait:max-lg:overflow-y-auto portrait:max-lg:pt-28 portrait:max-lg:px-4 portrait:max-lg:pb-4 fitness-scrollbar">
         <div className="w-full max-w-3xl flex flex-col items-stretch">
 
           {/* Slide header */}
