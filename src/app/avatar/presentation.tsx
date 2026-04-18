@@ -14,6 +14,13 @@ interface StatData {
   unit?: string;
 }
 
+export interface SubPoint {
+  label: string;
+  value?: string;
+  icon?: string;
+  color?: string;
+}
+
 interface Point {
   id: string;
   label: string;
@@ -22,6 +29,7 @@ interface Point {
   stats?: StatData;
   icon: string;
   accentColor: string;
+  subPoints?: SubPoint[];
 }
 
 interface Slide {
@@ -52,7 +60,12 @@ export const PRESENTATION_SLIDES: Slide[] = [
         script: "نبدأ باستغلال الأوامر الإدارية، مثل 'دليل الإجراءات الأمنية'، وتوظيفها كموجه أساسي ومعيار حقيقي لضبط أداء العمل اليومي.",
         icon: "pi-book",
         accentColor: "#00e5ff",
-        stats: { type: 'donut', value: 95, label: "امتثال", color: "#00e5ff", unit: "%" }
+        stats: { type: 'donut', value: 95, label: "امتثال", color: "#00e5ff", unit: "%" },
+        subPoints: [
+          { label: "دليل الإجراءات الأمني", icon: "pi-shield", color: "#00e5ff" },
+          { label: "مذكرات نقل المساجين", icon: "pi-sort-alt", color: "#00e5ff" },
+          { label: "بروتوكول التدخل السريع", icon: "pi-bolt", color: "#00e5ff" }
+        ]
       },
       {
         id: "p2",
@@ -61,7 +74,12 @@ export const PRESENTATION_SLIDES: Slide[] = [
         script: "ننتقل إلى البطاقات المنظمة للعمل، كبطاقات تفقد الأجنحة السجنية، وتحويلها من شكل دوري تقليدي إلى أداة تفعيل رقابي دقيق.",
         icon: "pi-id-card",
         accentColor: "#ff00ff",
-        stats: { type: 'bar', values: [40, 60, 85, 95], label: "انضباط", color: "#ff00ff" }
+        stats: { type: 'bar', values: [40, 60, 85, 95], label: "انضباط", color: "#ff00ff" },
+        subPoints: [
+          { label: "بطاقة تفقد الأجنحة", icon: "pi-list", color: "#ff00ff" },
+          { label: "بطاقات مراقبة الإعاشة", icon: "pi-eye", color: "#ff00ff" },
+          { label: "إجراءات التفتيش اليومي", icon: "pi-check-square", color: "#ff00ff" }
+        ]
       },
       {
         id: "p3",
@@ -70,7 +88,12 @@ export const PRESENTATION_SLIDES: Slide[] = [
         script: "يتم العمل على تغطية كافة الميادين: الجانب النفسي والاجتماعي والصحي والجزائي والتنشيطي والتكويني والرعائي، وحتى متابعة صندوق شكاوي المساجين.",
         icon: "pi-sitemap",
         accentColor: "#00ffaa",
-        stats: { type: 'pulse', value: 99.7, label: "استقرار", color: "#00ffaa", unit: "%" }
+        stats: { type: 'pulse', value: 99.7, label: "استقرار", color: "#00ffaa", unit: "%" },
+        subPoints: [
+          { label: "الجانب الصحي و الرعائي", icon: "pi-heart", color: "#00ffaa" },
+          { label: "الجانب النفسي و الاجتماعي", icon: "pi-users", color: "#00ffaa" },
+          { label: "صندوق شكاوي المساجين", icon: "pi-envelope", color: "#00ffaa" }
+        ]
       }
     ]
   },
@@ -89,7 +112,11 @@ export const PRESENTATION_SLIDES: Slide[] = [
         script: "نستنبط من النصوص التنظيمية أسئلة مباشرة تعمل كمؤشرات؛ فكل سؤال يستوجب إجابة حصرية إما بـ 'نعم' أم 'لا'.",
         icon: "pi-question-circle",
         accentColor: "#00ffaa",
-        stats: { type: 'donut', value: 100, label: "تغطية", color: "#00ffaa", unit: "%" }
+        stats: { type: 'donut', value: 100, label: "تغطية", color: "#00ffaa", unit: "%" },
+        subPoints: [
+          { label: "هل تم احتترام التوقيت؟", value: "نعم/لا", icon: "pi-clock", color: "#00ffaa" },
+          { label: "هل تم تحيين السجلات؟", value: "نعم/لا", icon: "pi-file", color: "#00ffaa" }
+        ]
       },
       {
         id: "p5",
@@ -98,7 +125,11 @@ export const PRESENTATION_SLIDES: Slide[] = [
         script: "تلك الإجابات لا تبقى مجرد كلمات، بل يتم تحويلها آلياً إلى درجة قياس رقمية بنسبة مئوية دقيقة لتحديد مدى الامتثال.",
         icon: "pi-chart-line",
         accentColor: "#00e5ff",
-        stats: { type: 'pulse', value: 1.2, label: "فرز_ث", color: "#00e5ff", unit: "s" }
+        stats: { type: 'pulse', value: 1.2, label: "فرز_ث", color: "#00e5ff", unit: "s" },
+        subPoints: [
+          { label: "حساب نسبة الإمتثال", value: "% الإيجابيات", icon: "pi-percentage", color: "#00e5ff" },
+          { label: "كشف مناطق الضعف", value: "آلي", icon: "pi-search-minus", color: "#00e5ff" }
+        ]
       },
       {
         id: "p6",
@@ -107,7 +138,11 @@ export const PRESENTATION_SLIDES: Slide[] = [
         script: "نجسّد كل هذه المعطيات في مخطط Canvas لتمكين القيادة من رصد التزام الوحدة عبر لوحة قياس وتقييم بصرية آنية وموضوعية.",
         icon: "pi-desktop",
         accentColor: "#ffcc00",
-        stats: { type: 'bar', values: [90, 95, 98, 99], label: "موثوقية", color: "#ffcc00" }
+        stats: { type: 'bar', values: [90, 95, 98, 99], label: "موثوقية", color: "#ffcc00" },
+        subPoints: [
+          { label: "عرض المعطيات الحية", icon: "pi-desktop", color: "#ffcc00" },
+          { label: "لوحات قياس مترابطة", icon: "pi-th-large", color: "#ffcc00" }
+        ]
       }
     ]
   },
@@ -122,11 +157,17 @@ export const PRESENTATION_SLIDES: Slide[] = [
       {
         id: "p7",
         label: "تحليل SWOT الميداني",
-        detail: "مثال: القوة (الكفاءة المتوفرة)، التهديدات (اكتظاظ الأجنحة).",
-        script: "بواسطة تحليل SWOT، نستخرج نقاط القوة ككفاءة الموظفين، والضعف كنقص الإمكانيات اللوجستية، مع دراسة تأثير التهديدات كالاكتظاظ.",
+        detail: "تشخيص علمي للوحدات الميدانية عبر أربعة محاور أساسية للمعالجة الوظيفية.",
+        script: "بواسطة تحليل SWOT، نستخرج نقاط القوة ككفاءة الموظفين، والضعف كنقص الإمكانيات اللوجستية، مع دراسة تأثير التهديدات كالاكتظاظ واستغلال الفرص.",
         icon: "pi-table",
         accentColor: "#00e5ff",
-        stats: { type: 'bar', values: [30, 45, 75, 90], label: "دقة_SWOT", color: "#00e5ff" }
+        stats: { type: 'bar', values: [30, 45, 75, 90], label: "دقة_SWOT", color: "#00e5ff" },
+        subPoints: [
+          { label: "القوة", value: "موظفون ذوو كفاءة", icon: "pi-angle-double-up", color: "#00ffaa" },
+          { label: "الضعف", value: "نقص الإمكانيات", icon: "pi-angle-double-down", color: "#ff3366" },
+          { label: "الفرص", value: "الرقمنة المتاحة", icon: "pi-globe", color: "#00e5ff" },
+          { label: "التهديدات", value: "ضغط والاكتظاظ", icon: "pi-shield", color: "#f59e0b" }
+        ]
       },
       {
         id: "p8",
@@ -135,7 +176,11 @@ export const PRESENTATION_SLIDES: Slide[] = [
         script: "هنا نُطبّق مصفوفة آيزنهاور لترتيب التدخلات. الخلل الأمني يُصنف ضمن العاجل والهام، بينما تُصنف برامج التدريب كمهام هامة غير عاجلة.",
         icon: "pi-th-large",
         accentColor: "#ff00ff",
-        stats: { type: 'pulse', value: 85, label: "نجاعة", color: "#ff00ff", unit: "%" }
+        stats: { type: 'pulse', value: 85, label: "نجاعة", color: "#ff00ff", unit: "%" },
+        subPoints: [
+          { label: "عاجل وهام", value: "التدخل الفوري", icon: "pi-bolt", color: "#ff00ff" },
+          { label: "هام وغير عاجل", value: "تخطيط استراتيجي", icon: "pi-calendar", color: "#ff00ff" }
+        ]
       },
       {
         id: "p9",
@@ -144,7 +189,11 @@ export const PRESENTATION_SLIDES: Slide[] = [
         script: "تساعد هذه المنهجية المؤسسة على تحويل فلسفة التقييم من أداة جزائية بسيطة إلى منهج بناء يوجه ويرشد عملية اتخاذ القرار الاستراتيجي.",
         icon: "pi-arrow-up-right",
         accentColor: "#ff3366",
-        stats: { type: 'donut', value: 420, label: "تَحَسُّن", color: "#ff3366", max: 500, unit: "%" }
+        stats: { type: 'donut', value: 420, label: "تَحَسُّن", color: "#ff3366", max: 500, unit: "%" },
+        subPoints: [
+          { label: "تكتيك العمليات", value: "دعم القرارات", icon: "pi-compass", color: "#ff3366" },
+          { label: "الرسكلة", value: "التحسين المتواصل", icon: "pi-sync", color: "#ff3366" }
+        ]
       }
     ]
   },
@@ -163,7 +212,11 @@ export const PRESENTATION_SLIDES: Slide[] = [
         script: "الخطوة الأولى تتمثل في رصد النواقص وتوثيق الإخلالات في بيئة العمل، مثل تسجيل مخالفات تتعلق بشروط السلامة أو ضعف الترتيب الداخلي.",
         icon: "pi-exclamation-triangle",
         accentColor: "#f59e0b",
-        stats: { type: 'pulse', value: 28, label: "وقت_الرصد", color: "#f59e0b", unit: "s" }
+        stats: { type: 'pulse', value: 28, label: "وقت_الرصد", color: "#f59e0b", unit: "s" },
+        subPoints: [
+          { label: "نقص النظافة", icon: "pi-exclamation-circle", color: "#f59e0b" },
+          { label: "خروقات الجانب الأمني", icon: "pi-exclamation-circle", color: "#f59e0b" }
+        ]
       },
       {
         id: "s2",
@@ -172,7 +225,11 @@ export const PRESENTATION_SLIDES: Slide[] = [
         script: "تليها صياغة توصيات محددة، من خلال توجيه تنبيهات أو صياغة مذكرات تدعو لإصلاح فوري واقتراح حلول عملية لتلافي التكرار.",
         icon: "pi-file-edit",
         accentColor: "#00e5ff",
-        stats: { type: 'donut', value: 98, label: "مطابقة", color: "#00e5ff", unit: "%" }
+        stats: { type: 'donut', value: 98, label: "مطابقة", color: "#00e5ff", unit: "%" },
+        subPoints: [
+          { label: "مذكرات تصحيحية", icon: "pi-pencil", color: "#00e5ff" },
+          { label: "توجيهات مباشرة", icon: "pi-megaphone", color: "#00e5ff" }
+        ]
       },
       {
         id: "s3",
@@ -181,7 +238,11 @@ export const PRESENTATION_SLIDES: Slide[] = [
         script: "لا نتوقف عند التوجيه بل نتّبع مدى استجابة الوحدات. يقوم جهاز المتابعة بقياس التنفيذ في الزيارات الموالية لضمان مصداقية الإصلاح.",
         icon: "pi-sync",
         accentColor: "#a855f7",
-        stats: { type: 'bar', values: [20, 45, 78, 95], label: "متابعة", color: "#a855f7" }
+        stats: { type: 'bar', values: [20, 45, 78, 95], label: "متابعة", color: "#a855f7" },
+        subPoints: [
+          { label: "الزيارة الموالية", icon: "pi-step-forward", color: "#a855f7" },
+          { label: "رصد الاستجابة", icon: "pi-chart-line", color: "#a855f7" }
+        ]
       },
       {
         id: "s4",
@@ -190,7 +251,11 @@ export const PRESENTATION_SLIDES: Slide[] = [
         script: "المرحلة النهائية هي التحصيل: إصدار معدل نهائي للأداء العام. هذا التحصيل الإجمالي يوفر مادة حاسمة تقيم نجاعة و مردودية الوحدة ككل.",
         icon: "pi-verified",
         accentColor: "#00ffaa",
-        stats: { type: 'donut', value: 100, label: "اكتمال", color: "#00ffaa", unit: "%" }
+        stats: { type: 'donut', value: 100, label: "اكتمال", color: "#00ffaa", unit: "%" },
+        subPoints: [
+          { label: "رقم المردودية", value: "92%", icon: "pi-star-fill", color: "#00ffaa" },
+          { label: "التقييم العام", value: "آلي", icon: "pi-file-check", color: "#00ffaa" }
+        ]
       }
     ]
   }
@@ -493,14 +558,61 @@ const PointCard = ({ point, isCurrent, idx }: { point: Point; isCurrent: boolean
               style={{ background: point.accentColor }}
             />
             
-            <div className="flex items-start gap-3 relative z-10">
+            <div className="flex items-start gap-3 relative z-10 w-full">
               <div 
                 className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full" 
                 style={{ backgroundColor: point.accentColor, boxShadow: `0 0 8px ${point.accentColor}` }} 
               />
-              <p className="text-sm font-inter text-white/80 leading-relaxed portrait:max-lg:text-[10px] portrait:max-lg:leading-relaxed">
-                {point.detail}
-              </p>
+              <div className="flex-1">
+                <p className="text-sm font-inter text-white/80 leading-relaxed portrait:max-lg:text-[10px] portrait:max-lg:leading-relaxed">
+                  {point.detail}
+                </p>
+
+                {/* SubPoints Grid Display - Very Impressive and Staggered */}
+                {point.subPoints && point.subPoints.length > 0 && (
+                  <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    variants={{
+                      visible: { transition: { staggerChildren: 0.15, delayChildren: 0.3 } }
+                    }}
+                    className={`mt-4 grid gap-3 ${point.subPoints.length === 4 ? 'grid-cols-2 portrait:max-lg:grid-cols-1' : 'grid-cols-1'}`}
+                  >
+                    {point.subPoints.map((sp, spIdx) => (
+                      <motion.div
+                        key={spIdx}
+                        variants={{
+                          hidden: { opacity: 0, y: 15, scale: 0.95 },
+                          visible: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 200, damping: 15 } }
+                        }}
+                        className="flex items-center gap-3 bg-[rgba(255,255,255,0.03)] hover:bg-[rgba(255,255,255,0.07)] transition-colors rounded-xl p-3 border border-white/5 relative overflow-hidden group"
+                        style={{ borderBottom: `1px solid ${sp.color || point.accentColor}33` }}
+                      >
+                        <div className="absolute inset-y-0 left-0 w-0.5" style={{ backgroundColor: sp.color || point.accentColor }} />
+                        <div 
+                          className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center border"
+                          style={{ 
+                            backgroundColor: `${sp.color || point.accentColor}15`,
+                            borderColor: `${sp.color || point.accentColor}33` 
+                          }}
+                        >
+                          <i className={`pi ${sp.icon || 'pi-check'} text-xs`} style={{ color: sp.color || point.accentColor }}></i>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <span className="text-xs font-mono font-bold block truncate" style={{ color: '#fff' }}>
+                            {sp.label}
+                          </span>
+                          {sp.value && (
+                            <span className="text-[9px] font-mono uppercase tracking-widest block opacity-60" style={{ color: sp.color || point.accentColor }}>
+                              {sp.value}
+                            </span>
+                          )}
+                        </div>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                )}
+              </div>
             </div>
           </motion.div>
         )}
