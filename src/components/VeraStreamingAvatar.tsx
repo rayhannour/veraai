@@ -8,11 +8,18 @@ enum ElevenLabsModel { eleven_flash_v2_5 = "eleven_flash_v2_5" }
 enum STTProvider { DEEPGRAM = "deepgram" }
 
 export interface VeraStreamingAvatarHandle {
+  startSession: () => Promise<void>;
   sendMessage: (text: string) => Promise<void>;
+  repeat: (text: string) => Promise<void>;
   terminateSession: () => Promise<void>;
 }
 
-export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { children?: React.ReactNode }>(({ children }, ref) => {
+export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { 
+  children?: React.ReactNode, 
+  onSpeakEnd?: () => void,
+  hideFullscreenButton?: boolean,
+  stayInContainer?: boolean
+}>(({ children, onSpeakEnd, hideFullscreenButton, stayInContainer }, ref) => {
   const [stream, setStream] = useState<MediaStream | undefined>();
   const [debug, setDebug] = useState<string>("SYSTEM_IDLE");
   const [isLoading, setIsLoading] = useState(false);
@@ -29,6 +36,8 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
   const chatEndRef = useRef<HTMLDivElement>(null);
   const avatar = useRef<any>(null);
   const taskRef = useRef<{ TaskType: any, TaskMode: any } | null>(null);
+  const pendingScript = useRef<string | null>(null);
+  const sessionReady = useRef(false);
 
   // 1. NEURAL TOKEN HANDSHAKE
   async function fetchAccessToken() {
@@ -72,20 +81,27 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
     avatar.current = new LiveAvatarSession(newToken);
 
     avatar.current.on(SessionEvent.SESSION_STREAM_READY, () => {
-      // The SDK auto-manages the stream, but we might still need to let UI know
+      sessionReady.current = true;
       setDebug("NEURAL_LINK_ESTABLISHED");
       setIsVeraTalking(true);
       setTimeout(() => setIsVeraTalking(false), 5000);
 
-      // Attempt to attach stream to video element
       if (mediaStream.current) {
         avatar.current.attach(mediaStream.current);
-        // Expose stream for the audio analyzer
         setTimeout(() => {
           if (mediaStream.current?.srcObject) {
             setStream(mediaStream.current.srcObject as MediaStream);
           }
         }, 500);
+      }
+
+      // Fire any script that was queued before session was ready
+      if (pendingScript.current) {
+        const script = pendingScript.current;
+        pendingScript.current = null;
+        setTimeout(() => {
+          avatar.current?.repeat(script);
+        }, 800);
       }
     });
 
@@ -116,6 +132,7 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
     avatar.current.on(AgentEventsEnum.AVATAR_SPEAK_ENDED, () => {
       setIsVeraTalking(false);
       setDebug("SYSTEM_READY");
+      if (onSpeakEnd) onSpeakEnd();
     });
 
     try {
@@ -131,6 +148,9 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
 
   // 3. EXPOSE CHAT INTERFACE
   useImperativeHandle(ref, () => ({
+    startSession: async () => {
+      if (!avatar.current && !doorsOpen) startSession();
+    },
     sendMessage: async (text: string) => {
       if (!avatar.current) return;
 
@@ -147,6 +167,20 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
         console.error("Communication error:", e);
       }
     },
+    repeat: async (text: string) => {
+      if (!avatar.current || !sessionReady.current) {
+        // Session not ready yet — queue for when it connects
+        pendingScript.current = text;
+        return;
+      }
+      try {
+        setDebug("SPEECH_COMMAND_SENT");
+        await avatar.current.repeat(text);
+      } catch (e) {
+        console.error("Speech error", e);
+        setDebug("SPEECH_FAILURE");
+      }
+    },
     terminateSession: async () => {
       if (!avatar.current) return;
       setIsShuttingDown(true);
@@ -154,6 +188,7 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
       // Wait for the "TV OFF" animation to complete before stopping the avatar
       setTimeout(async () => {
         await avatar.current?.stop();
+        sessionReady.current = false;
         setStream(undefined);
         setDoorsOpen(false);
         setIsShuttingDown(false);
@@ -257,15 +292,13 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
   return (
     <motion.div
       ref={containerRef}
-      animate={{
-        x: mousePos.x,
-        y: mousePos.y,
-        rotateX: -mousePos.y * 0.1,
-        rotateY: mousePos.x * 0.1
-      }}
-      className={`relative mx-auto group overflow-visible transition-all duration-1000 ${isFullPage
-        ? "fixed inset-0 w-screen h-screen z-[2000] mt-0 max-w-none flex items-center justify-center p-0 bg-background"
-        : "w-full max-w-2xl aspect-[4/5] mt-12"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className={`${stayInContainer ? 'relative w-full h-full' : 'relative mx-auto group overflow-visible transition-all duration-1000'} ${isFullPage
+        ? (stayInContainer 
+            ? "absolute inset-0 z-[2000] mt-0 max-w-none flex items-center justify-center p-0 bg-background"
+            : "fixed inset-0 w-screen h-screen z-[2000] mt-0 max-w-none flex items-center justify-center p-0 bg-background")
+        : (stayInContainer ? "w-full h-full" : "w-full max-w-2xl aspect-[4/5] mt-12")
         }`}
     >
       {/* 0. IMPRESSIVE NEURAL CORE RINGS (BACKDROP) */}
@@ -436,16 +469,18 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
         </AnimatePresence>
 
         {/* TRUE FULLSCREEN TOGGLE BUTTON (F11 STYLE) */}
-        <motion.div
-          role="button"
-          tabIndex={0}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={toggleFullscreen}
-          className="absolute z-[100] !w-10 !h-10 !min-w-[40px] !min-h-[40px] md:!w-12 md:!h-12 md:!min-w-[48px] md:!min-h-[48px] !p-0 !m-0 aspect-square flex-shrink-0 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 cursor-pointer shadow-[inset_0_0_0_1px_rgba(255,255,255,0.1)] hover:shadow-[0_0_20px_rgba(255,255,255,0.3),inset_0_0_0_1px_rgba(255,255,255,0.3)] text-white/70 hover:text-white transition-all group backdrop-blur-md top-4 right-4 md:top-6 md:right-6 outline-none"
-        >
-          <i className={`pi ${isFullPage ? 'pi-window-minimize' : 'pi-window-maximize'} text-sm md:text-base`}></i>
-        </motion.div>
+        {!hideFullscreenButton && (
+          <motion.div
+            role="button"
+            tabIndex={0}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={toggleFullscreen}
+            className="absolute z-[100] !w-10 !h-10 !min-w-[40px] !min-h-[40px] md:!w-12 md:!h-12 md:!min-w-[48px] md:!min-h-[48px] !p-0 !m-0 aspect-square flex-shrink-0 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 cursor-pointer shadow-[inset_0_0_0_1px_rgba(255,255,255,0.1)] hover:shadow-[0_0_20px_rgba(255,255,255,0.3),inset_0_0_0_1px_rgba(255,255,255,0.3)] text-white/70 hover:text-white transition-all group backdrop-blur-md top-4 right-4 md:top-6 md:right-6 outline-none"
+          >
+            <i className={`pi ${isFullPage ? 'pi-window-minimize' : 'pi-window-maximize'} text-sm md:text-base`}></i>
+          </motion.div>
+        )}
 
         {/* FRONTAL LASER SWEEP (DIAGNOSTIC SCANBAR) */}
         <motion.div
@@ -517,29 +552,36 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
         )}
       </AnimatePresence>
 
-      {/* 3. PERIPHERAL GLOW */}
+      {/* 4. PERIPHERAL GLOW */}
       <div className={`absolute -inset-16 bg-blue-500/10 blur-[120px] rounded-[4rem] -z-10 animate-pulse ${isFullPage ? 'hidden' : ''}`} />
 
-      {/* 4. NEURAL DIALOGUE HISTORY */}
+      {/* 5. IMPRESSIVE NEURAL DIALOGUE GLASS */}
       <AnimatePresence>
         {doorsOpen && isFullPage && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            className={`z-[100] hidden lg:flex flex-col gap-3 bg-background/60 backdrop-blur-2xl border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.6)] fitness-scrollbar pointer-events-auto overflow-hidden ${isFullPage
-              ? "absolute left-12 bottom-48 w-[480px] max-h-[600px] overflow-y-auto rounded-[3rem] p-8"
-              : "absolute bottom-[140px] left-1/2 -translate-x-1/2 w-full max-w-2xl rounded-3xl overflow-hidden"
+            initial={{ opacity: 0, x: 50, scale: 0.95 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            exit={{ opacity: 0, x: 50, scale: 0.95 }}
+            className={`z-[100] hidden lg:flex flex-col bg-white/[0.03] backdrop-blur-[40px] border border-white/10 shadow-[0_50px_120px_rgba(0,0,0,0.8)] pointer-events-auto overflow-hidden ${isFullPage
+              ? "absolute right-12 bottom-48 w-[450px] max-h-[650px] rounded-[3.5rem] p-10"
+              : "absolute bottom-[140px] left-1/2 -translate-x-1/2 w-full max-w-2xl rounded-3xl p-6"
               }`}
           >
-            {/* HEADER */}
-            <div className="flex items-center gap-2 px-5 py-3 border-b border-white/5 bg-white/5 flex-shrink-0">
-              <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              <span className="text-[10px] font-mono tracking-[0.4em] uppercase text-white/50 font-bold">Neural_Link_Protocol_Active</span>
+            {/* BRAIN SYNC HEADER */}
+            <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/5">
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_15px_#00e5ff]" />
+                <span className="text-[10px] font-mono tracking-[0.5em] uppercase text-white/40 font-black">Neural_Sync</span>
+              </div>
+              <div className="flex gap-1">
+                <div className="w-1 h-3 bg-white/10 rounded-full" />
+                <div className="w-1 h-5 bg-primary/40 rounded-full" />
+                <div className="w-1 h-2 bg-white/10 rounded-full" />
+              </div>
             </div>
 
-            {/* MESSAGES */}
-            <div className={`overflow-y-auto flex flex-col gap-4 fitness-scrollbar ${isFullPage ? "max-h-[480px] p-2" : "max-h-52 p-4 md:p-5"}`}>
+            {/* MESSAGES WITH PREMIUM SCROLLBAR */}
+            <div className="overflow-y-auto flex flex-col gap-6 fitness-scrollbar pr-2 h-full max-h-[450px]">
               {chatHistory.map((msg, i) => (
                 <motion.div
                   key={i}
@@ -569,6 +611,7 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { child
           </motion.div>
         )}
       </AnimatePresence>
+
       {children}
     </motion.div>
   );

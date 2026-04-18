@@ -81,7 +81,7 @@ export default function HomePage() {
                 animate="visible"
               >
                 {/* VERA AI LETTER BY LETTER (INTENSIFIED) */}
-                   {["V", "E", "R", "A", " ", "A", "I"].map((char, index) => (
+                {["V", "E", "R", "A", " ", "A", "I"].map((char, index) => (
                   <motion.div
                     key={index}
                     variants={{
@@ -145,7 +145,7 @@ export default function HomePage() {
 
               {/* THE SUPERMARKET AUTOMATIC DOORS (DUAL-PANE REVEAL) */}
               <div className="relative group/core h-40 w-full flex items-center justify-center overflow-visible mt-8 px-4">
-                
+
                 {/* THE LEFT SLIDING DOOR */}
                 <motion.div
                   initial={{ x: 0, opacity: 0.85 }}
@@ -187,7 +187,7 @@ export default function HomePage() {
                 />
 
                 {/* CENTRAL REVEAL PULSE */}
-                <motion.div 
+                <motion.div
                   initial={{ scale: 0, opacity: 0 }}
                   animate={{ scale: [0, 4], opacity: [0, 0.4, 0] }}
                   transition={{ delay: 0.8, duration: 0.8 }}

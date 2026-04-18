@@ -15,7 +15,7 @@ export const VeraLandingGate = () => {
 
             // Redirect to welcome after animation completes
             setTimeout(() => {
-                router.push('/welcome');
+                router.push('/avatar');
             }, 2500);
         }, 2000);
         return () => clearTimeout(timer);

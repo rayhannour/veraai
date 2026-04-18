@@ -10,6 +10,7 @@ const navLinks = [
   { name: 'Home', path: '/', color: '#00e5ff' },
   { name: 'Features', path: '/features', color: '#00ffaa' },
   { name: 'Pricing', path: '/pricing', color: '#FF7900' },
+  { name: 'Avatar', path: '/avatar', color: '#b300ff' },
   { name: 'Contact', path: '/contact', color: '#ff3366' },
 ];
 
@@ -150,9 +151,8 @@ export function VeraNavbar() {
                 const isActive = pathname === item.path;
                 return (
                   <Link key={item.path} href={item.path}
-                    className={`flex items-center gap-3 px-4 py-3 rounded-xl font-mono text-xs tracking-widest uppercase transition-all ${
-                      isActive ? 'bg-primary/10 text-primary border border-primary/30' : 'text-on-surface-variant hover:text-white hover:bg-white/5'
-                    }`}
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl font-mono text-xs tracking-widest uppercase transition-all ${isActive ? 'bg-primary/10 text-primary border border-primary/30' : 'text-on-surface-variant hover:text-white hover:bg-white/5'
+                      }`}
                   >
                     <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: item.color, boxShadow: `0 0 8px ${item.color}` }} />
                     {item.name}
