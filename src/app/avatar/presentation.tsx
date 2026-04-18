@@ -948,6 +948,122 @@ const TorchLine = ({ color = '#00e5ff', delay = 0 }: { color?: string; delay?: n
   </div>
 );
 
+// ─── SLIDE WAITING ART (shown before any point is revealed) ────────────────────
+
+const SLIDE_IMAGES: Record<string, string> = {
+  intro:  '/slide_commands.png',
+  tech:   '/slide_canvas.png',
+  impact: '/slide_swot.png',
+  sesp:   '/slide_evaluation.png',
+};
+
+const SlideWaitingArt = ({ slide }: { slide: Slide }) => {
+  const imgSrc = SLIDE_IMAGES[slide.id];
+  const accent = slide.points[0]?.accentColor ?? '#00e5ff';
+
+  return (
+    <motion.div
+      key={`waiting-${slide.id}`}
+      initial={{ opacity: 0, scale: 0.97, y: 16 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 1.02, y: -10 }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      className="w-full relative rounded-3xl overflow-hidden flex flex-col items-center justify-center my-4 portrait:max-lg:my-2"
+      style={{
+        minHeight: '280px',
+        background: 'rgba(0,0,0,0.4)',
+        border: `1px solid ${accent}22`,
+        boxShadow: `0 0 80px ${accent}18, inset 0 0 60px rgba(0,0,0,0.6)`,
+      }}
+    >
+      {/* Background image with strong overlay */}
+      {imgSrc && (
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${imgSrc})`,
+            transform: 'scale(1.04)',
+          }}
+        />
+      )}
+
+      {/* Gradient overlay from bottom + sides */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.7) 100%)`,
+        }}
+      />
+
+      {/* Accent vignette edges */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: `radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0,0,0,0.7) 100%)` }}
+      />
+
+      {/* Sweeping shimmer */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: `linear-gradient(120deg, transparent 30%, ${accent}12 50%, transparent 70%)` }}
+        animate={{ x: ['-100%', '200%'] }}
+        transition={{ duration: 4, ease: 'easeInOut', repeat: Infinity, repeatDelay: 2 }}
+      />
+
+      {/* Corner accent marks */}
+      {['top-3 left-3', 'top-3 right-3', 'bottom-3 left-3', 'bottom-3 right-3'].map((pos, i) => (
+        <div key={i} className={`absolute ${pos} w-5 h-5 pointer-events-none opacity-60`}
+          style={{
+            borderTop: i < 2 ? `2px solid ${accent}` : 'none',
+            borderBottom: i >= 2 ? `2px solid ${accent}` : 'none',
+            borderLeft: i % 2 === 0 ? `2px solid ${accent}` : 'none',
+            borderRight: i % 2 === 1 ? `2px solid ${accent}` : 'none',
+          }}
+        />
+      ))}
+
+      {/* Centre overlay text */}
+      <div className="relative z-10 text-center px-8 flex flex-col items-center gap-4">
+        {/* Pulsing wait icon */}
+        <motion.div
+          className="w-14 h-14 rounded-full flex items-center justify-center border-2"
+          style={{ borderColor: `${accent}66`, background: `${accent}15`, backdropFilter: 'blur(20px)' }}
+          animate={{ boxShadow: [`0 0 15px ${accent}44`, `0 0 50px ${accent}88`, `0 0 15px ${accent}44`] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <motion.div
+            className="w-2.5 h-2.5 rounded-full"
+            style={{ backgroundColor: accent }}
+            animate={{ scale: [1, 1.5, 1], opacity: [1, 0.4, 1] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          />
+        </motion.div>
+
+        <div>
+          <h3 className="text-white font-black text-xl lg:text-2xl tracking-tight leading-tight mb-1 portrait:max-lg:text-lg">
+            {slide.title}
+          </h3>
+          <p className="text-[11px] font-mono uppercase tracking-[0.35em] mt-2" style={{ color: `${accent}cc` }}>
+            {slide.subtitle}
+          </p>
+        </div>
+
+        {/* Waiting label */}
+        <div className="flex items-center gap-2 px-4 py-1.5 rounded-full" style={{ background: `${accent}15`, border: `1px solid ${accent}33` }}>
+          <motion.div
+            className="w-1.5 h-1.5 rounded-full"
+            style={{ backgroundColor: accent }}
+            animate={{ opacity: [1, 0.2, 1] }}
+            transition={{ duration: 0.9, repeat: Infinity }}
+          />
+          <span className="text-[9px] font-mono uppercase tracking-widest" style={{ color: accent }}>
+            في انتظار التفعيل
+          </span>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 // ─── PROCESS GRAPH ───────────────────────────────────────────────────────────
 
 const SESP_STEPS = [
@@ -1492,22 +1608,28 @@ const Presentation = React.forwardRef<PresentationHandle, PresentationProps>(({ 
                 <ProcessGraph revealedCount={currentPointIndex + 1} />
               )}
 
-              {/* Points or Orbital */}
+              {/* Points or Orbital — or Waiting Art if no point revealed yet */}
               <div className={`flex flex-col gap-4 ${currentSlide.id === 'tech' ? 'items-center w-full' : ''}`}>
-                {currentSlide.id === 'tech' ? (
-                  <OrbitalCanvasDiagram slide={currentSlide} currentPointIndex={currentPointIndex} />
-                ) : (
-                  <AnimatePresence mode="popLayout">
-                    {sortedPoints.map((point, idx) => (
-                      <PointCard
-                        key={`${currentSlideIndex}-${point.id}`}
-                        point={point}
-                        isCurrent={idx === 0}
-                        idx={idx}
-                      />
-                    ))}
-                  </AnimatePresence>
-                )}
+                <AnimatePresence mode="wait">
+                  {currentPointIndex === -1 ? (
+                    <SlideWaitingArt key={`wait-${currentSlide.id}`} slide={currentSlide} />
+                  ) : currentSlide.id === 'tech' ? (
+                    <OrbitalCanvasDiagram key="orbital" slide={currentSlide} currentPointIndex={currentPointIndex} />
+                  ) : (
+                    <motion.div key="points" className="flex flex-col gap-4">
+                      <AnimatePresence mode="popLayout">
+                        {sortedPoints.map((point, idx) => (
+                          <PointCard
+                            key={`${currentSlideIndex}-${point.id}`}
+                            point={point}
+                            isCurrent={idx === 0}
+                            idx={idx}
+                          />
+                        ))}
+                      </AnimatePresence>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </div>
           )}
