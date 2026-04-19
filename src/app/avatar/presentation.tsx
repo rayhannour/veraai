@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
+import dynamic from 'next/dynamic';
 
 // ─── TYPES ──────────────────────────────────────────────────────────────────
 
@@ -46,10 +47,48 @@ interface Slide {
 
 export const PRESENTATION_SLIDES: Slide[] = [
   {
+    id: "intro-definition",
+    title: "تعريف المشروع",
+    subtitle: "أهمية التقييم الوظيفي الموحد",
+    chapter: "المرحلة // 00",
+    gradient: "from-[#00e5ff]/10 via-transparent to-[#ff3366]/5",
+    introScript: "أهلاً بك. في هذا العرض نسلط الضوء على مشروع التقييم الوظيفي الشامل لمنظومة الإصلاح والسجون التونسية، ولماذا يعتبر أداة لا غنى عنها.",
+    points: [
+      {
+        id: "def1", label: "مفهوم التقييم", detail: "رصد موضوعي للآداء", script: "التقييم ليس مجرد تتبع دوري، بل هو تشخيص موضوعي يعتمد على بيانات حقيقية لقياس مدى الامتثال للمعايير المؤسساتية.", icon: "pi-chart-pie", accentColor: "#00e5ff", stats: { type: 'pulse', value: 100, label: "تشخيص", color: "#00e5ff", unit: "%" }
+      },
+      {
+        id: "def2", label: "أهمية المشروع", detail: "توحيد المعايير الوطنية", script: "أهمية المشروع تكمن في توحيد معايير العمل بين كافة الوحدات السجنية، مما يقلل من هامش الخطأ البشري ويرفع من مستوى الرعاية والأمن.", icon: "pi-shield", accentColor: "#00ffaa", stats: { type: 'donut', value: 95, label: "توحيد", color: "#00ffaa", unit: "%" }
+      },
+      {
+        id: "def3", label: "الرؤية المستقبلية", detail: "تأسيس مؤسسة ذكية", script: "يهدف المشروع في مرحلته النهائية إلى تأسيس منظومة إصلاح ذكية قادرة على التنبؤ بالاخلالات عبر مخرجات تحليل وتقييم مستمر.", icon: "pi-globe", accentColor: "#ff00ff", stats: { type: 'bar', values: [30, 60, 90, 100], label: "استباق", color: "#ff00ff" }
+      }
+    ]
+  },
+  {
+    id: "tunisia-map",
+    title: "الخارطة السجنية",
+    subtitle: "توزع الوحدات حسب الأهداف",
+    chapter: "المرحلة // 01",
+    gradient: "from-[#00ffaa]/10 via-transparent to-[#f59e0b]/5",
+    introScript: "نستعرض هنا الخارطة السجنية التونسية، حيث نطبق هذا المشروع الموحد على شبكة من الوحدات الموزعة على كامل التراب الوطني لغاية التقييم.",
+    points: [
+      {
+        id: "map1", label: "شبكة وطنية شاملة", detail: "انتشار الوحدات السجنية", script: "تتوزع المؤسسات العقابية والإصلاحية على كامل التراب الوطني التونسي، من بنزرت في أقصى الشمال إلى تخوم الجنوب.", icon: "pi-map-marker", accentColor: "#00ffaa"
+      },
+      {
+        id: "map2", label: "تصنيف الوحدات المركزية", detail: "أقطاب استراتيجية ومراكز إيقاف", script: "تمثل مدن كبرى مثل تونس وصفاقس وسوسة أقطاباً كبرى للمشروع، نظرة لقدرة استيعابها العالية وتأثيرها على مسار التاهيل.", icon: "pi-building", accentColor: "#00e5ff"
+      },
+      {
+        id: "map3", label: "تغطية المؤشرات وتداولها", detail: "تطبيق المعيار الموحد وطنياً", script: "بفضل هذا التوزيع، تتدفق البيانات والمؤشرات الآنية من مختلف السجون نحو لوحة قياس مركزية لتقييم جميع الوحدات بمسطرة واحدة.", icon: "pi-sitemap", accentColor: "#ffcc00"
+      }
+    ]
+  },
+  {
     id: "intro",
     title: "استغلال الأوامر",
     subtitle: "الأداء الوظيفي في التقييم",
-    chapter: "المرحلة // 01",
+    chapter: "المرحلة // 02",
     gradient: "from-[#00e5ff]/10 via-transparent to-[#ff00ff]/5",
     introScript: "أهلاً ومرحباً. يتمحور العرض اليوم حول أسس التقييم الوظيفي الحديث، وكيف نستغل النصوص المنظمة لعمل كافة الميادين داخل المنظومة السجنية والإصلاحية.",
     points: [
@@ -101,7 +140,7 @@ export const PRESENTATION_SLIDES: Slide[] = [
     id: "tech",
     title: "مخطط Canvas",
     subtitle: "أسئلة كمؤشرات أداء",
-    chapter: "المرحلة // 02",
+    chapter: "المرحلة // 03",
     gradient: "from-[#00ffaa]/10 via-transparent to-[#00e5ff]/5",
     introScript: "المرحلة الحاسمة تتمثل في تفكيك هذه الإجراءات وتحويلها إلى نموذج Canvas متكامل. هذا المخطط يعتمد على قوة صياغة واستغلال السؤال التقييمي.",
     points: [
@@ -150,7 +189,7 @@ export const PRESENTATION_SLIDES: Slide[] = [
     id: "impact",
     title: "المنهجية العلمية",
     subtitle: "SWOT & Eisenhower",
-    chapter: "المرحلة // 03",
+    chapter: "المرحلة // 04",
     gradient: "from-[#ff3366]/10 via-transparent to-[#ff00ff]/5",
     introScript: "نقرن عملية الرصد والمتابعة بأدوات علمية حديثة عالمياً للتحليل: تحديداً طريقة SWOT ومصفوفة آيزنهاور لتشخيص الحالة واتخاذ الإجراءات.",
     points: [
@@ -201,7 +240,7 @@ export const PRESENTATION_SLIDES: Slide[] = [
     id: "sesp",
     title: "مسار التقييم الكامل",
     subtitle: "رصد الإخلالات واستخراج التقرير",
-    chapter: "المرحلة // 04",
+    chapter: "المرحلة // 06",
     gradient: "from-[#f59e0b]/10 via-transparent to-[#ff3366]/5",
     introScript: "وأخيرا، لنتتبع الدورة الكاملة لعملية التقييم. ينقسم إنجاز التقييم إلى أربع خطوات تراكمية تضمن الموضوعية والمتابعة الفعلية.",
     points: [
@@ -557,11 +596,11 @@ const PointCard = ({ point, isCurrent, idx }: { point: Point; isCurrent: boolean
               className="absolute -top-10 -right-10 w-32 h-32 rounded-full blur-[40px] opacity-30 pointer-events-none transition-opacity duration-700 group-hover:opacity-50"
               style={{ background: point.accentColor }}
             />
-            
+
             <div className="flex items-start gap-3 relative z-10 w-full">
-              <div 
-                className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full" 
-                style={{ backgroundColor: point.accentColor, boxShadow: `0 0 8px ${point.accentColor}` }} 
+              <div
+                className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full"
+                style={{ backgroundColor: point.accentColor, boxShadow: `0 0 8px ${point.accentColor}` }}
               />
               <div className="flex-1">
                 <p className="text-sm font-inter text-white/80 leading-relaxed portrait:max-lg:text-[10px] portrait:max-lg:leading-relaxed">
@@ -589,11 +628,11 @@ const PointCard = ({ point, isCurrent, idx }: { point: Point; isCurrent: boolean
                         style={{ borderBottom: `1px solid ${sp.color || point.accentColor}33` }}
                       >
                         <div className="absolute inset-y-0 left-0 w-0.5" style={{ backgroundColor: sp.color || point.accentColor }} />
-                        <div 
+                        <div
                           className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center border"
-                          style={{ 
+                          style={{
                             backgroundColor: `${sp.color || point.accentColor}15`,
-                            borderColor: `${sp.color || point.accentColor}33` 
+                            borderColor: `${sp.color || point.accentColor}33`
                           }}
                         >
                           <i className={`pi ${sp.icon || 'pi-check'} text-xs`} style={{ color: sp.color || point.accentColor }}></i>
@@ -951,10 +990,10 @@ const TorchLine = ({ color = '#00e5ff', delay = 0 }: { color?: string; delay?: n
 // ─── SLIDE WAITING ART (shown before any point is revealed) ────────────────────
 
 const SLIDE_IMAGES: Record<string, string> = {
-  intro:  '/slide_commands.png',
-  tech:   '/slide_canvas.png',
+  intro: '/slide_commands.png',
+  tech: '/slide_canvas.png',
   impact: '/slide_swot.png',
-  sesp:   '/slide_evaluation.png',
+  sesp: '/slide_evaluation.png',
 };
 
 const SlideWaitingArt = ({ slide }: { slide: Slide }) => {
@@ -1156,29 +1195,42 @@ const ProcessGraph = ({ revealedCount }: { revealedCount: number }) => (
     )}
   </motion.div>
 );
+// ─── TUNISIA MAP EMBED DIAGRAM (SLIDE 1) ────────────────────────────────────────
 
-// ─── ORBITAL CANVAS DIAGRAM (SLIDE 2) ─────────────────────────────────────────
+const TunisiaMapLeaflet = dynamic(() => import('@/components/DynamicTunisiaMap'), { 
+  ssr: false, 
+  loading: () => (
+    <div className="w-full mt-4 h-[400px] rounded-2xl flex items-center justify-center border border-white/10 text-[#00e5ff] bg-black font-mono tracking-widest opacity-70">
+      <div className="flex flex-col items-center gap-4">
+        <motion.div animate={{ rotate: 360 }} transition={{ duration: 2, repeat: Infinity, ease: 'linear' }} className="w-8 h-8 rounded-full border-2 border-t-[#00e5ff] border-r-[#00e5ff] border-b-transparent border-l-transparent" />
+        <span>INITIALIZING SATELLITE MAP...</span>
+      </div>
+    </div>
+  )
+});
+
+// ─── ORBITAL CANVAS DIAGRAM (SLIDE 3) ─────────────────────────────────────────
 
 const OrbitalCanvasDiagram = ({ slide, currentPointIndex }: { slide: any; currentPointIndex: number }) => {
   const points = slide.points;
-  const radius = 130; 
+  const radius = 130;
 
   const activePoint = currentPointIndex > -1 ? points[currentPointIndex] : null;
 
   return (
     <div className="w-full relative flex flex-col items-center justify-start mt-2">
       <div className="relative w-[300px] h-[300px] flex items-center justify-center portrait:max-lg:w-[240px] portrait:max-lg:h-[240px] z-10">
-        
+
         {/* Connection Lines SVG */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible">
           {points.map((pt: any, i: number) => {
             const angle = (i * (360 / points.length)) - 90;
             const rad = (angle * Math.PI) / 180;
-            const currentRadius = 130; 
-            
-            const startX = 150; 
+            const currentRadius = 130;
+
+            const startX = 150;
             const startY = 150;
-            
+
             const endX = startX + Math.cos(rad) * currentRadius;
             const endY = startY + Math.sin(rad) * currentRadius;
 
@@ -1186,9 +1238,9 @@ const OrbitalCanvasDiagram = ({ slide, currentPointIndex }: { slide: any; curren
             const isActive = i === currentPointIndex;
 
             return (
-              <motion.line 
+              <motion.line
                 key={i}
-                x1={startX} y1={startY} 
+                x1={startX} y1={startY}
                 x2={endX} y2={endY}
                 stroke={isRevealed ? pt.accentColor : "rgba(255,255,255,0.1)"}
                 strokeWidth={isActive ? 2 : 1}
@@ -1205,9 +1257,9 @@ const OrbitalCanvasDiagram = ({ slide, currentPointIndex }: { slide: any; curren
         </svg>
 
         {/* Central Core */}
-        <motion.div 
-          animate={{ 
-            boxShadow: [`0 0 20px rgba(0, 255, 170, 0.2)`, `0 0 60px rgba(0, 255, 170, 0.5)`, `0 0 20px rgba(0, 255, 170, 0.2)`] 
+        <motion.div
+          animate={{
+            boxShadow: [`0 0 20px rgba(0, 255, 170, 0.2)`, `0 0 60px rgba(0, 255, 170, 0.5)`, `0 0 20px rgba(0, 255, 170, 0.2)`]
           }}
           transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
           className="relative z-20 w-24 h-24 rounded-full border border-white/20 flex flex-col items-center justify-center"
@@ -1220,47 +1272,47 @@ const OrbitalCanvasDiagram = ({ slide, currentPointIndex }: { slide: any; curren
 
         {/* Orbiting Cards */}
         {points.map((pt: any, i: number) => {
-            const angle = (i * (360 / points.length)) - 90;
-            const rad = (angle * Math.PI) / 180;
-            
-            const isActive = i === currentPointIndex;
-            const isRevealed = i <= currentPointIndex;
-            
-            const tx = Math.cos(rad) * radius;
-            const ty = Math.sin(rad) * radius;
+          const angle = (i * (360 / points.length)) - 90;
+          const rad = (angle * Math.PI) / 180;
 
-            return (
-              <motion.div
-                key={pt.id}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ 
-                  opacity: isRevealed ? 1 : 0.2, 
-                  scale: isRevealed ? (isActive ? 1.15 : 0.85) : 0.6,
-                  x: tx,
-                  y: ty,
-                  rotate: isActive ? [-1, 1, -1] : 0
-                }}
-                transition={{ duration: 0.6, rotate: { repeat: Infinity, duration: 2, ease: "linear" } }}
-                className="absolute w-24 h-24 flex items-center justify-center z-30"
-              >
-                  <div className="flex flex-col items-center justify-center">
-                    <motion.div
-                      animate={{
-                        borderColor: isActive ? pt.accentColor : 'rgba(255,255,255,0.1)',
-                        boxShadow: isActive ? `0 0 30px ${pt.accentColor}66` : 'none',
-                        background: isActive ? `${pt.accentColor}22` : 'rgba(255,255,255,0.02)'
-                      }}
-                      className="w-14 h-14 rounded-2xl border flex items-center justify-center backdrop-blur-md mb-2 relative overflow-hidden"
-                    >
-                      <i className={`pi ${pt.icon} text-xl relative z-10`} style={{ color: isActive ? '#fff' : pt.accentColor }} />
-                    </motion.div>
-                    
-                    <h4 className="text-[9px] font-bold text-center line-clamp-2 px-1 whitespace-nowrap" style={{ color: isActive ? pt.accentColor : 'rgba(255,255,255,0.4)', textShadow: isActive ? `0 0 10px ${pt.accentColor}` : 'none' }}>
-                      {pt.label}
-                    </h4>
-                  </div>
-              </motion.div>
-            )
+          const isActive = i === currentPointIndex;
+          const isRevealed = i <= currentPointIndex;
+
+          const tx = Math.cos(rad) * radius;
+          const ty = Math.sin(rad) * radius;
+
+          return (
+            <motion.div
+              key={pt.id}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{
+                opacity: isRevealed ? 1 : 0.2,
+                scale: isRevealed ? (isActive ? 1.15 : 0.85) : 0.6,
+                x: tx,
+                y: ty,
+                rotate: isActive ? [-1, 1, -1] : 0
+              }}
+              transition={{ duration: 0.6, rotate: { repeat: Infinity, duration: 2, ease: "linear" } }}
+              className="absolute w-24 h-24 flex items-center justify-center z-30"
+            >
+              <div className="flex flex-col items-center justify-center">
+                <motion.div
+                  animate={{
+                    borderColor: isActive ? pt.accentColor : 'rgba(255,255,255,0.1)',
+                    boxShadow: isActive ? `0 0 30px ${pt.accentColor}66` : 'none',
+                    background: isActive ? `${pt.accentColor}22` : 'rgba(255,255,255,0.02)'
+                  }}
+                  className="w-14 h-14 rounded-2xl border flex items-center justify-center backdrop-blur-md mb-2 relative overflow-hidden"
+                >
+                  <i className={`pi ${pt.icon} text-xl relative z-10`} style={{ color: isActive ? '#fff' : pt.accentColor }} />
+                </motion.div>
+
+                <h4 className="text-[9px] font-bold text-center line-clamp-2 px-1 whitespace-nowrap" style={{ color: isActive ? pt.accentColor : 'rgba(255,255,255,0.4)', textShadow: isActive ? `0 0 10px ${pt.accentColor}` : 'none' }}>
+                  {pt.label}
+                </h4>
+              </div>
+            </motion.div>
+          )
         })}
       </div>
 
@@ -1280,7 +1332,7 @@ const OrbitalCanvasDiagram = ({ slide, currentPointIndex }: { slide: any; curren
                 boxShadow: `0 20px 40px rgba(0,0,0,0.5), inset 0 0 30px ${activePoint.accentColor}15`
               }}
             >
-              <div 
+              <div
                 className="absolute -top-10 -right-10 w-32 h-32 rounded-full blur-[40px] opacity-40 pointer-events-none"
                 style={{ background: activePoint.accentColor }}
               />
@@ -1322,6 +1374,74 @@ const OrbitalCanvasDiagram = ({ slide, currentPointIndex }: { slide: any; curren
   );
 };
 
+// ─── AMBIENT AUDIO (offline file) ────────────────────────────────────────────
+// Uses /calm.mp3 from public folder. Plays at 8% volume so avatar voice
+// remains fully dominant. Fades in/out via volume ramp.
+
+const useAmbientAudio = (active: boolean) => {
+  const audioRef = React.useRef<HTMLAudioElement | null>(null);
+  const fadeRef = React.useRef<number | null>(null);
+
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    // Create audio element once
+    if (!audioRef.current) {
+      const audio = new Audio('/calm.mp3');
+      audio.loop = true;
+      audio.volume = 0;
+      audioRef.current = audio;
+    }
+
+    const audio = audioRef.current;
+
+    const clearFade = () => {
+      if (fadeRef.current) {
+        clearInterval(fadeRef.current);
+        fadeRef.current = null;
+      }
+    };
+
+    if (active) {
+      audio.play().catch(() => { }); // catch autoplay block silently
+      clearFade();
+      // Fade in to 0.08 over ~3 seconds
+      fadeRef.current = window.setInterval(() => {
+        if (audio.volume < 0.08) {
+          audio.volume = Math.min(0.08, audio.volume + 0.004);
+        } else {
+          clearFade();
+        }
+      }, 150);
+    } else {
+      clearFade();
+      // Fade out over ~3 seconds then pause
+      fadeRef.current = window.setInterval(() => {
+        if (audio.volume > 0.002) {
+          audio.volume = Math.max(0, audio.volume - 0.004);
+        } else {
+          audio.volume = 0;
+          audio.pause();
+          clearFade();
+        }
+      }, 150);
+    }
+
+    return clearFade;
+  }, [active]);
+
+  // Cleanup on unmount
+  React.useEffect(() => {
+    return () => {
+      if (fadeRef.current) clearInterval(fadeRef.current);
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
+};
+
 // ─── MAIN COMPONENT ───────────────────────────────────────────────────────────
 
 interface PresentationProps {
@@ -1339,6 +1459,9 @@ const Presentation = React.forwardRef<PresentationHandle, PresentationProps>(({ 
   const [isAutoplaying, setIsAutoplaying] = useState(false);
   const [isOutroActive, setIsOutroActive] = useState(false);
   const [speakingText, setSpeakingText] = useState('');
+
+  // Ambient background audio — very low volume, fades in/out with autoplay
+  useAmbientAudio(isAutoplaying);
 
   // Intercept script to capture for ticker
   const handleRepeatScript = (script: string) => {
@@ -1460,8 +1583,8 @@ const Presentation = React.forwardRef<PresentationHandle, PresentationProps>(({ 
                 background: isSlideActive
                   ? `linear-gradient(180deg, ${accent}12 0%, transparent 100%)`
                   : isPast
-                  ? 'rgba(255,255,255,0.02)'
-                  : 'transparent',
+                    ? 'rgba(255,255,255,0.02)'
+                    : 'transparent',
               }}
               transition={{ duration: 0.4 }}
               className="relative shrink-0 flex flex-col justify-between border-b-2 px-4 py-2.5 min-w-[130px] lg:min-w-[160px] portrait:max-lg:min-w-[110px] portrait:max-lg:px-3 portrait:max-lg:py-2 cursor-default"
@@ -1516,8 +1639,8 @@ const Presentation = React.forwardRef<PresentationHandle, PresentationProps>(({ 
                           backgroundColor: isDotActive
                             ? pt.accentColor
                             : isDotPast
-                            ? 'rgba(255,255,255,0.3)'
-                            : 'rgba(255,255,255,0.07)',
+                              ? 'rgba(255,255,255,0.3)'
+                              : 'rgba(255,255,255,0.07)',
                           boxShadow: isDotActive ? `0 0 8px ${pt.accentColor}` : 'none',
                           scale: isDotActive ? 1.3 : 1,
                         }}
@@ -1529,8 +1652,8 @@ const Presentation = React.forwardRef<PresentationHandle, PresentationProps>(({ 
                           color: isDotActive
                             ? pt.accentColor
                             : isDotPast
-                            ? 'rgba(255,255,255,0.4)'
-                            : 'rgba(255,255,255,0.15)',
+                              ? 'rgba(255,255,255,0.4)'
+                              : 'rgba(255,255,255,0.15)',
                           fontWeight: isDotActive ? 700 : 400,
                         }}
                         transition={{ duration: 0.25 }}
@@ -1613,6 +1736,8 @@ const Presentation = React.forwardRef<PresentationHandle, PresentationProps>(({ 
                 <AnimatePresence mode="wait">
                   {currentPointIndex === -1 ? (
                     <SlideWaitingArt key={`wait-${currentSlide.id}`} slide={currentSlide} />
+                  ) : currentSlide.id === 'tunisia-map' ? (
+                    <TunisiaMapLeaflet key="tunimap" currentPointIndex={currentPointIndex} />
                   ) : currentSlide.id === 'tech' ? (
                     <OrbitalCanvasDiagram key="orbital" slide={currentSlide} currentPointIndex={currentPointIndex} />
                   ) : (
@@ -1668,8 +1793,8 @@ const Presentation = React.forwardRef<PresentationHandle, PresentationProps>(({ 
                         pi === currentPointIndex
                           ? pt.accentColor
                           : pi < currentPointIndex
-                          ? 'rgba(255,255,255,0.3)'
-                          : 'rgba(255,255,255,0.1)',
+                            ? 'rgba(255,255,255,0.3)'
+                            : 'rgba(255,255,255,0.1)',
                       scale: pi === currentPointIndex ? 1.5 : 1,
                       boxShadow: pi === currentPointIndex ? `0 0 8px ${pt.accentColor}` : 'none',
                     }}
