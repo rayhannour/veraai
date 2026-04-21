@@ -176,7 +176,7 @@ export default function NeuralLogin() {
             >
               {/* 1. Underlying Vera Image (Revealed on success) */}
               <Image
-                src="/agent.png"
+                src="/officer.png"
                 alt="Vera Core"
                 fill
                 className={`object-cover transition-all duration-1000 ${authenticated ? 'scale-100 brightness-110' : 'scale-125 brightness-50'}`}

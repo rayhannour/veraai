@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
       }),*/
       body: JSON.stringify({
         mode: "FULL",
-        avatar_id: "073b60a9-89a8-45aa-8902-c358f64d2852",
+        avatar_id: "40b4f000-f783-4bba-a327-ea58b1a6fdf2",
         avatar_persona: {
           voice_id: "e948b062-7dce-4f2b-bcf6-98bd3511106b",
           context_id: "4968939e-b021-480d-a07d-f11e62e8beed",

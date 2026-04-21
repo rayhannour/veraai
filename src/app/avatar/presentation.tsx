@@ -30,6 +30,7 @@ interface Point {
   stats?: StatData;
   icon: string;
   accentColor: string;
+  image?: string;
   subPoints?: SubPoint[];
 }
 
@@ -52,7 +53,7 @@ export const PRESENTATION_SLIDES: Slide[] = [
     subtitle: "أهمية التقييم الوظيفي الموحد",
     chapter: "المرحلة // 00",
     gradient: "from-[#00e5ff]/10 via-transparent to-[#ff3366]/5",
-    introScript: "أهلاً بك. في هذا العرض نسلط الضوء على مشروع التقييم الوظيفي الشامل لمنظومة الإصلاح والسجون التونسية، ولماذا يعتبر أداة لا غنى عنها.",
+    introScript: "أهلاً بك. في هذا العرض نسلط الضوء على مشروع التقييم الوظيفي الشامل للمنظومة  السجنية التونسية، ولماذا يعتبر أداة لا غنى عنها.",
     points: [
       {
         id: "def1", label: "مفهوم التقييم", detail: "رصد موضوعي للآداء", script: "التقييم ليس مجرد تتبع دوري، بل هو تشخيص موضوعي يعتمد على بيانات حقيقية لقياس مدى الامتثال للمعايير المؤسساتية.", icon: "pi-chart-pie", accentColor: "#00e5ff", stats: { type: 'pulse', value: 100, label: "تشخيص", color: "#00e5ff", unit: "%" }
@@ -85,10 +86,29 @@ export const PRESENTATION_SLIDES: Slide[] = [
     ]
   },
   {
+    id: "orgchart",
+    title: "الهيكل الوظيفي للمشروع",
+    subtitle: "ديناميكية العمل والتدفق",
+    chapter: "المرحلة // 02",
+    gradient: "from-[#a855f7]/10 via-transparent to-[#00e5ff]/5",
+    introScript: "ننتقل الآن إلى الهيكل الوظيفي الذي يوضح الترابط المباشر. كيف تتدفق البيانات من الميدان، ليتم تحليلها مركزيا وعرضها أمام القيادة لاتخاذ القرار.",
+    points: [
+      {
+        id: "org1", label: "الرصد الميداني", detail: "فرق الرصد والتقييم بجميع الوحدات تجمع المؤشرات الحلقية بشكل دوري.", script: "تبدأ دورة العمل من القاعدة الميدانية حيث تقوم فرق التقييم بجميع الوحدات السجنية برصد وتسجيل البيانات بشكل دوري ومستمر.", icon: "pi-users", accentColor: "#00ffaa"
+      },
+      {
+        id: "org2", label: "المنصة المركزية للتحليل", detail: "دمج البيانات في نظام Canvas لتحويلها إلى تقارير ونسب امتثال.", script: "تتدفق هذه البيانات فورًا نحو المنصة المركزية التي تعمل كعقل تحليلي، حيث تترجم المعلومات إلى تقارير تقييمية ومؤشرات امتثال واضحة.", icon: "pi-server", accentColor: "#00e5ff"
+      },
+      {
+        id: "org3", label: "اتخاذ القرار الإستراتيجي", detail: "القيادة العامة تستغل المخرجات لاتخاذ قرارات وإصلاحات استباقية.", script: "تصل المخرجات الدقيقة أخيراً إلى القيادة العليا التي تملك الآن الرؤية الشاملة لاتخاذ قرارات إصلاحية سريعة وموجهة نحو مكامن الخلل.", icon: "pi-sitemap", accentColor: "#a855f7"
+      }
+    ]
+  },
+  {
     id: "intro",
     title: "استغلال الأوامر",
     subtitle: "الأداء الوظيفي في التقييم",
-    chapter: "المرحلة // 02",
+    chapter: "المرحلة // 03",
     gradient: "from-[#00e5ff]/10 via-transparent to-[#ff00ff]/5",
     introScript: "أهلاً ومرحباً. يتمحور العرض اليوم حول أسس التقييم الوظيفي الحديث، وكيف نستغل النصوص المنظمة لعمل كافة الميادين داخل المنظومة السجنية والإصلاحية.",
     points: [
@@ -140,7 +160,7 @@ export const PRESENTATION_SLIDES: Slide[] = [
     id: "tech",
     title: "مخطط Canvas",
     subtitle: "أسئلة كمؤشرات أداء",
-    chapter: "المرحلة // 03",
+    chapter: "المرحلة // 04",
     gradient: "from-[#00ffaa]/10 via-transparent to-[#00e5ff]/5",
     introScript: "المرحلة الحاسمة تتمثل في تفكيك هذه الإجراءات وتحويلها إلى نموذج Canvas متكامل. هذا المخطط يعتمد على قوة صياغة واستغلال السؤال التقييمي.",
     points: [
@@ -189,7 +209,7 @@ export const PRESENTATION_SLIDES: Slide[] = [
     id: "impact",
     title: "المنهجية العلمية",
     subtitle: "SWOT & Eisenhower",
-    chapter: "المرحلة // 04",
+    chapter: "المرحلة // 05",
     gradient: "from-[#ff3366]/10 via-transparent to-[#ff00ff]/5",
     introScript: "نقرن عملية الرصد والمتابعة بأدوات علمية حديثة عالمياً للتحليل: تحديداً طريقة SWOT ومصفوفة آيزنهاور لتشخيص الحالة واتخاذ الإجراءات.",
     points: [
@@ -295,6 +315,137 @@ export const PRESENTATION_SLIDES: Slide[] = [
           { label: "رقم المردودية", value: "92%", icon: "pi-star-fill", color: "#00ffaa" },
           { label: "التقييم العام", value: "آلي", icon: "pi-file-check", color: "#00ffaa" }
         ]
+      }
+    ]
+  },
+  {
+    id: "it-system",
+    title: "النظام المعلوماتي",
+    subtitle: "حجر الزاوية للتحول الرقمي",
+    chapter: "المرحلة // 05",
+    gradient: "from-[#a855f7]/10 via-transparent to-[#3b82f6]/5",
+    introScript: "قبل أن ننتقل إلى واجهات  يجب أن نؤكد على نقطة مفصلية: لا نجاح لأي عملية تقييم حديثة بدون نظام معلوماتي قوي. التكنولوجيا ليست مجرد أداة، بل هي شريك استراتيجي.",
+    points: [
+      {
+        id: "it1", label: "أرشفة لا مركزية", detail: "توفير خوادم تحفظ وتقاطع البيانات بصفة لحظية.", script: "النظام المعلوماتي يتيح لنا أرشفة لامركزية لآلاف التقارير، وتقاطع البيانات بصفة لحظية للحد من الأخطاء والاعتماد على الذاكرة البشرية المحدودة.", icon: "pi-database", accentColor: "#a855f7"
+      },
+      {
+        id: "it2", label: "الأساس المتين للذكاء", detail: "بناء مستودع بيانات ضخم (Data Lake) لتدريب النماذج.", script: "بدون هذا الأساس المتين من البيانات النظيفة والموثوقة، سيكون من المستحيل ادماج أنظمة الذكاء الاصطناعي وكلاء التقييم الآلي في المستقبل.", icon: "pi-server", accentColor: "#3b82f6"
+      },
+      {
+        id: "it3", label: "الحوكمة والشفافية", detail: "رسم مسار تدقيق يضمن حيادية وموضوعية التقييم.", script: "أخيراً، الرقمنة هي الضامن الأول للحوكمة. كل عملية مرصودة تترك أثراً رقمياً، مما يضمن أقصى درجات الشفافية والحياد في تقييم المؤسسات.", icon: "pi-lock", accentColor: "#00e5ff"
+      }
+    ]
+  },
+  {
+    id: "freya-demo",
+    title: "المنصة الذكية",
+    subtitle: "حل رقمي شامل و واجهات قيادة",
+    chapter: "المرحلة // 06",
+    gradient: "from-[#ef4444]/10 via-transparent to-[#3b82f6]/5",
+    introScript: "انطلاقاً من هذه القاعدة التقنية، أقدم لكم الآن 'امنصة '. هذه الواجهات تمثل نافذة الإدارة نحو الذكاء الاصطناعي التشغيلي، حيث يتجسد كل تعقيد المنظومة في لوحات بسيطة.",
+    points: [
+      {
+        id: "freya-dash",
+        label: "لوحات القيادة والتفاعل الآني",
+        detail: "واجهات ديناميكية ترصد كل المؤشرات في وقت فعلي لتدريب الذكاء الاصطناعي.",
+        script: "تمثل الشاشة التي ترونها اللوحة التفاعلية. هنا تتجمع البيانات لبناء النماذج التنبؤية، مما سيسمح لوكلاء الذكاء الاصطناعي مستقبلاً بتقديم توصيات استباقية قبل تفاقم أي اختلال.",
+        icon: "pi-chart-line",
+        accentColor: "#3b82f6",
+        image: "/demo-caps/real_dashboard.png",
+        stats: { type: 'pulse', value: 99.8, label: "دقة", color: "#3b82f6", unit: "%" },
+      },
+      {
+        id: "freya-orgchart",
+        label: "الهيكلة و التدفق الوظيفي (OrgChart)",
+        detail: "خريطة تنظيمية ديناميكية تسمح بتتبع ومراجعة العمليات بدقة متناهية.",
+        script: "عند تصفحنا لشجرة ההיﻜلة والعمليات، والنقر على مسارات 'العمليات' أو Processus كما ترون في الصورة، نكشف الطبقات الخفية للعمل لنحدد بدقة متناهية مكان التعطّل ونوجه التدخل.",
+        icon: "pi-sitemap",
+        accentColor: "#8b5cf6",
+        image: "/demo-caps/real_orgchart.png",
+        stats: { type: 'donut', value: 100, label: "شفافية", color: "#8b5cf6", unit: "%" }
+      },
+      {
+        id: "freya-map",
+        label: "الخارطة الجغرافية والمسافات",
+        detail: "ربط شبكي متطور لدعم قرارات النقل والإسعاف باستخدام الخوارزميات.",
+        script: "أخيراً، خارطة تونس التفاعلية. لن تقتصر على احتساب المسافات، بل ستُمكّن الوكيل الذكي مستقبلا من التخطيط اللوجستي الآلي لعمليات النقل بين الوحدات السجنية بأمان وسرعة.",
+        icon: "pi-map-marker",
+        accentColor: "#ef4444",
+        image: "/demo-caps/real_distance.png",
+        stats: { type: 'bar', values: [50, 70, 90, 100], label: "استجابة", color: "#ef4444" }
+      }
+    ]
+  },
+  {
+    id: "freya-agents",
+    title: "التقارير و الذكاء المستقل",
+    subtitle: "إدارة التقييم و التتبع الآلي",
+    chapter: "المرحلة // 07",
+    gradient: "from-[#10b981]/10 via-transparent to-[#f59e0b]/5",
+    introScript: "الآن ندخل في قلب العملية التقييمية. كيف تستغل 'منصة ' هذه المعلومات وكيف سيمكّننا وكيل الذكاء الاصطناعي (AI Agent) من مراقبة وتصحيح المسار بشكل مستقل.",
+    points: [
+      {
+        id: "freya-report",
+        label: "تقارير المهمات الآلية",
+        detail: "توثيق آلي لنتائج التفقد وتوليد تقارير شاملة بدون تدخل بشري محتمل الخطأ.",
+        script: "نشاهد أمامنا شاشة تقارير المهمات (Mission 45). في هذا المستوى، يقوم النظام بتوثيق كافة نتائج التقصي آليا. الوكيل الذكي سيتمكن من صياغة وتلخيص المخالفات قانونيا في ثوانٍ معدودة.",
+        icon: "pi-file-pdf",
+        accentColor: "#f59e0b",
+        image: "/demo-caps/real_report.png",
+        stats: { type: 'donut', value: 95, label: "توثيق", color: "#f59e0b", unit: "%" },
+      },
+      {
+        id: "freya-suivi",
+        label: "تتبع الإخلالات (Suivi Critiques)",
+        detail: "رصد وتتبع للإخلالات المدرجة بالتقارير بمقاييس خطورة واضحة.",
+        script: "هذه الصورة تبين جدول التتبع. بفضل الذكاء الاصطناعي الاستقلالي، لن يتم نسيان أي إخلال صحي أو أمني. الوكيل سيتابع بشكل حثيث مدى تصحيح الأخطاء من قبل مديري الوحدات عبر إشعارات دورية.",
+        icon: "pi-exclamation-triangle",
+        accentColor: "#ef4444",
+        image: "/demo-caps/real_suivi.png",
+        stats: { type: 'pulse', value: 24, label: "رقابة", color: "#ef4444", unit: "h" }
+      },
+      {
+        id: "freya-eval",
+        label: "لوحة التقييم المطلق",
+        detail: "تجسيد رقمي لمنظومة Canvas لحساب معدل الأمان و الامتثال.",
+        script: "نختتم بلوحة التقييم النهائي. هنا تتوج العملية! النظام يترجم كافة الأسئلة إلى معدلات مئوية دقيقة لكل السجون التونسية، ليصبح الذكاء الاصطناعي القاضي الموضوعي والحيادي الأول في تحسين المنظومة.",
+        icon: "pi-verified",
+        accentColor: "#10b981",
+        image: "/demo-caps/real_eval.png",
+        stats: { type: 'bar', values: [75, 80, 92, 98], label: "تطور", color: "#10b981" }
+      }
+    ]
+  },
+  {
+    id: "conclusion",
+    title: "الخاتمة والتوصيات",
+    subtitle: "نحو مستقبل إصلاحي رقمي",
+    chapter: "الخلاصة // 08",
+    gradient: "from-[#3b82f6]/10 via-transparent to-[#10b981]/5",
+    introScript: "في ختام عرضنا، نؤكد أن مشروع التقييم الوظيفي الموحد ليس مجرد إجراء تقني، بل هو تحول جذري في عقلية الإدارة لضمان أقصى درجات النجاعة والامتثال.",
+    points: [
+      {
+        id: "conc1", label: "أثر التحول الرقمي", detail: "تحويل البيانات إلى أصول استراتيجية تدعم القيادة.", script: "إن الرقمنة الشاملة حولت البيانات من مجرد سجلات ورقية إلى أصول استراتيجية حية، تمنح القيادة القدرة على استباق المخاطر قبل وقوعها.", icon: "pi-chart-line", accentColor: "#3b82f6", stats: { type: 'donut', value: 100, label: "رقمنة", color: "#3b82f6", unit: "%" }
+      },
+      {
+        id: "conc2", label: "الاستدامة والامتثال", detail: "خلق ثقافة التقييم المستمر كمعيار للجودة.", script: "نهدف إلى جعل التقييم ثقافة مؤسسية مستدامة، حيث يصبح الامتثال للمعايير الوطنية والدولية هو المحرك الأساسي لترقية الأداء وتطوير الكفاءات.", icon: "pi-shield", accentColor: "#10b981", stats: { type: 'pulse', value: 98, label: "امتثال", color: "#10b981", unit: "%" }
+      }
+    ]
+  },
+  {
+    id: "final-greetings",
+    title: "شكر وتقدير",
+    subtitle: "معاً نبني منظومة الغد",
+    chapter: "تحية // 09",
+    gradient: "from-[#f59e0b]/10 via-transparent to-[#ef4444]/5",
+    introScript: "شكراً جزيلاً على ثقتكم الغالية وسعة صدركم. نحن هنا لنرتقي بالعمل، ونجعل من تونس رائدة في مجال التقييم والإصلاح الرقمي.",
+    points: [
+      {
+        id: "greet1", label: "فريق العمل", detail: "تقدير لجهود كافة الوحدات السجنية في الميدان.", script: "نتوجه بجزيل الشكر لكل من ساهم في إنجاح هذا المسار الرقمي من أعوان وإطارات بجميع الوحدات السجنية على انضباطهم وتفانيهم.", icon: "pi-users", accentColor: "#f59e0b"
+      },
+      {
+        id: "greet2", label: "التواصل والدعم", detail: "  دائما في خدمتكم للدعم والتدريب.", script: "منصتكم الذكية  دائماً في خدمتكم للمتابعة والدعم التقني، لضمان استمرارية هذا المشروع ونجاحه المستدام. شكراً لكم.", icon: "pi-comments", accentColor: "#ef4444"
       }
     ]
   }
@@ -448,6 +599,66 @@ const ProgressTimeline = ({
   );
 };
 
+const FullscreenImageOverlay = ({ image, accentColor, label }: { image?: string; accentColor: string; label: string }) => {
+  if (!image) return null;
+  return (
+    <AnimatePresence>
+      <motion.div
+        key={image}
+        initial={{ opacity: 0, scale: 1.1, filter: 'blur(20px)' }}
+        animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+        exit={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
+        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+        className="fixed inset-0 z-[45] flex items-center justify-center p-8 lg:p-12 lg:pl-[25%]"
+        style={{ background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(10px)' }}
+      >
+        {/* Background Ambient Glow */}
+        <div className="absolute inset-0 pointer-events-none opacity-20" style={{ background: `radial-gradient(circle at center, ${accentColor}22 0%, transparent 70%)` }} />
+
+        {/* Massive Image Container */}
+        <div className="relative w-full h-full max-w-[85vw] max-h-[85vh] rounded-[2rem] border-2 overflow-hidden shadow-[0_0_100px_rgba(0,0,0,0.7)]" style={{ borderColor: `${accentColor}66` }}>
+          <div className="absolute inset-0 pointer-events-none z-10" style={{ background: `linear-gradient(to bottom, transparent 60%, ${accentColor}11)` }} />
+
+          {/* Scanline effect */}
+          <motion.div
+            className="absolute inset-0 pointer-events-none z-20 opacity-10"
+            style={{ background: `repeating-linear-gradient(0deg, transparent, transparent 2px, ${accentColor} 3px)` }}
+          />
+
+          <motion.img
+            src={image}
+            alt={label}
+            className="w-full h-full object-cover object-top"
+            initial={{ scale: 1.05 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 10, repeat: Infinity, repeatType: 'reverse', ease: 'linear' }}
+          />
+
+          {/* Label Tag */}
+          <div className="absolute bottom-10 left-10 z-30 px-6 py-3 rounded-2xl border bg-black/80 backdrop-blur-md" style={{ borderColor: accentColor }}>
+            <span className="text-xs font-mono font-black uppercase tracking-[0.5em] text-white brightness-125" style={{ textShadow: `0 0 10px ${accentColor}` }}>
+              {label} // VIEW_MODE: ACTIVE
+            </span>
+          </div>
+        </div>
+
+        {/* Decorative Sci-fi Corners */}
+        {['top-10 left-10', 'top-10 right-10', 'bottom-10 left-10', 'bottom-10 right-10'].map((pos, i) => (
+          <div key={i} className={`absolute ${pos} w-20 h-20 pointer-events-none`}
+            style={{
+              borderTop: i < 2 ? `4px solid ${accentColor}` : 'none',
+              borderBottom: i >= 2 ? `4px solid ${accentColor}` : 'none',
+              borderLeft: i % 2 === 0 ? `4px solid ${accentColor}` : 'none',
+              borderRight: i % 2 === 1 ? `4px solid ${accentColor}` : 'none',
+              opacity: 0.5
+            }}
+          />
+        ))}
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
 // ─── STAT HUD CARD ────────────────────────────────────────────────────────────
 
 const StatHudCard = ({ point }: { point: Point }) => {
@@ -509,6 +720,7 @@ const PointCard = ({ point, isCurrent, idx }: { point: Point; isCurrent: boolean
   <motion.div
     layout
     key={point.id}
+    id={isCurrent ? "active-presentation-target" : undefined}
     initial={{ opacity: 0, y: 60, scale: 0.85 }}
     animate={{
       opacity: isCurrent ? 1 : Math.max(0, 0.35 - idx * 0.12),
@@ -569,7 +781,7 @@ const PointCard = ({ point, isCurrent, idx }: { point: Point; isCurrent: boolean
           )}
         </AnimatePresence>
         <h4
-          className="text-xl lg:text-3xl font-black tracking-tight leading-tight portrait:max-lg:text-lg"
+          className="laser-target text-xl lg:text-5xl font-black tracking-tight leading-tight portrait:max-lg:text-lg"
           style={{
             color: isCurrent ? '#fff' : 'rgba(255,255,255,0.15)',
             textShadow: isCurrent ? `0 0 30px ${point.accentColor}44` : 'none',
@@ -583,7 +795,7 @@ const PointCard = ({ point, isCurrent, idx }: { point: Point; isCurrent: boolean
             animate={{ opacity: 1, y: 0, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ delay: 0.2, type: 'spring', stiffness: 200, damping: 20 }}
-            className="mt-4 rounded-2xl border p-4 relative overflow-hidden group portrait:max-lg:mt-3 portrait:max-lg:p-3"
+            className={`mt-4 rounded-2xl border p-4 relative overflow-hidden group portrait:max-lg:mt-3 portrait:max-lg:p-3 ${point.image ? 'w-full' : ''}`}
             style={{
               background: `linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2))`,
               borderColor: `${point.accentColor}33`,
@@ -603,7 +815,7 @@ const PointCard = ({ point, isCurrent, idx }: { point: Point; isCurrent: boolean
                 style={{ backgroundColor: point.accentColor, boxShadow: `0 0 8px ${point.accentColor}` }}
               />
               <div className="flex-1">
-                <p className="text-sm font-inter text-white/80 leading-relaxed portrait:max-lg:text-[10px] portrait:max-lg:leading-relaxed">
+                <p className="laser-target text-sm font-inter text-white/80 leading-relaxed portrait:max-lg:text-[10px] portrait:max-lg:leading-relaxed">
                   {point.detail}
                 </p>
 
@@ -624,7 +836,7 @@ const PointCard = ({ point, isCurrent, idx }: { point: Point; isCurrent: boolean
                           hidden: { opacity: 0, y: 15, scale: 0.95 },
                           visible: { opacity: 1, y: 0, scale: 1, transition: { type: 'spring', stiffness: 200, damping: 15 } }
                         }}
-                        className="flex items-center gap-3 bg-[rgba(255,255,255,0.03)] hover:bg-[rgba(255,255,255,0.07)] transition-colors rounded-xl p-3 border border-white/5 relative overflow-hidden group"
+                        className="laser-target flex items-center gap-3 bg-[rgba(255,255,255,0.03)] hover:bg-[rgba(255,255,255,0.07)] transition-colors rounded-xl p-3 border border-white/5 relative overflow-hidden group"
                         style={{ borderBottom: `1px solid ${sp.color || point.accentColor}33` }}
                       >
                         <div className="absolute inset-y-0 left-0 w-0.5" style={{ backgroundColor: sp.color || point.accentColor }} />
@@ -700,7 +912,7 @@ const SlideHeader = ({ slide, slideIndex }: { slide: Slide; slideIndex: number }
       >
         {slide.chapter}
       </motion.span>
-      <h2 className="text-2xl lg:text-4xl font-sans font-black tracking-tight leading-none mb-3 py-1 whitespace-nowrap overflow-hidden portrait:max-lg:whitespace-normal portrait:max-lg:text-xl portrait:max-lg:mb-2">
+      <h2 className="text-2xl lg:text-6xl font-sans font-black tracking-tight leading-none mb-3 py-1 whitespace-nowrap overflow-hidden portrait:max-lg:whitespace-normal portrait:max-lg:text-xl portrait:max-lg:mb-2">
         <motion.span
           className="inline-block text-white"
           initial={{ y: '100%', opacity: 0 }}
@@ -809,6 +1021,127 @@ const OutroScreen = () => (
     </div>
   </motion.div>
 );
+
+// ─── VIRTUAL LASER POINTER ───────────────────────────────────────────────────
+
+const VirtualLaserPointer = ({ pointIndex, isAutoplaying }: { pointIndex: number, isAutoplaying: boolean }) => {
+  const [pos, setPos] = useState({ x: -100, y: -100, opacity: 0 });
+
+  useEffect(() => {
+    let active = true;
+    let targetIndex = 0;
+
+    // When point changes, we instantly reset reading position to top
+    targetIndex = 0;
+
+    const updatePos = () => {
+      if (!active) return;
+
+      const dynamicTargets = Array.from(document.querySelectorAll('.laser-target'));
+
+      if (dynamicTargets && dynamicTargets.length > 0) {
+        // Cycle through sub-targets if autoplaying. If restricted (not speaking), stay on main target (title)
+        const currentTargetIndex = isAutoplaying ? (targetIndex % dynamicTargets.length) : 0;
+        const el = dynamicTargets[currentTargetIndex];
+
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          // Point dynamically to right hand side of the block, slightly randomized to feel human
+          const humanOffsetX = Math.random() * 20 - 10;
+          const humanOffsetY = Math.random() * 10 - 5;
+
+          setPos({
+            x: rect.right - 20 + humanOffsetX,
+            y: rect.top + rect.height / 2 + humanOffsetY,
+            opacity: 1
+          });
+        }
+
+        // Progress reading only if actively speaking/autoplaying
+        if (isAutoplaying && targetIndex < dynamicTargets.length - 1) {
+          targetIndex++;
+        }
+      } else {
+        const el = document.getElementById('active-presentation-target');
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          setPos({
+            x: rect.right - 80,
+            y: rect.top + rect.height / 2,
+            opacity: 1
+          });
+        } else {
+          setPos(p => ({ ...p, opacity: 0 }));
+        }
+      }
+    };
+
+    // Calculate intelligent pacing
+    // Slower pacing when reading long texts, or static fallback
+    const interval = setInterval(updatePos, isAutoplaying ? 4000 : 2000);
+
+    // Initial placement instantly handles coordinate rendering
+    setTimeout(updatePos, 150);
+    setTimeout(updatePos, 600); // Secondary snap
+
+    window.addEventListener('resize', updatePos);
+    return () => { active = false; clearInterval(interval); window.removeEventListener('resize', updatePos); };
+  }, [pointIndex, isAutoplaying]);
+
+  return (
+    <div className="fixed inset-0 pointer-events-none z-[9999] overflow-hidden">
+      <motion.div
+        className="absolute top-0 left-0 pointer-events-none flex items-center justify-center mix-blend-screen"
+        animate={{ x: pos.x, y: pos.y, opacity: pos.opacity }}
+        transition={{ type: "spring", stiffness: 60, damping: 15 }}
+      >
+        {/* Glow effect at contact point */}
+        <motion.div
+          className="absolute rounded-full border border-[#00e5ff] bg-[#00e5ff]/20"
+          animate={{ scale: [0.5, 2.5], opacity: [1, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5, ease: "easeOut" }}
+          style={{ width: 50, height: 50, transform: 'translate(-50%, -50%)' }}
+        />
+        {/* Contact laser dot */}
+        <div className="absolute w-3 h-3 bg-white rounded-full shadow-[0_0_20px_#00e5ff,0_0_40px_#00e5ff]" style={{ transform: 'translate(-50%, -50%)' }} />
+
+        {/* ── THE SCI-FI PRESENTATION STICK (عصا العرض) ── */}
+        <motion.div
+          className="absolute top-0 left-0 pointer-events-none"
+          style={{ transformOrigin: "0 0" }}
+          animate={{ rotate: [-30, -36, -30] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        >
+          {/* Inner white-hot laser core */}
+          <div className="w-[3px] h-[150px] bg-gradient-to-b from-white via-[#00e5ff] to-transparent shadow-[0_0_15px_#00e5ff] absolute top-2 left-[-1.5px] rounded-full" />
+
+          {/* Outer metallic/glass wand body extending downwards */}
+          <div className="absolute top-[40px] left-[-4px] w-[8px] h-[350px] bg-gradient-to-b from-gray-700 via-gray-900 to-transparent border-x border-[#00e5ff]/40 rounded-t-full shadow-[0_0_30px_rgba(0,229,255,0.15)] opacity-90 overflow-hidden">
+
+            {/* LED Grip Rings down the wand */}
+            <motion.div
+              className="w-full h-[6px] bg-[#00e5ff] mt-6 shadow-[0_0_15px_#00e5ff]"
+              animate={{ opacity: [0.6, 1, 0.6] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+            <div className="w-full h-[2px] bg-[#00ffaa] mt-12 opacity-50" />
+            <div className="w-full h-[2px] bg-[#00e5ff] mt-2 opacity-30" />
+            <div className="w-full h-[2px] bg-[#00e5ff] mt-2 opacity-30" />
+            <div className="w-full h-[2px] bg-[#00e5ff] mt-2 opacity-30" />
+
+            {/* Internal wand power pulse */}
+            <motion.div
+              className="w-full h-[40px] bg-gradient-to-b from-transparent via-[#00e5ff]/50 to-transparent"
+              animate={{ y: [-40, 350] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
+            />
+          </div>
+        </motion.div>
+      </motion.div>
+    </div>
+  );
+};
+
 
 // ─── CONTROL BAR ─────────────────────────────────────────────────────────────
 
@@ -927,7 +1260,7 @@ const SpeechTicker = ({ text, active }: { text: string; active: boolean }) => {
               animate={{ opacity: [1, 0.3, 1] }}
               transition={{ duration: 0.9, repeat: Infinity }}
             />
-            <span className="text-[8px] font-mono font-black uppercase tracking-[0.4em] text-primary whitespace-nowrap">VERA LIVE</span>
+            <span className="text-[8px] font-mono font-black uppercase tracking-[0.4em] text-primary whitespace-nowrap">LIVE</span>
           </div>
 
           {/* Scrolling text */}
@@ -1009,7 +1342,7 @@ const SlideWaitingArt = ({ slide }: { slide: Slide }) => {
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       className="w-full relative rounded-3xl overflow-hidden flex flex-col items-center justify-center my-4 portrait:max-lg:my-2"
       style={{
-        minHeight: '280px',
+        minHeight: '500px',
         background: 'rgba(0,0,0,0.4)',
         border: `1px solid ${accent}22`,
         boxShadow: `0 0 80px ${accent}18, inset 0 0 60px rgba(0,0,0,0.6)`,
@@ -1078,10 +1411,10 @@ const SlideWaitingArt = ({ slide }: { slide: Slide }) => {
         </motion.div>
 
         <div>
-          <h3 className="text-white font-black text-xl lg:text-2xl tracking-tight leading-tight mb-1 portrait:max-lg:text-lg">
+          <h3 className="text-white font-black text-2xl lg:text-5xl tracking-tight leading-tight mb-1 portrait:max-lg:text-lg">
             {slide.title}
           </h3>
-          <p className="text-[11px] font-mono uppercase tracking-[0.35em] mt-2" style={{ color: `${accent}cc` }}>
+          <p className="text-[14px] font-mono uppercase tracking-[0.35em] mt-2" style={{ color: `${accent}cc` }}>
             {slide.subtitle}
           </p>
         </div>
@@ -1134,13 +1467,13 @@ const ProcessGraph = ({ revealedCount }: { revealedCount: number }) => (
                   scale: isCurrent ? 1.2 : 1,
                 }}
                 transition={{ duration: 0.5 }}
-                className="w-12 h-12 rounded-2xl flex items-center justify-center border"
+                className="w-20 h-20 rounded-2xl flex items-center justify-center border"
               >
-                <i className={`pi ${step.icon} text-base`} style={{ color: active ? step.color : 'rgba(255,255,255,0.15)' }} />
+                <i className={`pi ${step.icon} text-2xl`} style={{ color: active ? step.color : 'rgba(255,255,255,0.15)' }} />
               </motion.div>
               <motion.span
                 animate={{ opacity: active ? 1 : 0.2, color: active ? step.color : '#fff' }}
-                className="text-[8px] font-mono uppercase tracking-widest whitespace-nowrap"
+                className="text-[11px] font-mono uppercase tracking-widest whitespace-nowrap"
               >
                 {step.label}
               </motion.span>
@@ -1197,10 +1530,10 @@ const ProcessGraph = ({ revealedCount }: { revealedCount: number }) => (
 );
 // ─── TUNISIA MAP EMBED DIAGRAM (SLIDE 1) ────────────────────────────────────────
 
-const TunisiaMapLeaflet = dynamic(() => import('@/components/DynamicTunisiaMap'), { 
-  ssr: false, 
+const TunisiaMapLeaflet = dynamic(() => import('@/components/DynamicTunisiaMap'), {
+  ssr: false,
   loading: () => (
-    <div className="w-full mt-4 h-[400px] rounded-2xl flex items-center justify-center border border-white/10 text-[#00e5ff] bg-black font-mono tracking-widest opacity-70">
+    <div className="w-full mt-4 h-[650px] rounded-2xl flex items-center justify-center border border-white/10 text-[#00e5ff] bg-black font-mono tracking-widest opacity-70">
       <div className="flex flex-col items-center gap-4">
         <motion.div animate={{ rotate: 360 }} transition={{ duration: 2, repeat: Infinity, ease: 'linear' }} className="w-8 h-8 rounded-full border-2 border-t-[#00e5ff] border-r-[#00e5ff] border-b-transparent border-l-transparent" />
         <span>INITIALIZING SATELLITE MAP...</span>
@@ -1213,23 +1546,23 @@ const TunisiaMapLeaflet = dynamic(() => import('@/components/DynamicTunisiaMap')
 
 const OrbitalCanvasDiagram = ({ slide, currentPointIndex }: { slide: any; currentPointIndex: number }) => {
   const points = slide.points;
-  const radius = 130;
+  const radius = 220;
 
   const activePoint = currentPointIndex > -1 ? points[currentPointIndex] : null;
 
   return (
     <div className="w-full relative flex flex-col items-center justify-start mt-2">
-      <div className="relative w-[300px] h-[300px] flex items-center justify-center portrait:max-lg:w-[240px] portrait:max-lg:h-[240px] z-10">
+      <div className="relative w-[600px] h-[600px] flex items-center justify-center portrait:max-lg:w-[240px] portrait:max-lg:h-[240px] z-10">
 
         {/* Connection Lines SVG */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible">
           {points.map((pt: any, i: number) => {
             const angle = (i * (360 / points.length)) - 90;
             const rad = (angle * Math.PI) / 180;
-            const currentRadius = 130;
+            const currentRadius = 220;
 
-            const startX = 150;
-            const startY = 150;
+            const startX = 300;
+            const startY = 300;
 
             const endX = startX + Math.cos(rad) * currentRadius;
             const endY = startY + Math.sin(rad) * currentRadius;
@@ -1284,6 +1617,7 @@ const OrbitalCanvasDiagram = ({ slide, currentPointIndex }: { slide: any; curren
           return (
             <motion.div
               key={pt.id}
+              id={isActive ? "active-presentation-target" : undefined}
               initial={{ opacity: 0, scale: 0 }}
               animate={{
                 opacity: isRevealed ? 1 : 0.2,
@@ -1317,7 +1651,7 @@ const OrbitalCanvasDiagram = ({ slide, currentPointIndex }: { slide: any; curren
       </div>
 
       {/* Detail Card Overlay below graph */}
-      <div className="w-full max-w-lg mt-8 z-40">
+      <div className="w-full max-w-4xl mt-8 z-40">
         <AnimatePresence mode="wait">
           {activePoint && (
             <motion.div
@@ -1370,6 +1704,271 @@ const OrbitalCanvasDiagram = ({ slide, currentPointIndex }: { slide: any; curren
           )}
         </AnimatePresence>
       </div>
+    </div>
+  );
+};
+
+// ─── ORG CHART DIAGRAM (SLIDE orgchart) ──────────────────────────────────────
+
+type OrgNode = {
+  label: string;
+  icon: string;
+  color: string;
+  role: string;
+  pointIdx: number;
+  children?: OrgNode[];
+};
+
+const ORG_TREE: OrgNode = {
+  label: "القيادة العليا والمتابعة",
+  icon: "pi-crown",
+  color: "#a855f7",
+  role: "Decision Maker",
+  pointIdx: 2,
+  children: [
+    {
+      label: "منصة Canvas المركزية",
+      icon: "pi-server",
+      color: "#00e5ff",
+      role: "AI Analysis Hub",
+      pointIdx: 1,
+      children: [
+        {
+          label: "لجان الرصد — الشمال",
+          icon: "pi-map-marker",
+          color: "#00ffaa",
+          role: "Field Team",
+          pointIdx: 0,
+        },
+        {
+          label: "لجان الرصد — الوسط",
+          icon: "pi-map-marker",
+          color: "#00ffaa",
+          role: "Field Team",
+          pointIdx: 0,
+        },
+        {
+          label: "لجان الرصد — الجنوب",
+          icon: "pi-map-marker",
+          color: "#00ffaa",
+          role: "Field Team",
+          pointIdx: 0,
+        },
+      ]
+    }
+  ]
+};
+
+const OrgNodeCard = ({ node, depth, currentPointIndex }: { node: OrgNode; depth: number; currentPointIndex: number }) => {
+  const isActive = currentPointIndex === node.pointIdx;
+  const isRevealed = currentPointIndex >= node.pointIdx;
+
+  return (
+    <motion.div
+      id={isActive && depth === 0 ? "active-presentation-target" : undefined}
+      initial={{ opacity: 0, scale: 0.7 }}
+      animate={{
+        opacity: isRevealed ? 1 : 0.2,
+        scale: isActive ? 1.08 : 1,
+      }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      className={`relative flex flex-col items-center gap-1 px-3 py-3 rounded-2xl border backdrop-blur-xl ${isActive ? 'laser-target' : ''}`}
+      style={{
+        borderColor: isActive ? node.color : 'rgba(255,255,255,0.1)',
+        background: isActive ? `${node.color}20` : 'rgba(5,5,15,0.75)',
+        boxShadow: isActive ? `0 0 30px ${node.color}55, inset 0 0 15px ${node.color}18` : '0 4px 20px rgba(0,0,0,0.5)',
+        minWidth: depth === 0 ? 160 : 110,
+        maxWidth: depth === 0 ? 200 : 140,
+      }}
+    >
+      {/* Active pulse ring */}
+      {isActive && (
+        <motion.div
+          className="absolute inset-0 rounded-2xl border"
+          style={{ borderColor: node.color }}
+          animate={{ opacity: [0.8, 0, 0.8], scale: [1, 1.06, 1] }}
+          transition={{ duration: 1.8, repeat: Infinity }}
+        />
+      )}
+      <div className="w-10 h-10 rounded-xl flex items-center justify-center border" style={{ backgroundColor: `${node.color}22`, borderColor: `${node.color}55` }}>
+        <motion.i
+          className={`pi ${node.icon} text-lg`}
+          style={{ color: isActive ? '#fff' : node.color }}
+          animate={{ scale: isActive ? [1, 1.15, 1] : 1 }}
+          transition={{ duration: 2, repeat: Infinity }}
+        />
+      </div>
+      <span className="text-[9px] font-mono uppercase tracking-widest opacity-60" style={{ color: node.color }}>{node.role}</span>
+      <h4 className="text-white font-bold text-[11px] text-center leading-tight">{node.label}</h4>
+    </motion.div>
+  );
+};
+
+const OrgChartDiagram = ({ slide, currentPointIndex }: { slide: any; currentPointIndex: number }) => {
+  const root = ORG_TREE;
+  const child = root.children![0];
+  const leaves = child.children!;
+
+  const isLeafRevealed = currentPointIndex >= 0;
+  const isMiddleRevealed = currentPointIndex >= 1;
+  const isRootRevealed = currentPointIndex >= 2;
+
+  const OBJECTIVES = [
+    { icon: "pi-chart-line", label: "تقييم موحد وطني", color: "#00ffaa" },
+    { icon: "pi-shield", label: "تعزيز الامتثال", color: "#00e5ff" },
+    { icon: "pi-lightbulb", label: "قرارات استباقية", color: "#a855f7" },
+    { icon: "pi-sync", label: "تحسين مستمر", color: "#f59e0b" },
+  ];
+
+  return (
+    <div className="w-full flex-1 flex flex-col items-center justify-center gap-6 mt-4 select-none overflow-hidden">
+
+      {/* ── HORIZONTAL ORG CHART ── */}
+      <div className="w-full flex items-center justify-center gap-0 px-2" dir="ltr">
+
+        {/* LAYER 1 ── Field Teams (3 stacked) */}
+        <motion.div
+          className="flex flex-col gap-3"
+          animate={{ opacity: isLeafRevealed ? 1 : 0.2 }}
+        >
+          {leaves.map((leaf, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: isLeafRevealed ? 1 : 0.2, x: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className={`flex items-center gap-2 px-3 py-2 rounded-xl border backdrop-blur-xl relative ${isLeafRevealed && currentPointIndex === 0 ? 'laser-target' : ''}`}
+              style={{
+                borderColor: isLeafRevealed ? '#00ffaa44' : 'rgba(255,255,255,0.06)',
+                background: isLeafRevealed && currentPointIndex === 0 ? '#00ffaa18' : 'rgba(5,5,15,0.7)',
+                boxShadow: isLeafRevealed && currentPointIndex === 0 ? '0 0 20px #00ffaa33' : 'none',
+                minWidth: 160,
+              }}
+            >
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: '#00ffaa22', border: '1px solid #00ffaa44' }}>
+                <i className="pi pi-map-marker text-sm" style={{ color: '#00ffaa' }} />
+              </div>
+              <div>
+                <div className="text-[10px] font-mono text-white/40 uppercase tracking-widest">Field Team</div>
+                <div className="text-white text-[12px] font-bold">{leaf.label}</div>
+              </div>
+              {isLeafRevealed && currentPointIndex === 0 && (
+                <motion.div className="absolute inset-0 rounded-xl border border-[#00ffaa]/40" animate={{ opacity: [1, 0, 1] }} transition={{ duration: 1.5, repeat: Infinity }} />
+              )}
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* CONNECTOR: fields → canvas */}
+        <div className="relative flex items-center" style={{ width: 100, height: 120 }}>
+          <div className="absolute left-0 right-0 top-1/2 h-[2px]" style={{ background: isLeafRevealed ? 'linear-gradient(to right, #00ffaa, #00e5ff)' : 'rgba(255,255,255,0.08)' }} />
+          {isLeafRevealed && (
+            <motion.div
+              className="absolute w-2.5 h-2.5 rounded-full top-1/2 -translate-y-1/2"
+              style={{ backgroundColor: '#00ffaa', boxShadow: '0 0 12px #00ffaa', left: 0 }}
+              animate={{ left: ['0%', '100%'], opacity: [1, 0] }}
+              transition={{ duration: 1.2, repeat: Infinity, ease: 'linear' }}
+            />
+          )}
+          <i className="pi pi-arrow-right absolute right-0 text-xs" style={{ color: isLeafRevealed ? '#00e5ff' : 'rgba(255,255,255,0.2)' }} />
+        </div>
+
+        {/* LAYER 2 ── Canvas Platform */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: isMiddleRevealed ? 1 : 0.2, scale: isMiddleRevealed && currentPointIndex === 1 ? 1.08 : 1 }}
+          transition={{ duration: 0.5 }}
+          className={`flex flex-col items-center gap-2 px-4 py-4 rounded-2xl border backdrop-blur-xl relative ${isMiddleRevealed && currentPointIndex === 1 ? 'laser-target' : ''}`}
+          id={currentPointIndex === 1 ? "active-presentation-target" : undefined}
+          style={{
+            borderColor: currentPointIndex === 1 ? '#00e5ff' : 'rgba(255,255,255,0.1)',
+            background: currentPointIndex === 1 ? '#00e5ff18' : 'rgba(5,5,15,0.8)',
+            boxShadow: currentPointIndex === 1 ? '0 0 40px #00e5ff44' : '0 8px 24px rgba(0,0,0,0.5)',
+            minWidth: 180,
+            padding: '1.5rem',
+          }}
+        >
+          {currentPointIndex === 1 && <motion.div className="absolute inset-0 rounded-2xl border border-[#00e5ff]/40" animate={{ opacity: [0.8, 0, 0.8], scale: [1, 1.04, 1] }} transition={{ duration: 1.8, repeat: Infinity }} />}
+          <div className="w-16 h-16 rounded-xl flex items-center justify-center border" style={{ backgroundColor: '#00e5ff22', borderColor: '#00e5ff55' }}>
+            <motion.i className="pi pi-server text-2xl" style={{ color: '#00e5ff' }} animate={{ scale: currentPointIndex === 1 ? [1, 1.2, 1] : 1 }} transition={{ duration: 2, repeat: Infinity }} />
+          </div>
+          <div className="text-[10px] font-mono text-[#00e5ff]/60 uppercase tracking-widest">AI Hub</div>
+          <div className="text-white text-[14px] font-bold text-center">المنصة الذكية</div>
+        </motion.div>
+
+        {/* CONNECTOR: canvas → leadership */}
+        <div className="relative flex items-center" style={{ width: 100, height: 80 }}>
+          <div className="absolute left-0 right-0 top-1/2 h-[2px]" style={{ background: isMiddleRevealed ? 'linear-gradient(to right, #00e5ff, #a855f7)' : 'rgba(255,255,255,0.08)' }} />
+          {isMiddleRevealed && (
+            <motion.div
+              className="absolute w-2.5 h-2.5 rounded-full top-1/2 -translate-y-1/2"
+              style={{ backgroundColor: '#00e5ff', boxShadow: '0 0 12px #00e5ff', left: 0 }}
+              animate={{ left: ['0%', '100%'], opacity: [1, 0] }}
+              transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+            />
+          )}
+          <i className="pi pi-arrow-right absolute right-0 text-xs" style={{ color: isMiddleRevealed ? '#a855f7' : 'rgba(255,255,255,0.2)' }} />
+        </div>
+
+        {/* LAYER 3 ── Leadership */}
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: isRootRevealed ? 1 : 0.2, scale: isRootRevealed && currentPointIndex === 2 ? 1.08 : 1 }}
+          transition={{ duration: 0.5 }}
+          className={`flex flex-col items-center gap-2 px-4 py-4 rounded-2xl border backdrop-blur-xl relative ${isRootRevealed && currentPointIndex === 2 ? 'laser-target' : ''}`}
+          id={currentPointIndex === 2 ? "active-presentation-target" : undefined}
+          style={{
+            borderColor: currentPointIndex === 2 ? '#a855f7' : 'rgba(255,255,255,0.1)',
+            background: currentPointIndex === 2 ? '#a855f718' : 'rgba(5,5,15,0.8)',
+            boxShadow: currentPointIndex === 2 ? '0 0 40px #a855f744' : '0 8px 24px rgba(0,0,0,0.5)',
+            minWidth: 180,
+            padding: '1.5rem',
+          }}
+        >
+          {currentPointIndex === 2 && <motion.div className="absolute inset-0 rounded-2xl border border-[#a855f7]/40" animate={{ opacity: [0.8, 0, 0.8], scale: [1, 1.04, 1] }} transition={{ duration: 1.8, repeat: Infinity }} />}
+          <div className="w-16 h-16 rounded-xl flex items-center justify-center border" style={{ backgroundColor: '#a855f722', borderColor: '#a855f755' }}>
+            <motion.i className="pi pi-crown text-2xl" style={{ color: '#a855f7' }} animate={{ scale: currentPointIndex === 2 ? [1, 1.2, 1] : 1 }} transition={{ duration: 2, repeat: Infinity }} />
+          </div>
+          <div className="text-[10px] font-mono text-[#a855f7]/60 uppercase tracking-widest">Decision</div>
+          <div className="text-white text-[14px] font-bold text-center">القيادة العليا</div>
+        </motion.div>
+      </div>
+
+      {/* ── PROJECT OBJECTIVES (reveals when complete) ── */}
+      {isRootRevealed && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="w-full mt-2"
+        >
+          <div className="text-center mb-3">
+            <span className="text-[9px] font-mono uppercase tracking-[0.4em] text-white/30">// أهداف المشروع</span>
+          </div>
+          <div className="grid grid-cols-4 gap-2 portrait:max-lg:grid-cols-2 px-2">
+            {OBJECTIVES.map((obj, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 12, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ delay: 0.5 + i * 0.1 }}
+                className="laser-target flex flex-col items-center gap-2 px-3 py-3 rounded-xl border text-center"
+                style={{ borderColor: `${obj.color}33`, background: `${obj.color}0e`, boxShadow: `0 4px 16px ${obj.color}1a` }}
+              >
+                <motion.div
+                  className="w-8 h-8 rounded-lg flex items-center justify-center"
+                  style={{ backgroundColor: `${obj.color}22` }}
+                  animate={{ boxShadow: [`0 0 8px ${obj.color}44`, `0 0 20px ${obj.color}88`, `0 0 8px ${obj.color}44`] }}
+                  transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.3 }}
+                >
+                  <i className={`pi ${obj.icon} text-sm`} style={{ color: obj.color }} />
+                </motion.div>
+                <span className="text-[10px] font-bold text-white">{obj.label}</span>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      )}
     </div>
   );
 };
@@ -1539,6 +2138,13 @@ const Presentation = React.forwardRef<PresentationHandle, PresentationProps>(({ 
     <div className="flex-1 w-full h-full flex flex-col relative overflow-hidden" style={{ background: 'rgba(0,0,0,0.5)' }}>
       <BackgroundGrid />
 
+      {/* Fullscreen Image Overlay triggered by activePoint */}
+      <FullscreenImageOverlay
+        image={activePoint?.image}
+        accentColor={activePoint?.accentColor || '#00e5ff'}
+        label={activePoint?.label || ''}
+      />
+
       {/* Slide gradient wash */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -1561,7 +2167,7 @@ const Presentation = React.forwardRef<PresentationHandle, PresentationProps>(({ 
 
       {/* ─── BOOK CHAPTER NAV BANNER ─── */}
       <div
-        className="absolute top-0 left-0 right-0 z-50 flex items-stretch gap-0 overflow-x-auto justify-center portrait:max-lg:justify-start"
+        className="absolute top-0 left-0 right-0 z-50 flex items-stretch gap-0 overflow-x-auto justify-center portrait:max-lg:justify-start [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
         style={{
           background: 'linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 100%)',
           backdropFilter: 'blur(40px)',
@@ -1704,7 +2310,7 @@ const Presentation = React.forwardRef<PresentationHandle, PresentationProps>(({ 
 
       {/* Main content — Header | TorchLine | Content | TorchLine | Footer */}
       <div className="flex-1 flex flex-col items-center justify-start px-6 lg:px-20 pt-36 lg:pt-40 relative z-20 overflow-hidden portrait:max-lg:overflow-y-auto portrait:max-lg:pt-28 portrait:max-lg:px-4 portrait:max-lg:pb-4 fitness-scrollbar">
-        <div className="w-full max-w-3xl flex flex-col items-stretch flex-1">
+        <div className="w-full max-w-6xl flex flex-col items-stretch flex-1">
 
           {/* ── HEADER ZONE ── */}
           <AnimatePresence mode="wait">
@@ -1738,6 +2344,8 @@ const Presentation = React.forwardRef<PresentationHandle, PresentationProps>(({ 
                     <SlideWaitingArt key={`wait-${currentSlide.id}`} slide={currentSlide} />
                   ) : currentSlide.id === 'tunisia-map' ? (
                     <TunisiaMapLeaflet key="tunimap" currentPointIndex={currentPointIndex} />
+                  ) : currentSlide.id === 'orgchart' ? (
+                    <OrgChartDiagram key="orgchart" slide={currentSlide} currentPointIndex={currentPointIndex} />
                   ) : currentSlide.id === 'tech' ? (
                     <OrbitalCanvasDiagram key="orbital" slide={currentSlide} currentPointIndex={currentPointIndex} />
                   ) : (
@@ -1826,8 +2434,10 @@ const Presentation = React.forwardRef<PresentationHandle, PresentationProps>(({ 
         </div>
       </div>
 
+      <VirtualLaserPointer pointIndex={currentPointIndex} isAutoplaying={isAutoplaying} />
+
       {/* Controls Container */}
-      <div className="shrink-0 flex flex-col z-40 relative">
+      <div className="shrink-0 flex flex-col z-[100] relative">
         {/* Speech ticker — above control bar */}
         <SpeechTicker text={speakingText} active={isAutoplaying} />
 

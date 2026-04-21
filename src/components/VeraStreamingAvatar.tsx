@@ -14,8 +14,8 @@ export interface VeraStreamingAvatarHandle {
   terminateSession: () => Promise<void>;
 }
 
-export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, { 
-  children?: React.ReactNode, 
+export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, {
+  children?: React.ReactNode,
   onSpeakEnd?: () => void,
   hideFullscreenButton?: boolean,
   stayInContainer?: boolean
@@ -295,9 +295,9 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className={`${stayInContainer ? 'relative w-full h-full' : 'relative mx-auto group overflow-visible transition-all duration-1000'} ${isFullPage
-        ? (stayInContainer 
-            ? "absolute inset-0 z-[2000] mt-0 max-w-none flex items-center justify-center p-0 bg-background"
-            : "fixed inset-0 w-screen h-screen z-[2000] mt-0 max-w-none flex items-center justify-center p-0 bg-background")
+        ? (stayInContainer
+          ? "absolute inset-0 z-[2000] mt-0 max-w-none flex items-center justify-center p-0 bg-background"
+          : "fixed inset-0 w-screen h-screen z-[2000] mt-0 max-w-none flex items-center justify-center p-0 bg-background")
         : (stayInContainer ? "w-full h-full" : "w-full max-w-2xl aspect-[4/5] mt-12")
         }`}
     >
@@ -378,7 +378,7 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, {
                   {isLoading ? (
                     <i className="pi pi-spin pi-spinner text-4xl text-primary animate-pulse"></i>
                   ) : (
-                    <Image src="/agent.png" alt="Vera AI" fill className="object-cover scale-150 opacity-80 group-hover:opacity-100 transition-opacity" />
+                    <Image src="/officer.png" alt="Vera AI" fill className="object-cover scale-150 opacity-80 group-hover:opacity-100 transition-opacity" />
                   )}
 
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
@@ -482,12 +482,6 @@ export const VeraStreamingAvatar = forwardRef<VeraStreamingAvatarHandle, {
           </motion.div>
         )}
 
-        {/* FRONTAL LASER SWEEP (DIAGNOSTIC SCANBAR) */}
-        <motion.div
-          animate={{ top: ['0%', '100%', '0%'] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-          className={`absolute inset-x-0 h-[2px] bg-primary blur-[4px] z-50 pointer-events-none opacity-40 ${doorsOpen ? 'block' : 'hidden'}`}
-        />
 
         {/* IGNITION STROBE */}
         {isLoading && (
